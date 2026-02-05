@@ -1,0 +1,13 @@
+{
+  "id": 104,
+  "gender": "Men",
+  "masterCategory": "Apparel",
+  "subCategory": "Topwear",
+  "articleType": "Shirts",
+  "baseColour": "Navy Blue",
+  "season": "Summer",
+  "year": 2012.0,
+  "usage": "Casual",
+  "productDisplayName": "Turtle Check Men Navy Blue Shirt",
+  "unexpectedField": "should not be here"
+}
