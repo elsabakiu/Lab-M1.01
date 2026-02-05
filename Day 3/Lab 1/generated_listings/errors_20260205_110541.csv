@@ -1,0 +1,11 @@
+index,product_name,error
+0,Turtle Check Men Navy Blue Shirt,"Error code: 400 - {'error': {'message': ""Unsupported parameter: 'temperature' is not supported with this model."", 'type': 'invalid_request_error', 'param': 'temperature', 'code': None}}"
+1,Peter England Men Party Blue Jeans,"Error code: 400 - {'error': {'message': ""Unsupported parameter: 'temperature' is not supported with this model."", 'type': 'invalid_request_error', 'param': 'temperature', 'code': None}}"
+2,Titan Women Silver Watch,"Error code: 400 - {'error': {'message': ""Unsupported parameter: 'temperature' is not supported with this model."", 'type': 'invalid_request_error', 'param': 'temperature', 'code': None}}"
+3,Manchester United Men Solid Black Track Pants,"Error code: 400 - {'error': {'message': ""Unsupported parameter: 'temperature' is not supported with this model."", 'type': 'invalid_request_error', 'param': 'temperature', 'code': None}}"
+4,Puma Men Grey T-shirt,"Error code: 400 - {'error': {'message': ""Unsupported parameter: 'temperature' is not supported with this model."", 'type': 'invalid_request_error', 'param': 'temperature', 'code': None}}"
+5,Inkfruit Mens Chain Reaction T-shirt,"Error code: 400 - {'error': {'message': ""Unsupported parameter: 'temperature' is not supported with this model."", 'type': 'invalid_request_error', 'param': 'temperature', 'code': None}}"
+6,Fabindia Men Striped Green Shirt,"Error code: 400 - {'error': {'message': ""Unsupported parameter: 'temperature' is not supported with this model."", 'type': 'invalid_request_error', 'param': 'temperature', 'code': None}}"
+7,Jealous 21 Women Purple Shirt,"Error code: 400 - {'error': {'message': ""Unsupported parameter: 'temperature' is not supported with this model."", 'type': 'invalid_request_error', 'param': 'temperature', 'code': None}}"
+8,Puma Men Pack of 3 Socks,"Error code: 400 - {'error': {'message': ""Unsupported parameter: 'temperature' is not supported with this model."", 'type': 'invalid_request_error', 'param': 'temperature', 'code': None}}"
+9,Skagen Men Black Watch,"Error code: 400 - {'error': {'message': ""Unsupported parameter: 'temperature' is not supported with this model."", 'type': 'invalid_request_error', 'param': 'temperature', 'code': None}}"
