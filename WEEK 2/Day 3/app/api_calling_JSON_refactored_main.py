@@ -15,18 +15,34 @@ from typing import Any, Dict, Iterable, List, Mapping, Optional, Tuple
 import pandas as pd
 from pydantic import BaseModel, ValidationError, field_validator
 
-from logging_utils import setup_logging
-from openai_client_utils import OpenAIWrapper, build_openai_wrapper
-from refactor_helpers import (
-    ProductBase,
-    build_listing_prompt,
-    build_result_record,
-    format_validation_error,
-    load_json_file,
-    parse_listing_response,
-    report_error,
-    validate_product_payload,
-)
+try:
+    # Works when running as module: python -m app.api_calling_JSON_refactored_main
+    from app.logging_utils import setup_logging
+    from app.openai_client_utils import OpenAIWrapper, build_openai_wrapper
+    from app.refactor_helpers import (
+        ProductBase,
+        build_listing_prompt,
+        build_result_record,
+        format_validation_error,
+        load_json_file,
+        parse_listing_response,
+        report_error,
+        validate_product_payload,
+    )
+except ModuleNotFoundError:
+    # Works when running file directly: python app/api_calling_JSON_refactored_main.py
+    from logging_utils import setup_logging
+    from openai_client_utils import OpenAIWrapper, build_openai_wrapper
+    from refactor_helpers import (
+        ProductBase,
+        build_listing_prompt,
+        build_result_record,
+        format_validation_error,
+        load_json_file,
+        parse_listing_response,
+        report_error,
+        validate_product_payload,
+    )
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +53,7 @@ DEFAULT_MODEL = "gpt-4.1-mini"
 DEFAULT_TEMPERATURE = 0.7
 DEFAULT_N_PRODUCTS = 10
 DEFAULT_SLEEP_SECONDS = 0.5
-DEFAULT_OUTPUT_DIR = Path("generated_listings")
+DEFAULT_OUTPUT_DIR = Path("outputs/generated_listings")
 
 
 # Stores settings for one batch run.
@@ -682,7 +698,7 @@ def write_json_payloads(folder: Path, payloads: Iterable[Tuple[str, Mapping[str,
 
 
 # Creates example JSON files for demo/checkpoint use.
-def generate_example_json_files(out_dir: Path = Path("example_json")) -> Path:
+def generate_example_json_files(out_dir: Path = Path("data/example_json")) -> Path:
     payloads = build_example_json_payloads()
     write_json_payloads(out_dir, payloads)
     return out_dir
@@ -819,12 +835,12 @@ def build_parser() -> argparse.ArgumentParser:
     batch_parser.set_defaults(func=run_batch_command)
 
     json_parser = subparsers.add_parser("json-demo", help="Generate and validate sample JSON files")
-    json_parser.add_argument("--json-dir", type=Path, default=Path("example_json"))
+    json_parser.add_argument("--json-dir", type=Path, default=Path("data/example_json"))
     json_parser.set_defaults(func=run_json_validation_demo)
 
     all_parser = subparsers.add_parser("all", help="Run all notebook-equivalent flows")
     add_batch_arguments(all_parser)
-    all_parser.add_argument("--json-dir", type=Path, default=Path("example_json"))
+    all_parser.add_argument("--json-dir", type=Path, default=Path("data/example_json"))
     all_parser.set_defaults(func=run_all_command)
 
     return parser
@@ -842,13 +858,13 @@ def build_default_all_args() -> argparse.Namespace:
         model=DEFAULT_MODEL,
         temperature=DEFAULT_TEMPERATURE,
         output_dir=DEFAULT_OUTPUT_DIR,
-        json_dir=Path("example_json"),
+        json_dir=Path("data/example_json"),
     )
 
 
 # Program entry point.
 def main() -> None:
-    setup_logging("product_generator.log")
+    setup_logging("outputs/logs/product_generator.log")
     logger.info("Application started")
     if len(sys.argv) == 1:
         run_all_command(build_default_all_args())

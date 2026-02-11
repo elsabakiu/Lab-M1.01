@@ -10,7 +10,12 @@ from typing import Any, Dict, List, Optional
 from dotenv import load_dotenv
 from openai import OpenAI
 
-from refactor_helpers import report_error
+try:
+    # Module mode
+    from app.refactor_helpers import report_error
+except ModuleNotFoundError:
+    # Direct-file mode
+    from refactor_helpers import report_error
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +27,7 @@ def build_env_candidates(explicit_env_path: Optional[Path]) -> List[Path]:
 
     cwd = Path.cwd()
     script_dir = Path(__file__).resolve().parent
-    return [script_dir / ".env", cwd / ".env", cwd.parent.parent / ".env"]
+    return [script_dir.parent / ".env", script_dir / ".env", cwd / ".env", cwd.parent.parent / ".env"]
 
 
 # Returns the first .env path that exists.
