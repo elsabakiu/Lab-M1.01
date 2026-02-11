@@ -1,0 +1,11 @@
+index,id,productDisplayName,error_type,error
+0,15970,Turtle Check Men Navy Blue Shirt,runtime_error,Unsupported image type: <class 'PIL.JpegImagePlugin.JpegImageFile'>
+1,39386,Peter England Men Party Blue Jeans,runtime_error,Unsupported image type: <class 'PIL.JpegImagePlugin.JpegImageFile'>
+2,59263,Titan Women Silver Watch,runtime_error,Unsupported image type: <class 'PIL.Image.Image'>
+3,21379,Manchester United Men Solid Black Track Pants,runtime_error,Unsupported image type: <class 'PIL.JpegImagePlugin.JpegImageFile'>
+4,53759,Puma Men Grey T-shirt,runtime_error,Unsupported image type: <class 'PIL.Image.Image'>
+5,1855,Inkfruit Mens Chain Reaction T-shirt,runtime_error,Unsupported image type: <class 'PIL.JpegImagePlugin.JpegImageFile'>
+6,30805,Fabindia Men Striped Green Shirt,runtime_error,Unsupported image type: <class 'PIL.JpegImagePlugin.JpegImageFile'>
+7,26960,Jealous 21 Women Purple Shirt,runtime_error,Unsupported image type: <class 'PIL.Image.Image'>
+8,29114,Puma Men Pack of 3 Socks,runtime_error,Unsupported image type: <class 'PIL.Image.Image'>
+9,30039,Skagen Men Black Watch,runtime_error,Unsupported image type: <class 'PIL.Image.Image'>
