@@ -12,10 +12,9 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Tuple
 
 import pandas as pd
-from openai import OpenAI
 from pydantic import BaseModel, ValidationError, field_validator
 
-from openai_client_utils import build_openai_client, request_response_text
+from openai_client_utils import OpenAIWrapper, build_openai_wrapper
 from refactor_helpers import (
     ProductBase,
     build_listing_prompt,
@@ -348,7 +347,7 @@ def create_listing_api_input(prompt: str, image_data_url: str) -> List[Dict[str,
 
 # Product-listing helper that calls the generic OpenAI request function.
 def fetch_listing_text(
-    client: OpenAI,
+    client: OpenAIWrapper,
     prompt: str,
     image_base64: str,
     model: str,
@@ -356,11 +355,11 @@ def fetch_listing_text(
 ) -> str:
     image_data_url = build_image_data_url(image_base64)
     api_input = create_listing_api_input(prompt, image_data_url)
-    return request_response_text(
-        client=client,
+    return client.request_response_text(
         model=model,
         input_payload=api_input,
         temperature=temperature,
+        context={"operation": "fetch_listing_text"},
     )
 
 
@@ -400,7 +399,7 @@ def build_runtime_error_entry(index: Any, row: pd.Series, fallback_name: str, er
 def process_single_product_row(
     index: Any,
     row: pd.Series,
-    client: OpenAI,
+    client: OpenAIWrapper,
     model: str,
     temperature: float,
 ) -> Dict[str, Any]:
@@ -415,7 +414,7 @@ def process_single_product_row(
 # Processes all selected rows and separates success/error outputs.
 def process_products_frame(
     products_df: pd.DataFrame,
-    client: OpenAI,
+    client: OpenAIWrapper,
     model: str,
     temperature: float,
     sleep_seconds: float,
@@ -525,7 +524,7 @@ def save_batch_outputs(
 # Top-level batch workflow (process + save + report).
 def generate_listings_batch(
     products_df: pd.DataFrame,
-    client: OpenAI,
+    client: OpenAIWrapper,
     config: BatchConfig,
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
     frame = select_products_frame(products_df, config.n_products)
@@ -680,10 +679,16 @@ def validate_json_file(path: Path) -> Tuple[Optional[ProductBase], Optional[Dict
         payload = load_json_file(path)
         product = validate_product_json_payload(payload)
         return product, None
+    except FileNotFoundError as error:
+        return None, {"error": "file_not_found", "message": str(error)}
+    except PermissionError as error:
+        return None, {"error": "file_permission_error", "message": str(error)}
     except ValidationError as error:
         return None, format_validation_error(error)
     except json.JSONDecodeError as error:
         return None, {"error": "invalid_json", "message": str(error)}
+    except OSError as error:
+        return None, {"error": "file_io_error", "message": str(error)}
     except Exception as error:
         report_error(
             function_name="validate_json_file",
@@ -714,7 +719,12 @@ def validate_folder(folder: Path) -> Tuple[List[Dict[str, Any]], List[Dict[str, 
 
 # Runs the API batch workflow from CLI args.
 def run_batch_command(args: argparse.Namespace) -> None:
-    client = build_openai_client(explicit_env_path=args.env_path)
+    client = build_openai_wrapper(
+        explicit_env_path=args.env_path,
+        max_retries=3,
+        initial_backoff_seconds=1.0,
+        backoff_multiplier=2.0,
+    )
 
     print("Loading product dataset...")
     products_df = load_products_dataframe(dataset_name=args.dataset_name, split=args.split)
