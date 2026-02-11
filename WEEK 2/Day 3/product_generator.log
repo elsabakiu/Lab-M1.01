@@ -1,0 +1,98 @@
+2026-02-11 17:43:03,143 - __main__ - INFO - Application started
+2026-02-11 17:43:03,150 - __main__ - INFO - Running JSON validation demo for folder: example_json
+2026-02-11 17:43:03,157 - __main__ - INFO - Wrote JSON payload to example_json/valid_product.json
+2026-02-11 17:43:03,159 - __main__ - INFO - Wrote JSON payload to example_json/invalid_missing_required.json
+2026-02-11 17:43:03,162 - __main__ - INFO - Wrote JSON payload to example_json/invalid_wrong_types.json
+2026-02-11 17:43:03,164 - __main__ - INFO - Wrote JSON payload to example_json/invalid_bad_values.json
+2026-02-11 17:43:03,166 - __main__ - INFO - Wrote JSON payload to example_json/invalid_extra_field.json
+2026-02-11 17:43:03,171 - refactor_helpers - INFO - Loaded JSON file: example_json/invalid_bad_values.json
+2026-02-11 17:43:03,176 - __main__ - WARNING - JSON validation failed: example_json/invalid_bad_values.json
+2026-02-11 17:43:03,180 - refactor_helpers - INFO - Loaded JSON file: example_json/invalid_extra_field.json
+2026-02-11 17:43:03,181 - __main__ - WARNING - JSON validation failed: example_json/invalid_extra_field.json
+2026-02-11 17:43:03,183 - refactor_helpers - INFO - Loaded JSON file: example_json/invalid_missing_required.json
+2026-02-11 17:43:03,184 - __main__ - WARNING - JSON validation failed: example_json/invalid_missing_required.json
+2026-02-11 17:43:03,189 - refactor_helpers - INFO - Loaded JSON file: example_json/invalid_wrong_types.json
+2026-02-11 17:43:03,190 - __main__ - WARNING - JSON validation failed: example_json/invalid_wrong_types.json
+2026-02-11 17:43:03,192 - refactor_helpers - INFO - Loaded JSON file: example_json/valid_product.json
+2026-02-11 17:43:03,194 - __main__ - INFO - Validated JSON file successfully: example_json/valid_product.json
+2026-02-11 17:43:03,197 - __main__ - INFO - Application finished command=json-demo
+2026-02-11 17:44:47,787 - __main__ - INFO - Application started
+2026-02-11 17:44:47,788 - __main__ - INFO - Running full workflow: basics + batch + json-demo
+2026-02-11 17:44:47,791 - __main__ - INFO - Running batch command
+2026-02-11 17:44:47,793 - openai_client_utils - INFO - Environment variables loaded from /Users/elsa/Documents/Dropbox/Work Projects:Trainings/AI Consulting Training/Weekly Assignments/WEEK 2/Day 3/.env
+2026-02-11 17:44:47,794 - openai_client_utils - INFO - OPENAI_API_KEY found in environment
+2026-02-11 17:44:47,795 - openai_client_utils - INFO - Building OpenAIWrapper from environment configuration
+2026-02-11 17:44:47,923 - openai_client_utils - INFO - OpenAIWrapper initialized with max_retries=3
+2026-02-11 17:44:48,899 - __main__ - INFO - Loading dataset: ashraq/fashion-product-images-small (train[:100])
+2026-02-11 17:44:49,109 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/datasets/ashraq/fashion-product-images-small/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-02-11 17:44:49,121 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/ashraq/fashion-product-images-small/3859c76db2f6f3d3b9a3863345e3ccdbff75879d/README.md "HTTP/1.1 200 OK"
+2026-02-11 17:44:49,251 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/datasets/ashraq/fashion-product-images-small/resolve/3859c76db2f6f3d3b9a3863345e3ccdbff75879d/fashion-product-images-small.py "HTTP/1.1 404 Not Found"
+2026-02-11 17:44:49,605 - httpx - INFO - HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/ashraq/fashion-product-images-small/ashraq/fashion-product-images-small.py "HTTP/1.1 404 Not Found"
+2026-02-11 17:44:49,736 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/datasets/ashraq/fashion-product-images-small/revision/3859c76db2f6f3d3b9a3863345e3ccdbff75879d "HTTP/1.1 200 OK"
+2026-02-11 17:44:49,861 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/datasets/ashraq/fashion-product-images-small/resolve/3859c76db2f6f3d3b9a3863345e3ccdbff75879d/.huggingface.yaml "HTTP/1.1 404 Not Found"
+2026-02-11 17:44:49,862 - huggingface_hub.utils._http - WARNING - Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-02-11 17:44:50,058 - httpx - INFO - HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=ashraq/fashion-product-images-small "HTTP/1.1 200 OK"
+2026-02-11 17:44:50,195 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/datasets/ashraq/fashion-product-images-small/tree/3859c76db2f6f3d3b9a3863345e3ccdbff75879d/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-02-11 17:44:50,447 - httpx - INFO - HTTP Request: GET https://huggingface.co/api/datasets/ashraq/fashion-product-images-small/tree/3859c76db2f6f3d3b9a3863345e3ccdbff75879d?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-02-11 17:44:50,601 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/datasets/ashraq/fashion-product-images-small/resolve/3859c76db2f6f3d3b9a3863345e3ccdbff75879d/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-02-11 17:44:51,401 - __main__ - INFO - Dataset loaded successfully with 100 rows
+2026-02-11 17:44:51,404 - __main__ - INFO - Selected 10 products for listing generation
+2026-02-11 17:44:51,404 - __main__ - INFO - Starting batch processing for 10 products
+2026-02-11 17:44:51,408 - openai_client_utils - INFO - Calling OpenAI Responses API (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:44:55,156 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
+2026-02-11 17:44:55,245 - openai_client_utils - INFO - OpenAI response received successfully (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:44:55,247 - __main__ - INFO - Processed product successfully: index=0, name=Turtle Check Men Navy Blue Shirt
+2026-02-11 17:44:55,751 - openai_client_utils - INFO - Calling OpenAI Responses API (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:44:58,467 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
+2026-02-11 17:44:58,470 - openai_client_utils - INFO - OpenAI response received successfully (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:44:58,470 - __main__ - INFO - Processed product successfully: index=1, name=Peter England Men Party Blue Jeans
+2026-02-11 17:44:58,973 - openai_client_utils - INFO - Calling OpenAI Responses API (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:45:02,279 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
+2026-02-11 17:45:02,282 - openai_client_utils - INFO - OpenAI response received successfully (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:45:02,282 - __main__ - INFO - Processed product successfully: index=2, name=Titan Women Silver Watch
+2026-02-11 17:45:02,854 - openai_client_utils - INFO - Calling OpenAI Responses API (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:45:06,005 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
+2026-02-11 17:45:06,008 - openai_client_utils - INFO - OpenAI response received successfully (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:45:06,008 - __main__ - INFO - Processed product successfully: index=3, name=Manchester United Men Solid Black Track Pants
+2026-02-11 17:45:06,514 - openai_client_utils - INFO - Calling OpenAI Responses API (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:45:09,651 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
+2026-02-11 17:45:09,654 - openai_client_utils - INFO - OpenAI response received successfully (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:45:09,654 - __main__ - INFO - Processed product successfully: index=4, name=Puma Men Grey T-shirt
+2026-02-11 17:45:10,161 - openai_client_utils - INFO - Calling OpenAI Responses API (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:45:12,999 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
+2026-02-11 17:45:13,013 - openai_client_utils - INFO - OpenAI response received successfully (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:45:13,013 - __main__ - INFO - Processed product successfully: index=5, name=Inkfruit Mens Chain Reaction T-shirt
+2026-02-11 17:45:13,515 - openai_client_utils - INFO - Calling OpenAI Responses API (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:45:16,869 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
+2026-02-11 17:45:16,870 - openai_client_utils - INFO - OpenAI response received successfully (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:45:16,870 - __main__ - INFO - Processed product successfully: index=6, name=Fabindia Men Striped Green Shirt
+2026-02-11 17:45:17,377 - openai_client_utils - INFO - Calling OpenAI Responses API (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:45:20,191 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
+2026-02-11 17:45:20,193 - openai_client_utils - INFO - OpenAI response received successfully (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:45:20,193 - __main__ - INFO - Processed product successfully: index=7, name=Jealous 21 Women Purple Shirt
+2026-02-11 17:45:20,699 - openai_client_utils - INFO - Calling OpenAI Responses API (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:45:22,938 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
+2026-02-11 17:45:22,942 - openai_client_utils - INFO - OpenAI response received successfully (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:45:22,942 - __main__ - INFO - Processed product successfully: index=8, name=Puma Men Pack of 3 Socks
+2026-02-11 17:45:23,448 - openai_client_utils - INFO - Calling OpenAI Responses API (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:45:26,369 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
+2026-02-11 17:45:26,372 - openai_client_utils - INFO - OpenAI response received successfully (model=gpt-4.1-mini, attempt=1)
+2026-02-11 17:45:26,372 - __main__ - INFO - Processed product successfully: index=9, name=Skagen Men Black Watch
+2026-02-11 17:45:26,896 - __main__ - INFO - Saved batch outputs: jsonl=generated_listings/listings_20260211_174526.jsonl, results_csv=generated_listings/listings_20260211_174526.csv, errors_csv=generated_listings/errors_20260211_174526.csv
+2026-02-11 17:45:26,955 - __main__ - INFO - Running JSON validation demo for folder: example_json
+2026-02-11 17:45:26,956 - __main__ - INFO - Wrote JSON payload to example_json/valid_product.json
+2026-02-11 17:45:26,957 - __main__ - INFO - Wrote JSON payload to example_json/invalid_missing_required.json
+2026-02-11 17:45:26,958 - __main__ - INFO - Wrote JSON payload to example_json/invalid_wrong_types.json
+2026-02-11 17:45:26,959 - __main__ - INFO - Wrote JSON payload to example_json/invalid_bad_values.json
+2026-02-11 17:45:26,960 - __main__ - INFO - Wrote JSON payload to example_json/invalid_extra_field.json
+2026-02-11 17:45:26,960 - refactor_helpers - INFO - Loaded JSON file: example_json/invalid_bad_values.json
+2026-02-11 17:45:26,961 - __main__ - WARNING - JSON validation failed: example_json/invalid_bad_values.json
+2026-02-11 17:45:26,962 - refactor_helpers - INFO - Loaded JSON file: example_json/invalid_extra_field.json
+2026-02-11 17:45:26,963 - __main__ - WARNING - JSON validation failed: example_json/invalid_extra_field.json
+2026-02-11 17:45:26,963 - refactor_helpers - INFO - Loaded JSON file: example_json/invalid_missing_required.json
+2026-02-11 17:45:26,963 - __main__ - WARNING - JSON validation failed: example_json/invalid_missing_required.json
+2026-02-11 17:45:26,964 - refactor_helpers - INFO - Loaded JSON file: example_json/invalid_wrong_types.json
+2026-02-11 17:45:26,967 - __main__ - WARNING - JSON validation failed: example_json/invalid_wrong_types.json
+2026-02-11 17:45:26,967 - refactor_helpers - INFO - Loaded JSON file: example_json/valid_product.json
+2026-02-11 17:45:26,968 - __main__ - INFO - Validated JSON file successfully: example_json/valid_product.json
+2026-02-11 17:45:26,968 - __main__ - INFO - Application finished (default all command)

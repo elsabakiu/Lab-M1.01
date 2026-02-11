@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import base64
 import json
+import logging
 import sys
 import time
 from dataclasses import dataclass
@@ -14,6 +15,7 @@ from typing import Any, Dict, Iterable, List, Mapping, Optional, Tuple
 import pandas as pd
 from pydantic import BaseModel, ValidationError, field_validator
 
+from logging_utils import setup_logging
 from openai_client_utils import OpenAIWrapper, build_openai_wrapper
 from refactor_helpers import (
     ProductBase,
@@ -25,6 +27,8 @@ from refactor_helpers import (
     report_error,
     validate_product_payload,
 )
+
+logger = logging.getLogger(__name__)
 
 
 DEFAULT_DATASET = "ashraq/fashion-product-images-small"
@@ -403,6 +407,7 @@ def process_single_product_row(
     model: str,
     temperature: float,
 ) -> Dict[str, Any]:
+    logger.debug("Processing single product row: index=%s", index)
     product = product_from_row(row)
     prompt = build_listing_prompt(product)
     image_b64 = image_to_base64(product.image)
@@ -421,18 +426,22 @@ def process_products_frame(
 ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
     results: List[Dict[str, Any]] = []
     errors: List[Dict[str, Any]] = []
+    logger.info("Starting batch processing for %s products", len(products_df))
 
     for index, row in products_df.iterrows():
         fallback_name = build_fallback_name(row, index)
         try:
             result = process_single_product_row(index, row, client, model, temperature)
             results.append(result)
+            logger.info("Processed product successfully: index=%s, name=%s", index, result["productDisplayName"])
             print(f"[OK] [{index}] Generated listing for: {result['productDisplayName']}")
         except ValidationError as error:
             errors.append(build_validation_error_entry(index, row, fallback_name, error))
+            logger.warning("Validation failed: index=%s, name=%s", index, fallback_name)
             print(f"[WARN] [{index}] Validation failed for {fallback_name}")
         except Exception as error:
             errors.append(build_runtime_error_entry(index, row, fallback_name, error))
+            logger.error("Runtime failure: index=%s, name=%s, error=%s", index, fallback_name, error)
             print(f"[WARN] [{index}] Failed for {fallback_name}: {error}")
 
         if sleep_seconds > 0:
@@ -517,6 +526,12 @@ def save_batch_outputs(
     write_jsonl_file(paths.jsonl, results)
     write_dataframe_csv_if_not_empty(results_df, paths.results_csv)
     write_dataframe_csv_if_not_empty(errors_df, paths.errors_csv)
+    logger.info(
+        "Saved batch outputs: jsonl=%s, results_csv=%s, errors_csv=%s",
+        paths.jsonl,
+        paths.results_csv,
+        paths.errors_csv,
+    )
 
     return results_df, errors_df, paths
 
@@ -528,6 +543,7 @@ def generate_listings_batch(
     config: BatchConfig,
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
     frame = select_products_frame(products_df, config.n_products)
+    logger.info("Selected %s products for listing generation", len(frame))
 
     results, errors = process_products_frame(
         products_df=frame,
@@ -554,8 +570,11 @@ def load_products_dataframe(dataset_name: str = DEFAULT_DATASET, split: str = DE
     from datasets import load_dataset
 
     try:
+        logger.info("Loading dataset: %s (%s)", dataset_name, split)
         dataset = load_dataset(dataset_name, split=split)
-        return pd.DataFrame(dataset)
+        dataframe = pd.DataFrame(dataset)
+        logger.info("Dataset loaded successfully with %s rows", len(dataframe))
+        return dataframe
     except Exception as error:
         report_error(
             function_name="load_products_dataframe",
@@ -644,6 +663,7 @@ def build_example_json_payloads() -> List[Tuple[str, Dict[str, Any]]]:
 def write_json_payload(path: Path, payload: Mapping[str, Any]) -> None:
     try:
         path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        logger.info("Wrote JSON payload to %s", path)
     except OSError as error:
         report_error(
             function_name="write_json_payload",
@@ -678,16 +698,22 @@ def validate_json_file(path: Path) -> Tuple[Optional[ProductBase], Optional[Dict
     try:
         payload = load_json_file(path)
         product = validate_product_json_payload(payload)
+        logger.info("Validated JSON file successfully: %s", path)
         return product, None
     except FileNotFoundError as error:
+        logger.warning("JSON file not found: %s", path)
         return None, {"error": "file_not_found", "message": str(error)}
     except PermissionError as error:
+        logger.warning("JSON file permission error: %s", path)
         return None, {"error": "file_permission_error", "message": str(error)}
     except ValidationError as error:
+        logger.warning("JSON validation failed: %s", path)
         return None, format_validation_error(error)
     except json.JSONDecodeError as error:
+        logger.warning("JSON parse failed: %s", path)
         return None, {"error": "invalid_json", "message": str(error)}
     except OSError as error:
+        logger.warning("JSON file I/O error: %s", path)
         return None, {"error": "file_io_error", "message": str(error)}
     except Exception as error:
         report_error(
@@ -719,6 +745,7 @@ def validate_folder(folder: Path) -> Tuple[List[Dict[str, Any]], List[Dict[str, 
 
 # Runs the API batch workflow from CLI args.
 def run_batch_command(args: argparse.Namespace) -> None:
+    logger.info("Running batch command")
     client = build_openai_wrapper(
         explicit_env_path=args.env_path,
         max_retries=3,
@@ -748,6 +775,7 @@ def run_batch_command(args: argparse.Namespace) -> None:
 
 # Runs the JSON validation demo from CLI args.
 def run_json_validation_demo(args: argparse.Namespace) -> None:
+    logger.info("Running JSON validation demo for folder: %s", args.json_dir)
     folder = generate_example_json_files(out_dir=args.json_dir)
     valid_items, invalid_items = validate_folder(folder)
 
@@ -758,6 +786,7 @@ def run_json_validation_demo(args: argparse.Namespace) -> None:
 
 # Runs all demos one after another.
 def run_all_command(args: argparse.Namespace) -> None:
+    logger.info("Running full workflow: basics + batch + json-demo")
     run_pydantic_basics_demo()
     run_batch_command(args)
     run_json_validation_demo(args)
@@ -819,13 +848,17 @@ def build_default_all_args() -> argparse.Namespace:
 
 # Program entry point.
 def main() -> None:
+    setup_logging("product_generator.log")
+    logger.info("Application started")
     if len(sys.argv) == 1:
         run_all_command(build_default_all_args())
+        logger.info("Application finished (default all command)")
         return
 
     parser = build_parser()
     args = parser.parse_args()
     args.func(args)
+    logger.info("Application finished command=%s", getattr(args, "command", "unknown"))
 
 
 if __name__ == "__main__":

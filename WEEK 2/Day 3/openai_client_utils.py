@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 import time
 from pathlib import Path
@@ -10,6 +11,8 @@ from dotenv import load_dotenv
 from openai import OpenAI
 
 from refactor_helpers import report_error
+
+logger = logging.getLogger(__name__)
 
 
 # Builds possible .env locations to check.
@@ -33,9 +36,11 @@ def resolve_env_path(explicit_env_path: Optional[Path] = None) -> Optional[Path]
 # Loads environment variables from a .env file.
 def load_environment_variables(env_path: Optional[Path]) -> None:
     if env_path is None:
+        logger.info("No .env file found; using current environment variables")
         return
     try:
         load_dotenv(dotenv_path=env_path, override=True)
+        logger.info("Environment variables loaded from %s", env_path)
     except OSError as error:
         report_error(
             function_name="load_environment_variables",
@@ -58,6 +63,7 @@ def read_openai_api_key() -> str:
             suggestion="Add OPENAI_API_KEY to your shell environment or .env file.",
         )
         raise error
+    logger.info("OPENAI_API_KEY found in environment")
     return api_key
 
 
@@ -85,6 +91,7 @@ class OpenAIWrapper:
         self.initial_backoff_seconds = initial_backoff_seconds
         self.backoff_multiplier = backoff_multiplier
         self.client = client or OpenAI(api_key=api_key)
+        logger.info("OpenAIWrapper initialized with max_retries=%s", max_retries)
 
     # Creates one consistent error payload shape.
     def _build_error_response(
@@ -110,6 +117,7 @@ class OpenAIWrapper:
     def _sleep_before_retry(self, attempt: int) -> None:
         delay = self.initial_backoff_seconds * (self.backoff_multiplier ** (attempt - 1))
         if delay > 0:
+            logger.warning("API call failed; retrying in %.2f seconds (attempt %s)", delay, attempt + 1)
             time.sleep(delay)
 
     # Calls Responses API and returns output text.
@@ -126,10 +134,12 @@ class OpenAIWrapper:
 
         for attempt in range(1, self.max_retries + 1):
             try:
+                logger.info("Calling OpenAI Responses API (model=%s, attempt=%s)", model, attempt)
                 response = self.client.responses.create(**request_kwargs)
                 raw_text = response.output_text
                 if not raw_text:
                     raise RuntimeError("Empty response.output_text")
+                logger.info("OpenAI response received successfully (model=%s, attempt=%s)", model, attempt)
                 return raw_text
             except Exception as error:
                 if attempt < self.max_retries:
@@ -189,6 +199,7 @@ def build_openai_wrapper(
     env_path = resolve_env_path(explicit_env_path)
     load_environment_variables(env_path)
     api_key = read_openai_api_key()
+    logger.info("Building OpenAIWrapper from environment configuration")
     return OpenAIWrapper(
         api_key=api_key,
         max_retries=max_retries,

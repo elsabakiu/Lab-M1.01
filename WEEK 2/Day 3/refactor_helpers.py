@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import traceback
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional
@@ -10,6 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_valida
 
 YEAR_MIN = 1900
 YEAR_MAX = 2100
+logger = logging.getLogger(__name__)
 
 
 # Build one consistent error message format.
@@ -55,6 +57,7 @@ def report_error(
         error_message=error_message,
         suggestion=suggestion,
     )
+    logger.error(message)
     print(message)
     return message
 
@@ -145,7 +148,9 @@ class ListingOutput(BaseModel):
 def load_json_file(path: Path) -> Dict[str, Any]:
     """Read JSON from disk with UTF-8 decoding."""
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
+        data = json.loads(path.read_text(encoding="utf-8"))
+        logger.info("Loaded JSON file: %s", path)
+        return data
     except FileNotFoundError as error:
         report_error(
             function_name="load_json_file",
@@ -185,7 +190,9 @@ def load_json_file(path: Path) -> Dict[str, Any]:
 def parse_json_strict(text: str) -> Dict[str, Any]:
     """Parse JSON without fallbacks."""
     try:
-        return json.loads(text)
+        payload = json.loads(text)
+        logger.debug("Strict JSON parse succeeded")
+        return payload
     except json.JSONDecodeError as error:
         report_error(
             function_name="parse_json_strict",
@@ -217,6 +224,7 @@ def safe_json_loads(text: str) -> Dict[str, Any]:
     except json.JSONDecodeError:
         try:
             candidate = extract_first_json_object(cleaned)
+            logger.debug("Strict parse failed; trying extracted JSON object")
             return parse_json_strict(candidate)
         except json.JSONDecodeError as error:
             report_error(
@@ -248,13 +256,17 @@ def format_validation_error(error: ValidationError) -> Dict[str, Any]:
 # Validate one product payload against the product model.
 def validate_product_payload(payload: Mapping[str, Any]) -> ProductBase:
     """Validate product payload and return typed model."""
-    return ProductBase.model_validate(payload)
+    product = ProductBase.model_validate(payload)
+    logger.debug("Product payload validation succeeded: id=%s", product.id)
+    return product
 
 
 # Validate one listing payload against the listing model.
 def validate_listing_payload(payload: Mapping[str, Any]) -> ListingOutput:
     """Validate listing payload and return typed model."""
-    return ListingOutput.model_validate(payload)
+    listing = ListingOutput.model_validate(payload)
+    logger.debug("Listing payload validation succeeded")
+    return listing
 
 
 # Convert year into display text for prompts.
@@ -329,6 +341,7 @@ def parse_listing_response(raw_text: str) -> Dict[str, Any]:
     try:
         payload = parse_listing_json(raw_text)
         listing = validate_listing_payload(payload)
+        logger.debug("Listing response parsed and validated")
         return listing_model_to_dict(listing)
     except (json.JSONDecodeError, ValidationError) as error:
         report_error(
