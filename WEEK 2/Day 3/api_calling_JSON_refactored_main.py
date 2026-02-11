@@ -774,21 +774,8 @@ def validate_json_file(path: Path) -> Tuple[Optional[ProductBase], Optional[Dict
         product = validate_product_json_payload(payload)
         return product, None
     except ValidationError as error:
-        report_error(
-            function_name="validate_json_file",
-            error=error,
-            location=f"path={path}",
-            suggestion="Fix required fields, types, and value constraints in the JSON file.",
-        )
         return None, format_validation_error(error)
     except json.JSONDecodeError as error:
-        report_error(
-            function_name="validate_json_file",
-            error=error,
-            location=f"path={path}, line={error.lineno}, column={error.colno}",
-            suggestion="Fix JSON syntax at the shown line and column.",
-            message_override=error.msg,
-        )
         return None, {"error": "invalid_json", "message": str(error)}
     except Exception as error:
         report_error(

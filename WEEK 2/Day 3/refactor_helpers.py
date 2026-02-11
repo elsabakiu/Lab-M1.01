@@ -248,31 +248,13 @@ def format_validation_error(error: ValidationError) -> Dict[str, Any]:
 # Validate one product payload against the product model.
 def validate_product_payload(payload: Mapping[str, Any]) -> ProductBase:
     """Validate product payload and return typed model."""
-    try:
-        return ProductBase.model_validate(payload)
-    except ValidationError as error:
-        report_error(
-            function_name="validate_product_payload",
-            error=error,
-            location="product_payload",
-            suggestion="Check required product fields, value types, and year range constraints.",
-        )
-        raise
+    return ProductBase.model_validate(payload)
 
 
 # Validate one listing payload against the listing model.
 def validate_listing_payload(payload: Mapping[str, Any]) -> ListingOutput:
     """Validate listing payload and return typed model."""
-    try:
-        return ListingOutput.model_validate(payload)
-    except ValidationError as error:
-        report_error(
-            function_name="validate_listing_payload",
-            error=error,
-            location="listing_payload",
-            suggestion="Ensure title/description length and features/keywords list shape are correct.",
-        )
-        raise
+    return ListingOutput.model_validate(payload)
 
 
 # Convert year into display text for prompts.
