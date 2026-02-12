@@ -1,9 +1,13 @@
 """Unit tests for summarizer pipeline."""
+import asyncio
 import pytest
+from types import SimpleNamespace
 from unittest.mock import Mock, patch
 from news_summarizer.clients.news_api import NewsAPIClient
+from news_summarizer.config import Config
+from news_summarizer.main import _parse_num_articles
 from news_summarizer.providers.llm_providers import LLMProviders, CostTracker, count_tokens
-from news_summarizer.services.summarizer import NewsSummarizer
+from news_summarizer.services.summarizer import AsyncNewsSummarizer, NewsSummarizer
 
 class TestCostTracker:
     """Test cost tracking functionality."""
@@ -138,6 +142,62 @@ class TestNewsSummarizer:
         assert result["sentiment"] == "Positive sentiment"
         assert mock_openai.called
         assert mock_cohere.called
+
+    @patch.object(LLMProviders, "ask_openai")
+    @patch.object(LLMProviders, "ask_cohere")
+    def test_summarize_article_with_object_input(self, mock_cohere, mock_openai):
+        """Test article summarization with object-style input."""
+        mock_openai.return_value = "Test summary"
+        mock_cohere.return_value = "Neutral sentiment"
+
+        summarizer = NewsSummarizer()
+        article = SimpleNamespace(
+            title="Object Article",
+            description="Object description",
+            content="Object content",
+            url="https://example.com/object",
+            source="Object Source",
+            published_at="2026-01-19",
+        )
+
+        result = summarizer.summarize_article(article)
+
+        assert result["title"] == "Object Article"
+        assert result["summary"] == "Test summary"
+        assert result["sentiment"] == "Neutral sentiment"
+
+
+class TestMainHelpers:
+    """Test CLI helper behavior."""
+
+    def test_parse_num_articles_invalid_defaults(self):
+        """Invalid numeric input should use configured default."""
+        assert _parse_num_articles("abc") == Config.DEFAULT_ARTICLES
+
+
+class TestAsyncNewsSummarizer:
+    """Test async processing behavior."""
+
+    def test_process_articles_async_mixed_results(self):
+        """Async processing should return valid results and skip exceptions."""
+        summarizer = AsyncNewsSummarizer.__new__(AsyncNewsSummarizer)
+
+        async def fake_summarize(article):
+            if article == "bad":
+                raise RuntimeError("boom")
+            return {"title": "ok"}
+
+        summarizer.summarize_article_async = fake_summarize
+
+        with patch("builtins.print") as mock_print:
+            results = asyncio.run(
+                AsyncNewsSummarizer.process_articles_async(
+                    summarizer, ["good", "bad"], max_concurrent=2
+                )
+            )
+
+        assert results == [{"title": "ok"}]
+        assert any("Failed to process article" in str(call) for call in mock_print.call_args_list)
 
 # Run tests
 if __name__ == "__main__":
