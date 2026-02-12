@@ -1,0 +1,5 @@
+Metadata-Version: 2.4
+Name: news-summarizer
+Version: 0.1.0
+Summary: Multi-provider news summarizer
+Requires-Python: >=3.10

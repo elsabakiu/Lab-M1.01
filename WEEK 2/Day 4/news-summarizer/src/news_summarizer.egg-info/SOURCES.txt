@@ -1,0 +1,17 @@
+README.md
+pyproject.toml
+src/news_summarizer/__init__.py
+src/news_summarizer/config.py
+src/news_summarizer/main.py
+src/news_summarizer.egg-info/PKG-INFO
+src/news_summarizer.egg-info/SOURCES.txt
+src/news_summarizer.egg-info/dependency_links.txt
+src/news_summarizer.egg-info/top_level.txt
+src/news_summarizer/clients/__init__.py
+src/news_summarizer/clients/news_api.py
+src/news_summarizer/providers/__init__.py
+src/news_summarizer/providers/llm_providers.py
+src/news_summarizer/services/__init__.py
+src/news_summarizer/services/summarizer.py
+tests/test_llm_providers.py
+tests/test_summarizer.py
