@@ -4,21 +4,94 @@ from __future__ import annotations
 
 import asyncio
 import logging
+from datetime import datetime
 from typing import Any, Dict
 
+from news_summarizer.clients.gdelt_api import GDELTAPIClient
 from news_summarizer.clients.news_api import NewsAPIClient
 from news_summarizer.config import Config
 from news_summarizer.providers.llm_providers import LLMProviders
 
 logger = logging.getLogger(__name__)
+VALID_PROVIDER_MODES = {"all", "openai", "cohere"}
+VALID_NEWS_PROVIDERS = {"all", "newsapi", "gdelt"}
 
 
 class NewsSummarizer:
     """Summarize news articles using multiple LLM providers."""
 
-    def __init__(self):
-        self.news_api = NewsAPIClient()
+    def __init__(self, news_api: NewsAPIClient | None = None, gdelt_api: GDELTAPIClient | None = None):
+        self.news_api = news_api or NewsAPIClient()
+        self.gdelt_api = gdelt_api or GDELTAPIClient()
         self.llm_providers = LLMProviders()
+
+    @staticmethod
+    def _sort_key(article: Any) -> datetime:
+        """Best-effort datetime parser for article sorting."""
+        raw_value = getattr(article, "published_at", "") or ""
+        value = str(raw_value).strip()
+        if not value:
+            return datetime.min
+        try:
+            return datetime.fromisoformat(value.replace("Z", "+00:00"))
+        except ValueError:
+            pass
+        try:
+            return datetime.strptime(value, "%Y%m%dT%H%M%SZ")
+        except ValueError:
+            return datetime.min
+
+    @staticmethod
+    def _deduplicate_articles(articles):
+        """De-duplicate normalized articles by URL."""
+        seen_urls = set()
+        deduped = []
+        for article in articles:
+            url = (getattr(article, "url", "") or "").strip().lower()
+            dedupe_key = url or f"{getattr(article, 'title', '').strip().lower()}|{getattr(article, 'source', '').strip().lower()}"
+            if dedupe_key in seen_urls:
+                continue
+            seen_urls.add(dedupe_key)
+            deduped.append(article)
+        return deduped
+
+    @staticmethod
+    def _normalize_news_provider(news_provider: str | None) -> str:
+        """Normalize news source mode to one of all/newsapi/gdelt."""
+        normalized = (news_provider or "all").strip().lower()
+        return normalized if normalized in VALID_NEWS_PROVIDERS else "all"
+
+    def fetch_articles(
+        self,
+        category: str = "technology",
+        max_articles: int = 5,
+        news_provider: str = "all",
+    ):
+        """Fetch and merge articles from selected news source(s)."""
+        if max_articles <= 0:
+            return []
+
+        normalized_news_provider = self._normalize_news_provider(news_provider)
+        merged = []
+        sources = []
+        if normalized_news_provider in {"all", "newsapi"}:
+            sources.append(
+                ("NewsAPI", lambda: self.news_api.fetch_top_headlines(category=category, max_articles=max_articles))
+            )
+        if normalized_news_provider in {"all", "gdelt"}:
+            sources.append(
+                ("GDELT", lambda: self.gdelt_api.fetch_top_headlines(category=category, max_articles=max_articles))
+            )
+        for source_name, fetch_fn in sources:
+            try:
+                merged.extend(fetch_fn())
+            except Exception as error:
+                logger.exception("Failed to fetch from %s", source_name)
+                print(f"✗ Failed to fetch from {source_name}: {error}")
+
+        deduped = self._deduplicate_articles(merged)
+        deduped.sort(key=self._sort_key, reverse=True)
+        return deduped[:max_articles]
 
     @staticmethod
     def _extract_article_fields(article: Any) -> Dict[str, str]:
@@ -57,8 +130,26 @@ Content: {fields['content'][:500]}"""
         """Build sentiment analysis prompt."""
         return Config.SENTIMENT_PROMPT_TEMPLATE.format(summary=summary)
 
-    def _run_summary(self, summary_prompt: str) -> str:
-        """Run summary generation with OpenAI primary and Cohere fallback."""
+    @staticmethod
+    def _normalize_provider_mode(provider_mode: str | None) -> str:
+        """Normalize provider mode to one of all/openai/cohere."""
+        normalized = (provider_mode or "all").strip().lower()
+        return normalized if normalized in VALID_PROVIDER_MODES else "all"
+
+    def _run_summary(self, summary_prompt: str, provider_mode: str = "all") -> str:
+        """Run summary generation for selected provider mode."""
+        mode = self._normalize_provider_mode(provider_mode)
+        if mode == "openai":
+            print("  → Summarizing with OpenAI...")
+            summary = self.llm_providers.ask_openai(summary_prompt)
+            print("  ✓ Summary generated")
+            return summary
+        if mode == "cohere":
+            print("  → Summarizing with Cohere...")
+            summary = self.llm_providers.ask_cohere(summary_prompt)
+            print("  ✓ Summary generated")
+            return summary
+
         try:
             print("  → Summarizing with OpenAI...")
             summary = self.llm_providers.ask_openai(summary_prompt)
@@ -69,9 +160,29 @@ Content: {fields['content'][:500]}"""
             print("  → Falling back to Cohere for summary...")
             return self.llm_providers.ask_cohere(summary_prompt)
 
-    def _run_sentiment(self, summary: str) -> str:
-        """Run sentiment analysis with Cohere and fallback text on failure."""
+    def _run_sentiment(self, summary: str, provider_mode: str = "all") -> str:
+        """Run sentiment analysis for selected provider mode."""
+        mode = self._normalize_provider_mode(provider_mode)
         sentiment_prompt = self._build_sentiment_prompt(summary)
+        if mode == "openai":
+            try:
+                print("  → Analyzing sentiment with OpenAI...")
+                sentiment = self.llm_providers.ask_openai(sentiment_prompt)
+                print("  ✓ Sentiment analyzed")
+                return sentiment
+            except Exception as error:
+                print(f"  ✗ OpenAI sentiment analysis failed: {error}")
+                return "Unable to analyze sentiment"
+        if mode == "cohere":
+            try:
+                print("  → Analyzing sentiment with Cohere...")
+                sentiment = self.llm_providers.ask_cohere(sentiment_prompt)
+                print("  ✓ Sentiment analyzed")
+                return sentiment
+            except Exception as error:
+                print(f"  ✗ Cohere sentiment analysis failed: {error}")
+                return "Unable to analyze sentiment"
+
         try:
             print("  → Analyzing sentiment with Cohere...")
             sentiment = self.llm_providers.ask_cohere(sentiment_prompt)
@@ -79,9 +190,15 @@ Content: {fields['content'][:500]}"""
             return sentiment
         except Exception as error:
             print(f"  ✗ Cohere sentiment analysis failed: {error}")
-            return "Unable to analyze sentiment"
+            try:
+                print("  → Falling back to OpenAI for sentiment...")
+                sentiment = self.llm_providers.ask_openai(sentiment_prompt)
+                print("  ✓ Sentiment analyzed")
+                return sentiment
+            except Exception:
+                return "Unable to analyze sentiment"
 
-    def summarize_article(self, article):
+    def summarize_article(self, article, provider_mode: str = "all"):
         """
         Summarize a single article.
 
@@ -97,8 +214,8 @@ Content: {fields['content'][:500]}"""
         article_text = self._build_article_text(fields)
         summary_prompt = self._build_summary_prompt(article_text)
 
-        summary = self._run_summary(summary_prompt)
-        sentiment = self._run_sentiment(summary)
+        summary = self._run_summary(summary_prompt, provider_mode=provider_mode)
+        sentiment = self._run_sentiment(summary, provider_mode=provider_mode)
 
         return {
             "title": fields["title"],
@@ -109,7 +226,7 @@ Content: {fields['content'][:500]}"""
             "published_at": fields["published_at"],
         }
 
-    def process_articles(self, articles):
+    def process_articles(self, articles, provider_mode: str = "all"):
         """
         Process multiple articles.
 
@@ -123,7 +240,7 @@ Content: {fields['content'][:500]}"""
 
         for article in articles:
             try:
-                result = self.summarize_article(article)
+                result = self.summarize_article(article, provider_mode=provider_mode)
                 results.append(result)
             except Exception as error:
                 logger.exception("Failed to process article")
@@ -172,7 +289,7 @@ class AsyncNewsSummarizer(NewsSummarizer):
         """Async version of summarize_article."""
         return await asyncio.to_thread(self.summarize_article, article)
 
-    async def process_articles_async(self, articles, max_concurrent=3):
+    async def process_articles_async(self, articles, max_concurrent=3, provider_mode: str = "all"):
         """
         Process articles concurrently.
 
@@ -184,10 +301,13 @@ class AsyncNewsSummarizer(NewsSummarizer):
             List of results
         """
         semaphore = asyncio.Semaphore(max_concurrent)
+        normalized_mode = self._normalize_provider_mode(provider_mode)
 
         async def process_with_semaphore(article):
             async with semaphore:
-                return await self.summarize_article_async(article)
+                if normalized_mode == "all":
+                    return await self.summarize_article_async(article)
+                return await asyncio.to_thread(self.summarize_article, article, normalized_mode)
 
         tasks = [process_with_semaphore(article) for article in articles]
         results = await asyncio.gather(*tasks, return_exceptions=True)
@@ -207,7 +327,7 @@ async def test_async():
     summarizer = AsyncNewsSummarizer()
 
     print("Fetching news articles...")
-    articles = summarizer.news_api.fetch_top_headlines(category="technology", max_articles=5)
+    articles = summarizer.fetch_articles(category="technology", max_articles=5)
 
     if articles:
         print(f"\nProcessing {len(articles)} articles concurrently...")

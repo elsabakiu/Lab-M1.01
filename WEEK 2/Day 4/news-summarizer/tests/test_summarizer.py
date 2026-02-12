@@ -3,6 +3,7 @@ import asyncio
 import pytest
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
+from news_summarizer.clients.gdelt_api import GDELTAPIClient
 from news_summarizer.clients.news_api import NewsAPIClient
 from news_summarizer.config import Config
 from news_summarizer.main import _parse_num_articles
@@ -116,7 +117,85 @@ class TestNewsSummarizer:
         summarizer = NewsSummarizer()
         
         assert summarizer.news_api is not None
+        assert summarizer.gdelt_api is not None
         assert summarizer.llm_providers is not None
+
+    def test_fetch_articles_merges_and_deduplicates(self):
+        """Merged source output should deduplicate by URL."""
+        summarizer = NewsSummarizer.__new__(NewsSummarizer)
+        summarizer.news_api = Mock()
+        summarizer.gdelt_api = Mock()
+
+        news_article = SimpleNamespace(
+            title="A",
+            description="desc",
+            content="content",
+            url="https://example.com/a",
+            source="NewsAPI",
+            published_at="2026-02-12T10:00:00Z",
+        )
+        gdelt_duplicate = SimpleNamespace(
+            title="A duplicate",
+            description="desc",
+            content="content",
+            url="https://example.com/a",
+            source="GDELT",
+            published_at="2026-02-12T11:00:00Z",
+        )
+        gdelt_unique = SimpleNamespace(
+            title="B",
+            description="desc",
+            content="content",
+            url="https://example.com/b",
+            source="GDELT",
+            published_at="2026-02-12T12:00:00Z",
+        )
+
+        summarizer.news_api.fetch_top_headlines.return_value = [news_article]
+        summarizer.gdelt_api.fetch_top_headlines.return_value = [gdelt_duplicate, gdelt_unique]
+
+        merged = NewsSummarizer.fetch_articles(summarizer, category="technology", max_articles=5)
+
+        assert len(merged) == 2
+        assert {article.url for article in merged} == {"https://example.com/a", "https://example.com/b"}
+
+    def test_fetch_articles_newsapi_only(self):
+        """news_provider='newsapi' should only call NewsAPI."""
+        summarizer = NewsSummarizer.__new__(NewsSummarizer)
+        summarizer.news_api = Mock()
+        summarizer.gdelt_api = Mock()
+
+        summarizer.news_api.fetch_top_headlines.return_value = []
+        summarizer.gdelt_api.fetch_top_headlines.return_value = []
+
+        NewsSummarizer.fetch_articles(
+            summarizer,
+            category="technology",
+            max_articles=5,
+            news_provider="newsapi",
+        )
+
+        summarizer.news_api.fetch_top_headlines.assert_called_once()
+        summarizer.gdelt_api.fetch_top_headlines.assert_not_called()
+
+    def test_fetch_articles_gdelt_only(self):
+        """news_provider='gdelt' should only call GDELT."""
+        summarizer = NewsSummarizer.__new__(NewsSummarizer)
+        summarizer.news_api = Mock()
+        summarizer.gdelt_api = Mock()
+
+        summarizer.news_api.fetch_top_headlines.return_value = []
+        summarizer.gdelt_api.fetch_top_headlines.return_value = []
+
+        NewsSummarizer.fetch_articles(
+            summarizer,
+            category="technology",
+            max_articles=5,
+            news_provider="gdelt",
+        )
+
+        summarizer.gdelt_api.fetch_top_headlines.assert_called_once()
+        summarizer.news_api.fetch_top_headlines.assert_not_called()
     
     @patch.object(LLMProviders, 'ask_openai')
     @patch.object(LLMProviders, 'ask_cohere')
@@ -198,6 +277,37 @@ class TestAsyncNewsSummarizer:
 
         assert results == [{"title": "ok"}]
         assert any("Failed to process article" in str(call) for call in mock_print.call_args_list)
+
+
+class TestGDELTAPI:
+    """Test GDELT API integration."""
+
+    @patch("news_summarizer.clients.gdelt_api.requests.Session.get")
+    def test_fetch_top_headlines(self, mock_get):
+        """Test fetching and normalizing GDELT article list."""
+        mock_response = Mock()
+        mock_response.status_code = 200
+        mock_response.raise_for_status = Mock()
+        mock_response.json.return_value = {
+            "articles": [
+                {
+                    "title": "GDELT Article",
+                    "url": "https://example.com/gdelt",
+                    "domain": "example.com",
+                    "seendate": "20260212T103000Z",
+                    "snippet": "Snippet text",
+                }
+            ]
+        }
+        mock_get.return_value = mock_response
+
+        api = GDELTAPIClient()
+        articles = api.fetch_top_headlines(category="AI", max_articles=1)
+
+        assert len(articles) == 1
+        assert articles[0].title == "GDELT Article"
+        assert articles[0].source == "GDELT (example.com)"
+        assert articles[0].published_at == "2026-02-12T10:30:00Z"
 
 # Run tests
 if __name__ == "__main__":

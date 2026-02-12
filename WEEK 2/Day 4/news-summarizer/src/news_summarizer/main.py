@@ -17,6 +17,7 @@ NEWS_CATEGORIES = [
     "sports",
     "technology",
 ]
+NEWS_PROVIDER_CHOICES = ["all", "newsapi", "gdelt"]
 
 
 def _parse_num_articles(raw_value: Any) -> int:
@@ -28,37 +29,67 @@ def _parse_num_articles(raw_value: Any) -> int:
         return Config.DEFAULT_ARTICLES
 
 
-def _run_pipeline(category: str, num_articles: int, use_async: bool):
+def _normalize_news_provider(raw_value: Any) -> str:
+    """Normalize UI news provider selection to allowed values."""
+    normalized = (raw_value or "all").strip().lower()
+    return normalized if normalized in NEWS_PROVIDER_CHOICES else "all"
+
+
+def _run_pipeline(
+    category: str,
+    num_articles: int,
+    use_async: bool,
+    news_provider: str,
+):
     """Run summarization pipeline and return summarizer/results tuple."""
     normalized_category = (category or Config.DEFAULT_CATEGORY).strip() or Config.DEFAULT_CATEGORY
     if normalized_category not in NEWS_CATEGORIES:
         normalized_category = Config.DEFAULT_CATEGORY
     normalized_num_articles = _parse_num_articles(num_articles)
+    normalized_news_provider = _normalize_news_provider(news_provider)
     summarizer = AsyncNewsSummarizer() if use_async else NewsSummarizer()
 
-    articles = summarizer.news_api.fetch_top_headlines(
+    articles = summarizer.fetch_articles(
         category=normalized_category,
         max_articles=normalized_num_articles,
+        news_provider=normalized_news_provider,
     )
     if not articles:
-        return normalized_category, normalized_num_articles, [], summarizer
+        return (
+            normalized_category,
+            normalized_num_articles,
+            normalized_news_provider,
+            [],
+            summarizer,
+        )
 
     if use_async:
         results = asyncio.run(
-            summarizer.process_articles_async(articles, max_concurrent=Config.ASYNC_MAX_CONCURRENT)
+            summarizer.process_articles_async(
+                articles,
+                max_concurrent=Config.ASYNC_MAX_CONCURRENT,
+                provider_mode="all",
+            )
         )
     else:
-        results = summarizer.process_articles(articles)
-    return normalized_category, normalized_num_articles, results, summarizer
+        results = summarizer.process_articles(articles, provider_mode="all")
+    return (
+        normalized_category,
+        normalized_num_articles,
+        normalized_news_provider,
+        results,
+        summarizer,
+    )
 
 
-def _format_report(category: str, num_articles: int, results, summarizer) -> str:
+def _format_report(category: str, num_articles: int, news_provider: str, results, summarizer) -> str:
     """Format results and cost summary as markdown for Gradio."""
     if not results:
         return (
             f"## News Summarizer Report\n"
             f"- Category: `{category}`\n"
             f"- Requested articles: `{num_articles}`\n\n"
+            f"- News provider: `{news_provider}`\n\n"
             "No articles found for the selected category."
         )
 
@@ -66,6 +97,7 @@ def _format_report(category: str, num_articles: int, results, summarizer) -> str
         "## News Summarizer Report",
         f"- Category: `{category}`",
         f"- Requested articles: `{num_articles}`",
+        f"- News provider: `{news_provider}`",
         "",
     ]
     for idx, result in enumerate(results, 1):
@@ -120,15 +152,33 @@ def _format_result_rows(results) -> list[list[str]]:
     return rows
 
 
-def run_app(category: str, num_articles: int, use_async: bool) -> tuple[str, list[list[str]]]:
+def run_app(
+    category: str,
+    num_articles: int,
+    use_async: bool,
+    news_provider: str,
+) -> tuple[str, list[list[str]]]:
     """Gradio callback for running the summarizer."""
     try:
-        resolved_category, resolved_num, results, summarizer = _run_pipeline(
+        (
+            resolved_category,
+            resolved_num,
+            resolved_news_provider,
+            results,
+            summarizer,
+        ) = _run_pipeline(
             category,
             num_articles,
             use_async,
+            news_provider,
         )
-        report = _format_report(resolved_category, resolved_num, results, summarizer)
+        report = _format_report(
+            resolved_category,
+            resolved_num,
+            resolved_news_provider,
+            results,
+            summarizer,
+        )
         rows = _format_result_rows(results)
         return report, rows
     except Exception as error:
@@ -143,22 +193,31 @@ def build_demo():
         gr.Markdown("# News Summarizer")
         gr.Markdown("Fetch headlines, summarize with LLMs, and get sentiment + cost analysis.")
 
-        category = gr.Dropdown(
-            label="Category",
-            choices=NEWS_CATEGORIES,
-            value=Config.DEFAULT_CATEGORY,
-        )
-        num_articles = gr.Slider(
-            minimum=Config.MIN_ARTICLES,
-            maximum=Config.MAX_ARTICLES,
-            step=1,
-            value=Config.DEFAULT_ARTICLES,
-            label="Number of articles",
-        )
+        with gr.Row():
+            category = gr.Dropdown(
+                label="Category",
+                choices=NEWS_CATEGORIES,
+                value=Config.DEFAULT_CATEGORY,
+            )
+            num_articles = gr.Slider(
+                minimum=Config.MIN_ARTICLES,
+                maximum=Config.MAX_ARTICLES,
+                step=1,
+                value=Config.DEFAULT_ARTICLES,
+                label="Number of articles",
+            )
+            news_provider = gr.Dropdown(
+                label="News provider",
+                choices=NEWS_PROVIDER_CHOICES,
+                value="all",
+            )
+
         use_async = gr.Checkbox(value=False, label="Use async processing")
 
         run_button = gr.Button("Run Summarizer", variant="primary")
+        
         report_output = gr.Markdown(label="Report")
+        
         results_output = gr.Dataframe(
             headers=["Title", "Source", "Published", "Summary", "Sentiment", "URL"],
             datatype=["str", "str", "str", "str", "str", "str"],
@@ -171,7 +230,7 @@ def build_demo():
 
         run_button.click(
             fn=run_app,
-            inputs=[category, num_articles, use_async],
+            inputs=[category, num_articles, use_async, news_provider],
             outputs=[report_output, results_output],
         )
     return demo

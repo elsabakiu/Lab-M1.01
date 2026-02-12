@@ -50,8 +50,10 @@ class Config:
     OPENAI_RPM = _get_int("OPENAI_RPM", 500, minimum=1)
     COHERE_RPM = _get_int("COHERE_RPM", 50, minimum=1)
     NEWS_API_RPM = _get_int("NEWS_API_RPM", 100, minimum=1)
+    GDELT_RPM = _get_int("GDELT_RPM", 120, minimum=1)
 
     DEFAULT_CATEGORY = os.getenv("DEFAULT_CATEGORY", "technology")
+    GDELT_DEFAULT_QUERY = os.getenv("GDELT_DEFAULT_QUERY", "AI")
     MIN_ARTICLES = _get_int("MIN_ARTICLES", 1, minimum=1)
     MAX_ARTICLES = _get_int("MAX_ARTICLES", 10, minimum=1)
     DEFAULT_ARTICLES = _get_int("DEFAULT_ARTICLES", 3, minimum=1)

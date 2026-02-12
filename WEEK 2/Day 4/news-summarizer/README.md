@@ -1,10 +1,10 @@
 # News Summarizer
 
-A CLI app that fetches top headlines from NewsAPI, summarizes each article with OpenAI, analyzes sentiment with Cohere, and prints a report with per-run token/cost usage.
+A CLI app that fetches headlines from NewsAPI and GDELT, summarizes each article with OpenAI, analyzes sentiment with Cohere, and prints a report with per-run token/cost usage.
 
 ## What The Project Does
 
-- Fetches latest headlines by category (for example: `technology`, `business`, `health`, `general`).
+- Fetches latest headlines by category/query from multiple sources (NewsAPI + GDELT).
 - Summarizes each article in 2-3 sentences.
 - Runs sentiment analysis on each generated summary.
 - Supports sync and async processing modes.
@@ -15,6 +15,7 @@ A CLI app that fetches top headlines from NewsAPI, summarizes each article with 
 
 - `src/news_summarizer/main.py`: interactive CLI entrypoint.
 - `src/news_summarizer/clients/news_api.py`: NewsAPI client + normalization.
+- `src/news_summarizer/clients/gdelt_api.py`: GDELT client + normalization.
 - `src/news_summarizer/services/summarizer.py`: sync/async orchestration and report generation.
 - `src/news_summarizer/providers/llm_providers.py`: OpenAI/Cohere calls, retries, budget checks, and cost tracking.
 - `tests/`: unit tests.
@@ -54,6 +55,8 @@ Common optional settings (defaults shown in code):
 - `OPENAI_RPM=500`
 - `COHERE_RPM=50`
 - `NEWS_API_RPM=100`
+- `GDELT_RPM=120`
+- `GDELT_DEFAULT_QUERY=AI`
 
 ## How To Run
 
