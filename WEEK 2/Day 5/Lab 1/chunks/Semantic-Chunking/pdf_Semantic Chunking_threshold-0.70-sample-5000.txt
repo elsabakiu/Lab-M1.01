@@ -1,0 +1,201 @@
+Document: pdf
+Chunking Strategy: Semantic Chunking
+Config: threshold=0.70,sample=5000
+Total Chunks: 35
+
+===== Chunk 1 (length=507) =====
+GROUPE D’EXPERTS 
+INDEPENDANTS DE HAUT NIVEAU SUR 
+L’INTELLIGENCE ARTIFICIELLE 
+CONSTITUE PAR LA COMMISSION EUROPEENNE EN JUIN 2018 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+LIGNES DIRECTRICES EN 
+MATIERE D’ETHIQUE 
+POUR UNE IA DIGNE DE 
+CONFIANCE 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+LIGNES DIRECTRICES EN MATIERE D’ETHIQUE pour UNE IA DIGNE 
+DE CONFIANCE 
+ 
+Groupe d’experts de haut niveau sur l’intelligence artificielle 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Le présent document a été rédigé par le groupe d’experts de haut niveau sur l’intelligence artificielle 
+(GEHN IA).
+
+===== Chunk 2 (length=233) =====
+Les membres du GEHN IA qui y sont cités soutiennent le cadre général pour une IA digne de 
+confiance présenté dans les présentes lignes direc trices, sans approuver nécessairement chacune des 
+affirmations formulées dans le document.
+
+===== Chunk 3 (length=202) =====
+Afin de recueillir des commentaires pratiques, les parties prenantes soumettront à une phase pilote la liste 
+d’évaluation pour une IA digne de confiance présentée  au chapitre  III du présent document.
+
+===== Chunk 4 (length=173) =====
+Une version 
+révisée de cette liste d’évaluation tenant compte des commentaires recueillis au cours de la phase pilote sera 
+présentée à la Commission européenne début 2020.
+
+===== Chunk 5 (length=100) =====
+Le GEHN IA est un groupe d’experts indépendants constitué par la Commission européenne en juin 2018.
+
+===== Chunk 6 (length=231) =====
+Personne de contact Nathalie Smuha – coordinatrice du groupe d’experts de haut niveau sur l’IA  
+Adresse électronique CNECT-HLG-AI@ec.europa.eu  
+ 
+Commission européenne  
+B-1049 Bruxelles  
+ 
+Document rendu public le X avril 2019.
+
+===== Chunk 7 (length=178) =====
+Un premier projet de ce document a été publié le 18 décembre 2018 et a fait l’objet d’une consultation ouverte à 
+laquelle plus de 500 contributeurs ont apporté des commentaires.
+
+===== Chunk 8 (length=157) =====
+Nous souhaitons remercier expliciteme nt et 
+chaleureusement toutes les personnes ayant fait part de leurs commentaires sur le premier projet de ce document.
+
+===== Chunk 9 (length=97) =====
+Ces 
+commentaires ont été pris en compte dans le cadre de l’élaboration de cette version révisée.
+
+===== Chunk 10 (length=168) =====
+Ni la Commission européenne ni aucune personne agissant au nom de la Commission n’est responsable de l’usage qui 
+pourrait être fait des informations données ci -après.
+
+===== Chunk 11 (length=156) =====
+Le contenu du présent document de travail relève de la seule 
+responsabilité du groupe d’e xperts de haut niveau sur l’intelligence artificielle (GEHN  IA).
+
+===== Chunk 12 (length=314) =====
+Bien que des membres du 
+personnel de la Commission aient facilité la préparation des lignes directrices, les avis que le présent document exprime 
+reflètent l’opinion du GEHN  IA et ne peuvent,  en aucune circonstance, être considérés comme reflétant une prise de 
+position officielle de la Commission européenne.
+
+===== Chunk 13 (length=222) =====
+De plus amples informations sur le groupe d’experts de haut niveau sur l’intelligence artificielle sont disponibles en ligne 
+(https://ec.europa.eu/digital-single-market/en/high-level-expert-group-artificial-intelligence).
+
+===== Chunk 14 (length=139) =====
+La politique de réutilisation des documents de la Commission européenne est régie par la décision  2011/833/UE (JO L 330 
+du 14.12.2011, p.
+
+===== Chunk 15 (length=4) =====
+39).
+
+===== Chunk 16 (length=201) =====
+Pour toute utilisation ou  reproduction de photos ou d’autres éléments non couverts par le droit 
+d’auteur de l’UE, l’autorisation doit être obtenue directement auprès des titulaires du droit d’auteur.
+
+===== Chunk 17 (length=45) =====
+1 
+ 
+ 
+ 
+TABLE DES MATIERES 
+ 
+ 
+RÉSUMÉ 2 
+A.
+
+===== Chunk 18 (length=18) =====
+INTRODUCTION 5 
+B.
+
+===== Chunk 19 (length=42) =====
+CADRE POUR UNE IA DIGNE DE CONFIANCE 7 
+I.
+
+===== Chunk 20 (length=57) =====
+Chapitre I: Fondements d’une IA digne de confiance 11 
+1.
+
+===== Chunk 21 (length=66) =====
+Les droits fondamentaux en tant que droits moraux et légaux 12 
+2.
+
+===== Chunk 22 (length=54) =====
+Des droits fondamentaux aux principes éthiques 12 
+II.
+
+===== Chunk 23 (length=56) =====
+Chapitre II: Parvenir à une IA digne de confiance 17 
+1.
+
+===== Chunk 24 (length=44) =====
+Exigences d’une IA digne de confiance 17 
+2.
+
+===== Chunk 25 (length=88) =====
+Méthodes techniques et non techniques pour parvenir à une IA digne de confiance 25 
+III.
+
+===== Chunk 26 (length=59) =====
+Chapitre III: évaluation d’une IA digne de confiance 30 
+C.
+
+===== Chunk 27 (length=80) =====
+EXEMPLES DE POSSIBILITES ET DE PREOCCUPATIONS MAJEURES SOULEVEES PAR L’IA 42 
+D.
+
+===== Chunk 28 (length=130) =====
+CONCLUSION 46 
+GLOSSAIRE 48 
+ 
+  
+2 
+ 
+RÉSUMÉ 
+(1) Les présentes lignes directrices visent à promouvoir une IA digne de confiance.
+
+===== Chunk 29 (length=502) =====
+Une IA digne de confiance 
+présente les trois caractéristiques  suivantes, qui devraient être respectées tout au long du cycle de vie du 
+système: a) elle doit être licite, en assurant le respect des législations et réglementations applicables; b) elle 
+doit être éthique, en assurant l’adhésion à des principes et valeurs éthiques; et c) elle doit être robuste, sur le 
+plan tant technique que social car, même avec de bonnes intentions, les systèmes d’IA peuvent causer des 
+préjudices involontaires.
+
+===== Chunk 30 (length=140) =====
+Toutes ces caractéristiques sont nécessaires en elles -mêmes, mais elles ne sauraient 
+suffire à la réalisation d’une IA digne de confiance.
+
+===== Chunk 31 (length=90) =====
+L’idéal serait que ces trois caractéristiques fonctionnent en 
+harmonie et se chevauchent.
+
+===== Chunk 32 (length=129) =====
+Si, dans la pratique, des tensions venaient à apparaître entre ces 
+caractéristiques, la société devrait s’efforcer d’y remédier.
+
+===== Chunk 33 (length=118) =====
+(2) Les présentes lignes directrices établissent un cadre pour parvenir à la réalisation d’une IA digne de 
+confiance.
+
+===== Chunk 34 (length=110) =====
+Ce cadre ne traite pas explicitement de la première caractéristique d’une IA digne de confiance (IA 
+licite)1.
+
+===== Chunk 35 (length=16) =====
+Il vise plutôt à

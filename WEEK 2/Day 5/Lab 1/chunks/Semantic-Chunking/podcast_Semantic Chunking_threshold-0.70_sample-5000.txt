@@ -1,0 +1,281 @@
+Document: podcast
+Chunking Strategy: Semantic Chunking
+Similarity Threshold: 0.70
+Sample Characters: 5000
+Total Chunks: 92
+
+===== Chunk 1 (length=90) =====
+So, imagine for a second you're driving across, I don't know, a massive suspension bridge.
+
+===== Chunk 2 (length=3) =====
+OK.
+
+===== Chunk 3 (length=85) =====
+You don't pull over halfway across, get out, and demand to see the blueprints, right?
+
+===== Chunk 4 (length=37) =====
+You don't interview the welding crew.
+
+===== Chunk 5 (length=22) =====
+No, you just trust it.
+
+===== Chunk 6 (length=132) =====
+You just drive, you trust the bridge, you trust the engineering standards, the inspections, the laws that say this thing won't fail.
+
+===== Chunk 7 (length=40) =====
+Right, it's trust in the infrastructure.
+
+===== Chunk 8 (length=31) =====
+It's invisible, but it's there.
+
+===== Chunk 9 (length=8) =====
+Exactly.
+
+===== Chunk 10 (length=28) =====
+But now, let's switch gears.
+
+===== Chunk 11 (length=121) =====
+Think about the algorithm that just denied your mortgage application, or the AI system scanning your face at the airport.
+
+===== Chunk 12 (length=28) =====
+Do you have that same trust?
+
+===== Chunk 13 (length=33) =====
+And I mean, honestly, should you?
+
+===== Chunk 14 (length=53) =====
+That is the defining question of our decade, I think.
+
+===== Chunk 15 (length=79) =====
+We've moved past the wow phase of AI and straight into the wait-a-minute phase.
+
+===== Chunk 16 (length=56) =====
+Today, we are digging into the blueprint for that trust.
+
+===== Chunk 17 (length=124) =====
+We're unpacking a document that is arguably the Magna Carta for ethical computing, the Ethics Guidelines for Trustworthy AI.
+
+===== Chunk 18 (length=23) =====
+This is a heavy hitter.
+
+===== Chunk 19 (length=79) =====
+It was produced by the High-Level Expert Group on AI, or you know, the AI HLEG.
+
+===== Chunk 20 (length=63) =====
+This is an independent group set up by the European Commission.
+
+===== Chunk 21 (length=37) =====
+A mix of academics, industry leaders.
+
+===== Chunk 22 (length=40) =====
+And civil society, a really broad group.
+
+===== Chunk 23 (length=91) =====
+And just to frame this for everyone listening, this document, it went public in April 2019.
+
+===== Chunk 24 (length=48) =====
+In tech years, that's practically the Stone Age.
+
+===== Chunk 25 (length=117) =====
+We didn't have the generative AI explosion we have today, so why are we blowing the dust off of this specific report?
+
+===== Chunk 26 (length=44) =====
+Because it's not dusty, it's the foundation.
+
+===== Chunk 27 (length=92) =====
+Everything we see now, like the EU AI Act, it all stands on the shoulders of this framework.
+
+===== Chunk 28 (length=124) =====
+It was the moment the conversation shifted from, you know, how do we make AI powerful, to how do we make AI worthy of trust?
+
+===== Chunk 29 (length=79) =====
+And our mission for this deep dive is to figure out how to operationalize that.
+
+===== Chunk 30 (length=39) =====
+We aren't just talking philosophy here.
+
+===== Chunk 31 (length=15) =====
+No, not at all.
+
+===== Chunk 32 (length=108) =====
+We're looking at how you take an abstract concept like fairness and turn it into, I don't know, Python code.
+
+===== Chunk 33 (length=89) =====
+We've got three pillars, four principles, and seven concrete requirements to get through.
+
+===== Chunk 34 (length=80) =====
+And a checklist that every developer should probably have tattooed on their arm.
+
+===== Chunk 35 (length=37) =====
+OK, let's start with the big picture.
+
+===== Chunk 36 (length=70) =====
+The source material defines trustworthy AI as having three components.
+
+===== Chunk 37 (length=74) =====
+Right, and they have to exist through the entire life cycle of the system.
+
+===== Chunk 38 (length=39) =====
+Not just at launch. Not just at launch.
+
+===== Chunk 39 (length=26) =====
+From design to retirement.
+
+===== Chunk 40 (length=38) =====
+Think of it like a three-legged stool.
+
+===== Chunk 41 (length=24) =====
+The first leg is lawful.
+
+===== Chunk 42 (length=46) =====
+The AI has to comply with all the regulations.
+
+===== Chunk 43 (length=34) =====
+Which feels like a pretty low bar.
+
+===== Chunk 44 (length=20) =====
+Don't break the law.
+
+===== Chunk 45 (length=52) =====
+I mean, that should be step one for anything, right?
+
+===== Chunk 46 (length=15) =====
+You'd think so.
+
+===== Chunk 47 (length=92) =====
+But in the tech world, move fast and break things has been the mantra for a long, long time.
+
+===== Chunk 48 (length=44) =====
+This says, no, you have to follow the rules.
+
+===== Chunk 49 (length=18) =====
+But laws are slow.
+
+===== Chunk 50 (length=14) =====
+Terribly slow.
+
+===== Chunk 51 (length=59) =====
+Moore's law moves a lot faster than parliament or congress.
+
+===== Chunk 52 (length=118) =====
+Right, by the time a law is passed to regulate a specific algorithm, that algorithm is, what, three versions obsolete?
+
+===== Chunk 53 (length=10) =====
+Precisely.
+
+===== Chunk 54 (length=54) =====
+And that's why the second leg of the stool is ethical.
+
+===== Chunk 55 (length=29) =====
+This component fills the gap.
+
+===== Chunk 56 (length=79) =====
+It ensures you adhere to ethical principles even when the law hasn't caught up.
+
+===== Chunk 57 (length=65) =====
+It's the difference between technically legal and actually right.
+
+===== Chunk 58 (length=18) =====
+And the third leg.
+
+===== Chunk 59 (length=38) =====
+Robust, both technically and socially.
+
+===== Chunk 60 (length=125) =====
+Because you can have the most lawful, well-intentioned AI, but if it crashes every time it sees a pixel it doesn't recognize.
+
+===== Chunk 61 (length=27) =====
+Or it can be easily hacked.
+
+===== Chunk 62 (length=20) =====
+Then it causes harm.
+
+===== Chunk 63 (length=33) =====
+Unintentional harm is still harm.
+
+===== Chunk 64 (length=31) =====
+So lawful, ethical, and robust.
+
+===== Chunk 65 (length=99) =====
+The document then roots this whole ethical approach in something very specific, fundamental rights.
+
+===== Chunk 66 (length=33) =====
+Yes, the EU charter specifically.
+
+===== Chunk 67 (length=50) =====
+This is so crucial because it changes the framing.
+
+===== Chunk 68 (length=61) =====
+AI isn't an end in itself, it's a tool for human flourishing.
+
+===== Chunk 69 (length=57) =====
+I highlighted that phrase in my notes, human flourishing.
+
+===== Chunk 70 (length=90) =====
+It's such a distinct shift from, you know, optimizing efficiency or maximizing engagement.
+
+===== Chunk 71 (length=6) =====
+It is.
+
+===== Chunk 72 (length=45) =====
+It sounds nice, but it feels hard to measure.
+
+===== Chunk 73 (length=22) =====
+It is hard to measure.
+
+===== Chunk 74 (length=86) =====
+But to make it concrete, the experts derive four ethical principles from those rights.
+
+===== Chunk 75 (length=30) =====
+These are the non-negotiables.
+
+===== Chunk 76 (length=29) =====
+Okay, let's run through them.
+
+===== Chunk 77 (length=42) =====
+Principle one, respect for human autonomy.
+
+===== Chunk 78 (length=44) =====
+This means humans stay in the driver's seat.
+
+===== Chunk 79 (length=54) =====
+AI shouldn't hurt us or condition us or manipulate us.
+
+===== Chunk 80 (length=79) =====
+It shouldn't deceive you into clicking something you wouldn't otherwise choose.
+
+===== Chunk 81 (length=45) =====
+It's about preserving our self-determination.
+
+===== Chunk 82 (length=36) =====
+Principle two is prevention of harm.
+
+===== Chunk 83 (length=13) =====
+Safety first.
+
+===== Chunk 84 (length=151) =====
+This covers physical integrity, like a robotic arm not swinging into a worker, but also mental integrity and, of course, protection from malicious use.
+
+===== Chunk 85 (length=56) =====
+Principle three is the big one we hear about constantly.
+
+===== Chunk 86 (length=9) =====
+Fairness.
+
+===== Chunk 87 (length=6) =====
+Right.
+
+===== Chunk 88 (length=59) =====
+This is about the equal distribution of benefits and costs.
+
+===== Chunk 89 (length=49) =====
+It means avoiding unfair bias and discrimination.
+
+===== Chunk 90 (length=109) =====
+Basically, ensuring the AI doesn't work perfectly for one group of people while ruining the lives of another.
+
+===== Chunk 91 (length=43) =====
+And finally, principle four, explicability.
+
+===== Chunk 92 (length=19) =====
+The black box probl

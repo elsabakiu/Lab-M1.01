@@ -1,0 +1,1379 @@
+[Fixed-Size | podcast | chunk-size=500,overlap=0 | boundary 1]
+prev_tail: t's invisible, but it's there. Exactly. But now, let's switch gears. Think about
+next_head: the algorithm that just denied your mortgage application, or the AI system scann
+
+[Fixed-Size | podcast | chunk-size=500,overlap=0 | boundary 2]
+prev_tail: Carta for ethical computing, the Ethics Guidelines for Trustworthy AI. This is a
+next_head: heavy hitter. It was produced by the High-Level Expert Group on AI, or you know,
+
+[Fixed-Size | podcast | chunk-size=500,overlap=0 | boundary 3]
+prev_tail: osion we have today, so why are we blowing the dust off of this specific report?
+next_head: Because it's not dusty, it's the foundation. Everything we see now, like the EU
+
+[Fixed-Size | podcast | chunk-size=500,overlap=0 | boundary 4]
+prev_tail: t how you take an abstract concept like fairness and turn it into, I don't know,
+next_head: Python code. We've got three pillars, four principles, and seven concrete requir
+
+[Fixed-Size | podcast | chunk-size=500,overlap=0 | boundary 5]
+prev_tail: n to retirement. Think of it like a three-legged stool. The first leg is lawful.
+next_head: The AI has to comply with all the regulations. Which feels like a pretty low bar
+
+[Fixed-Size | podcast | chunk-size=500,overlap=50 | boundary 1]
+prev_tail: t's invisible, but it's there. Exactly. But now, let's switch gears. Think about
+next_head: Exactly. But now, let's switch gears. Think about the algorithm that just denied
+
+[Fixed-Size | podcast | chunk-size=500,overlap=50 | boundary 2]
+prev_tail: unpacking a document that is arguably the Magna Carta for ethical computing, the
+next_head: the Magna Carta for ethical computing, the Ethics Guidelines for Trustworthy AI.
+
+[Fixed-Size | podcast | chunk-size=500,overlap=50 | boundary 3]
+prev_tail: . In tech years, that's practically the Stone Age. We didn't have the generative
+next_head: the Stone Age. We didn't have the generative AI explosion we have today, so why
+
+[Fixed-Size | podcast | chunk-size=500,overlap=50 | boundary 4]
+prev_tail: is deep dive is to figure out how to operationalize that. We aren't just talking
+next_head: how to operationalize that. We aren't just talking philosophy here. No, not at a
+
+[Fixed-Size | podcast | chunk-size=500,overlap=50 | boundary 5]
+prev_tail: erial defines trustworthy AI as having three components. Right, and they have to
+next_head: having three components. Right, and they have to exist through the entire life c
+
+[Fixed-Size | podcast | chunk-size=500,overlap=100 | boundary 1]
+prev_tail: t's invisible, but it's there. Exactly. But now, let's switch gears. Think about
+next_head: infrastructure. It's invisible, but it's there. Exactly. But now, let's switch g
+
+[Fixed-Size | podcast | chunk-size=500,overlap=100 | boundary 2]
+prev_tail: re digging into the blueprint for that trust. We're unpacking a document that is
+next_head: phase. Today, we are digging into the blueprint for that trust. We're unpacking
+
+[Fixed-Size | podcast | chunk-size=500,overlap=100 | boundary 3]
+prev_tail: ly broad group. And just to frame this for everyone listening, this document, it
+next_head: society, a really broad group. And just to frame this for everyone listening, th
+
+[Fixed-Size | podcast | chunk-size=500,overlap=100 | boundary 4]
+prev_tail: framework. It was the moment the conversation shifted from, you know, how do we
+next_head: shoulders of this framework. It was the moment the conversation shifted from, yo
+
+[Fixed-Size | podcast | chunk-size=500,overlap=100 | boundary 5]
+prev_tail: pillars, four principles, and seven concrete requirements to get through. And a
+next_head: We've got three pillars, four principles, and seven concrete requirements to get
+
+[Fixed-Size | podcast | chunk-size=1000,overlap=0 | boundary 1]
+prev_tail: Carta for ethical computing, the Ethics Guidelines for Trustworthy AI. This is a
+next_head: heavy hitter. It was produced by the High-Level Expert Group on AI, or you know,
+
+[Fixed-Size | podcast | chunk-size=1000,overlap=0 | boundary 2]
+prev_tail: ou take an abstract concept like fairness and turn it into, I don't know, Python
+next_head: code. We've got three pillars, four principles, and seven concrete requirements
+
+[Fixed-Size | podcast | chunk-size=1000,overlap=0 | boundary 3]
+prev_tail: a law is passed to regulate a specific algorithm, that algorithm is, what, three
+next_head: versions obsolete? Precisely. And that's why the second leg of the stool is ethi
+
+[Fixed-Size | podcast | chunk-size=1000,overlap=0 | boundary 4]
+prev_tail: efficiency or maximizing engagement. It is. It sounds nice, but it feels hard to
+next_head: measure. It is hard to measure. But to make it concrete, the experts derive four
+
+[Fixed-Size | podcast | chunk-size=1000,overlap=0 | boundary 5]
+prev_tail: ning the lives of another. And finally, principle four, explicability. The black
+next_head: box problem. If an algorithm affects your life, decides your credit, your job, w
+
+[Fixed-Size | podcast | chunk-size=1000,overlap=50 | boundary 1]
+prev_tail: Carta for ethical computing, the Ethics Guidelines for Trustworthy AI. This is a
+next_head: Ethics Guidelines for Trustworthy AI. This is a heavy hitter. It was produced by
+
+[Fixed-Size | podcast | chunk-size=1000,overlap=50 | boundary 2]
+prev_tail: phy here. No, not at all. We're looking at how you take an abstract concept like
+next_head: looking at how you take an abstract concept like fairness and turn it into, I do
+
+[Fixed-Size | podcast | chunk-size=1000,overlap=50 | boundary 3]
+prev_tail: erribly slow. Moore's law moves a lot faster than parliament or congress. Right,
+next_head: a lot faster than parliament or congress. Right, by the time a law is passed to
+
+[Fixed-Size | podcast | chunk-size=1000,overlap=50 | boundary 4]
+prev_tail: it's a tool for human flourishing. I highlighted that phrase in my notes, human
+next_head: I highlighted that phrase in my notes, human flourishing. It's such a distinct s
+
+[Fixed-Size | podcast | chunk-size=1000,overlap=50 | boundary 5]
+prev_tail: t. This is about the equal distribution of benefits and costs. It means avoiding
+next_head: of benefits and costs. It means avoiding unfair bias and discrimination. Basical
+
+[Fixed-Size | podcast | chunk-size=1000,overlap=100 | boundary 1]
+prev_tail: Carta for ethical computing, the Ethics Guidelines for Trustworthy AI. This is a
+next_head: arguably the Magna Carta for ethical computing, the Ethics Guidelines for Trustw
+
+[Fixed-Size | podcast | chunk-size=1000,overlap=100 | boundary 2]
+prev_tail: erationalize that. We aren't just talking philosophy here. No, not at all. We're
+next_head: figure out how to operationalize that. We aren't just talking philosophy here. N
+
+[Fixed-Size | podcast | chunk-size=1000,overlap=100 | boundary 3]
+prev_tail: n the mantra for a long, long time. This says, no, you have to follow the rules.
+next_head: break things has been the mantra for a long, long time. This says, no, you have
+
+[Fixed-Size | podcast | chunk-size=1000,overlap=100 | boundary 4]
+prev_tail: very specific, fundamental rights. Yes, the EU charter specifically. This is so
+next_head: in something very specific, fundamental rights. Yes, the EU charter specifically
+
+[Fixed-Size | podcast | chunk-size=1000,overlap=100 | boundary 5]
+prev_tail: like a robotic arm not swinging into a worker, but also mental integrity and, of
+next_head: physical integrity, like a robotic arm not swinging into a worker, but also ment
+
+[Fixed-Size | podcast | chunk-size=2000,overlap=0 | boundary 1]
+prev_tail: e an abstract concept like fairness and turn it into, I don't know, Python code.
+next_head: We've got three pillars, four principles, and seven concrete requirements to get
+
+[Fixed-Size | podcast | chunk-size=2000,overlap=0 | boundary 2]
+prev_tail: y or maximizing engagement. It is. It sounds nice, but it feels hard to measure.
+next_head: It is hard to measure. But to make it concrete, the experts derive four ethical
+
+[Fixed-Size | podcast | chunk-size=2000,overlap=0 | boundary 3]
+prev_tail: y. Right. And if the historical crime data is biased, which it almost always is,
+next_head: you're violating fairness by targeting specific neighborhoods over and over. So
+
+[Fixed-Size | podcast | chunk-size=2000,overlap=0 | boundary 4]
+prev_tail: tastrophe when you hit it is a very complex engineering challenge. Let's look at
+next_head: requirement two, technical robustness and safety. We touched on this, but I want
+
+[Fixed-Size | podcast | chunk-size=2000,overlap=50 | boundary 1]
+prev_tail: e an abstract concept like fairness and turn it into, I don't know, Python code.
+next_head: and turn it into, I don't know, Python code. We've got three pillars, four princ
+
+[Fixed-Size | podcast | chunk-size=2000,overlap=50 | boundary 2]
+prev_tail: shift from, you know, optimizing efficiency or maximizing engagement. It is. It
+next_head: efficiency or maximizing engagement. It is. It sounds nice, but it feels hard to
+
+[Fixed-Size | podcast | chunk-size=2000,overlap=50 | boundary 3]
+prev_tail: e other hand, you're using surveillance that just smashes into respect for human
+next_head: that just smashes into respect for human autonomy. Right. And if the historical
+
+[Fixed-Size | podcast | chunk-size=2000,overlap=50 | boundary 4]
+prev_tail: tions the capability to safely abort an operation. It sounds obvious, but a kill
+next_head: abort an operation. It sounds obvious, but a kill switch that actually works and
+
+[Fixed-Size | podcast | chunk-size=2000,overlap=50 | boundary 5]
+prev_tail: ning will appreciate. Identification. It's simple. AI systems must not represent
+next_head: It's simple. AI systems must not represent themselves as humans. No more. Hi, I'
+
+[Fixed-Size | podcast | chunk-size=2000,overlap=100 | boundary 1]
+prev_tail: e an abstract concept like fairness and turn it into, I don't know, Python code.
+next_head: at how you take an abstract concept like fairness and turn it into, I don't know
+
+[Fixed-Size | podcast | chunk-size=2000,overlap=100 | boundary 2]
+prev_tail: hrase in my notes, human flourishing. It's such a distinct shift from, you know,
+next_head: I highlighted that phrase in my notes, human flourishing. It's such a distinct s
+
+[Fixed-Size | podcast | chunk-size=2000,overlap=100 | boundary 3]
+prev_tail: rm principle. If the data helps police stop a crime before it happens, aren't we
+next_head: the prevention of harm principle. If the data helps police stop a crime before i
+
+[Fixed-Size | podcast | chunk-size=2000,overlap=100 | boundary 4]
+prev_tail: human in command. Where the human decides when the system runs and when it dies.
+next_head: look weird. And human in command. Where the human decides when the system runs a
+
+[Fixed-Size | podcast | chunk-size=2000,overlap=100 | boundary 5]
+prev_tail: a fact. The guidelines are clear that this inferred data needs to be treated as
+next_head: that inference as a fact. The guidelines are clear that this inferred data needs
+
+[Recursive-Character | podcast | profile=semantic,chunk-size=500,overlap=0 | boundary 1]
+prev_tail: with all the regulations. Which feels like a pretty low bar. Don't break the law
+next_head: . I mean, that should be step one for anything, right? You'd think so. But in th
+
+[Recursive-Character | podcast | profile=semantic,chunk-size=500,overlap=0 | boundary 2]
+prev_tail: noble, but my first thought was, these have to conflict, don't they? Absolutely
+next_head: . You can't always have perfect fairness and perfect privacy and perfect safety
+
+[Recursive-Character | podcast | profile=semantic,chunk-size=500,overlap=0 | boundary 3]
+prev_tail: The requirement explicitly mentions the capability to safely abort an operation
+next_head: . It sounds obvious, but a kill switch that actually works and doesn't cause a c
+
+[Recursive-Character | podcast | profile=semantic,chunk-size=500,overlap=50 | boundary 1]
+prev_tail: with all the regulations. Which feels like a pretty low bar. Don't break the law
+next_head: . Not just at launch. From design to retirement. Think of it like a three-legged
+
+[Recursive-Character | podcast | profile=semantic,chunk-size=500,overlap=50 | boundary 2]
+prev_tail: es of another. And finally, principle four, explicability. The black box problem
+next_head: . This is about the equal distribution of benefits and costs. It means avoiding
+
+[Recursive-Character | podcast | profile=semantic,chunk-size=500,overlap=50 | boundary 3]
+prev_tail: h or gets fatigued and just clicks yes, yes, yes. The guidelines warn about this
+next_head: . Or is the human just a rubber stamp because they can't possibly review that fa
+
+[Recursive-Character | podcast | profile=semantic,chunk-size=500,overlap=50 | boundary 4]
+prev_tail: ere that I think everyone listening will appreciate. Identification. It's simple
+next_head: . The guidelines are clear that this inferred data needs to be treated as sensit
+
+[Recursive-Character | podcast | profile=semantic,chunk-size=500,overlap=100 | boundary 1]
+prev_tail: with all the regulations. Which feels like a pretty low bar. Don't break the law
+next_head: . And a checklist that every developer should probably have tattooed on their ar
+
+[Recursive-Character | podcast | profile=semantic,chunk-size=500,overlap=100 | boundary 2]
+prev_tail: us use. Principle three is the big one we hear about constantly. Fairness. Right
+next_head: . Principle one, respect for human autonomy. This means humans stay in the drive
+
+[Recursive-Character | podcast | profile=semantic,chunk-size=500,overlap=100 | boundary 3]
+prev_tail: f control. Let's break that down. Human in the loop. That's the tightest control
+next_head: . They need specs. And chapter two of the source lists seven of them. This is re
+
+[Recursive-Character | podcast | profile=semantic,chunk-size=500,overlap=100 | boundary 4]
+prev_tail: on something called inference risks. This part actually unsettled me. It should
+next_head: . They change the system's mind. So they teach it to be wrong. Exactly. Imagine
+
+[Recursive-Character | podcast | profile=semantic,chunk-size=1000,overlap=0 | boundary 1]
+prev_tail: noble, but my first thought was, these have to conflict, don't they? Absolutely
+next_head: . You can't always have perfect fairness and perfect privacy and perfect safety
+
+[Recursive-Character | podcast | profile=semantic,chunk-size=1000,overlap=50 | boundary 1]
+prev_tail: noble, but my first thought was, these have to conflict, don't they? Absolutely
+next_head: . You can't contest a decision you can't understand. Now, reading through these,
+
+[Recursive-Character | podcast | profile=semantic,chunk-size=1000,overlap=100 | boundary 1]
+prev_tail: noble, but my first thought was, these have to conflict, don't they? Absolutely
+next_head: . It means avoiding unfair bias and discrimination. Basically, ensuring the AI d
+
+[Recursive-Character | podcast | profile=line_first,chunk-size=500,overlap=0 | boundary 1]
+prev_tail: with all the regulations. Which feels like a pretty low bar. Don't break the law
+next_head: . I mean, that should be step one for anything, right? You'd think so. But in th
+
+[Recursive-Character | podcast | profile=line_first,chunk-size=500,overlap=0 | boundary 2]
+prev_tail: noble, but my first thought was, these have to conflict, don't they? Absolutely
+next_head: . You can't always have perfect fairness and perfect privacy and perfect safety
+
+[Recursive-Character | podcast | profile=line_first,chunk-size=500,overlap=0 | boundary 3]
+prev_tail: The requirement explicitly mentions the capability to safely abort an operation
+next_head: . It sounds obvious, but a kill switch that actually works and doesn't cause a c
+
+[Recursive-Character | podcast | profile=line_first,chunk-size=500,overlap=50 | boundary 1]
+prev_tail: with all the regulations. Which feels like a pretty low bar. Don't break the law
+next_head: . Not just at launch. From design to retirement. Think of it like a three-legged
+
+[Recursive-Character | podcast | profile=line_first,chunk-size=500,overlap=50 | boundary 2]
+prev_tail: es of another. And finally, principle four, explicability. The black box problem
+next_head: . This is about the equal distribution of benefits and costs. It means avoiding
+
+[Recursive-Character | podcast | profile=line_first,chunk-size=500,overlap=50 | boundary 3]
+prev_tail: h or gets fatigued and just clicks yes, yes, yes. The guidelines warn about this
+next_head: . Or is the human just a rubber stamp because they can't possibly review that fa
+
+[Recursive-Character | podcast | profile=line_first,chunk-size=500,overlap=50 | boundary 4]
+prev_tail: ere that I think everyone listening will appreciate. Identification. It's simple
+next_head: . The guidelines are clear that this inferred data needs to be treated as sensit
+
+[Recursive-Character | podcast | profile=line_first,chunk-size=500,overlap=100 | boundary 1]
+prev_tail: with all the regulations. Which feels like a pretty low bar. Don't break the law
+next_head: . And a checklist that every developer should probably have tattooed on their ar
+
+[Recursive-Character | podcast | profile=line_first,chunk-size=500,overlap=100 | boundary 2]
+prev_tail: us use. Principle three is the big one we hear about constantly. Fairness. Right
+next_head: . Principle one, respect for human autonomy. This means humans stay in the drive
+
+[Recursive-Character | podcast | profile=line_first,chunk-size=500,overlap=100 | boundary 3]
+prev_tail: f control. Let's break that down. Human in the loop. That's the tightest control
+next_head: . They need specs. And chapter two of the source lists seven of them. This is re
+
+[Recursive-Character | podcast | profile=line_first,chunk-size=500,overlap=100 | boundary 4]
+prev_tail: on something called inference risks. This part actually unsettled me. It should
+next_head: . They change the system's mind. So they teach it to be wrong. Exactly. Imagine
+
+[Recursive-Character | podcast | profile=line_first,chunk-size=1000,overlap=0 | boundary 1]
+prev_tail: noble, but my first thought was, these have to conflict, don't they? Absolutely
+next_head: . You can't always have perfect fairness and perfect privacy and perfect safety
+
+[Recursive-Character | podcast | profile=line_first,chunk-size=1000,overlap=50 | boundary 1]
+prev_tail: noble, but my first thought was, these have to conflict, don't they? Absolutely
+next_head: . You can't contest a decision you can't understand. Now, reading through these,
+
+[Recursive-Character | podcast | profile=line_first,chunk-size=1000,overlap=100 | boundary 1]
+prev_tail: noble, but my first thought was, these have to conflict, don't they? Absolutely
+next_head: . It means avoiding unfair bias and discrimination. Basically, ensuring the AI d
+
+[Recursive-Character | podcast | profile=sentence,chunk-size=500,overlap=0 | boundary 1]
+prev_tail: with all the regulations. Which feels like a pretty low bar. Don't break the law
+next_head: . I mean, that should be step one for anything, right? You'd think so. But in th
+
+[Recursive-Character | podcast | profile=sentence,chunk-size=500,overlap=0 | boundary 2]
+prev_tail: noble, but my first thought was, these have to conflict, don't they? Absolutely
+next_head: . You can't always have perfect fairness and perfect privacy and perfect safety
+
+[Recursive-Character | podcast | profile=sentence,chunk-size=500,overlap=0 | boundary 3]
+prev_tail: The requirement explicitly mentions the capability to safely abort an operation
+next_head: . It sounds obvious, but a kill switch that actually works and doesn't cause a c
+
+[Recursive-Character | podcast | profile=sentence,chunk-size=500,overlap=50 | boundary 1]
+prev_tail: with all the regulations. Which feels like a pretty low bar. Don't break the law
+next_head: . Not just at launch. From design to retirement. Think of it like a three-legged
+
+[Recursive-Character | podcast | profile=sentence,chunk-size=500,overlap=50 | boundary 2]
+prev_tail: es of another. And finally, principle four, explicability. The black box problem
+next_head: . This is about the equal distribution of benefits and costs. It means avoiding
+
+[Recursive-Character | podcast | profile=sentence,chunk-size=500,overlap=50 | boundary 3]
+prev_tail: h or gets fatigued and just clicks yes, yes, yes. The guidelines warn about this
+next_head: . Or is the human just a rubber stamp because they can't possibly review that fa
+
+[Recursive-Character | podcast | profile=sentence,chunk-size=500,overlap=50 | boundary 4]
+prev_tail: ere that I think everyone listening will appreciate. Identification. It's simple
+next_head: . The guidelines are clear that this inferred data needs to be treated as sensit
+
+[Recursive-Character | podcast | profile=sentence,chunk-size=500,overlap=100 | boundary 1]
+prev_tail: with all the regulations. Which feels like a pretty low bar. Don't break the law
+next_head: . And a checklist that every developer should probably have tattooed on their ar
+
+[Recursive-Character | podcast | profile=sentence,chunk-size=500,overlap=100 | boundary 2]
+prev_tail: us use. Principle three is the big one we hear about constantly. Fairness. Right
+next_head: . Principle one, respect for human autonomy. This means humans stay in the drive
+
+[Recursive-Character | podcast | profile=sentence,chunk-size=500,overlap=100 | boundary 3]
+prev_tail: f control. Let's break that down. Human in the loop. That's the tightest control
+next_head: . They need specs. And chapter two of the source lists seven of them. This is re
+
+[Recursive-Character | podcast | profile=sentence,chunk-size=500,overlap=100 | boundary 4]
+prev_tail: on something called inference risks. This part actually unsettled me. It should
+next_head: . They change the system's mind. So they teach it to be wrong. Exactly. Imagine
+
+[Recursive-Character | podcast | profile=sentence,chunk-size=1000,overlap=0 | boundary 1]
+prev_tail: noble, but my first thought was, these have to conflict, don't they? Absolutely
+next_head: . You can't always have perfect fairness and perfect privacy and perfect safety
+
+[Recursive-Character | podcast | profile=sentence,chunk-size=1000,overlap=50 | boundary 1]
+prev_tail: noble, but my first thought was, these have to conflict, don't they? Absolutely
+next_head: . You can't contest a decision you can't understand. Now, reading through these,
+
+[Recursive-Character | podcast | profile=sentence,chunk-size=1000,overlap=100 | boundary 1]
+prev_tail: noble, but my first thought was, these have to conflict, don't they? Absolutely
+next_head: . It means avoiding unfair bias and discrimination. Basically, ensuring the AI d
+
+[Token-Based | podcast | chunk-size=500,overlap=0 | boundary 1]
+prev_tail: on their arm. OK, let's start with the big picture. The source material defines
+next_head: trustworthy AI as having three components. Right, and they have to exist throug
+
+[Token-Based | podcast | chunk-size=500,overlap=0 | boundary 2]
+prev_tail: m. Safety first. This covers physical integrity, like a robotic arm not swinging
+next_head: into a worker, but also mental integrity and, of course, protection from malici
+
+[Token-Based | podcast | chunk-size=500,overlap=0 | boundary 3]
+prev_tail: Human in the loop. That's the tightest control. The AI makes a suggestion, but a
+next_head: human has to click approve for every single action. But let me play devil's adv
+
+[Token-Based | podcast | chunk-size=500,overlap=0 | boundary 4]
+prev_tail: based on your location data, your typing speed, the time of day you browse. Your
+next_head: grocery list. Your grocery list. The AI can infer those details with a frighten
+
+[Token-Based | podcast | chunk-size=500,overlap=50 | boundary 1]
+prev_tail: on their arm. OK, let's start with the big picture. The source material defines
+next_head: , Python code. We've got three pillars, four principles, and seven concrete requ
+
+[Token-Based | podcast | chunk-size=500,overlap=50 | boundary 2]
+prev_tail: n autonomy. This means humans stay in the driver's seat. AI shouldn't hurt us or
+next_head: experts derive four ethical principles from those rights. These are the non-neg
+
+[Token-Based | podcast | chunk-size=500,overlap=50 | boundary 3]
+prev_tail: nts. They need specs. And chapter two of the source lists seven of them. This is
+next_head: and reasoned out. You can't just pretend the tradeoff doesn't exist. That moves
+
+[Token-Based | podcast | chunk-size=500,overlap=50 | boundary 4]
+prev_tail: . Imagine teaching a self-driving car that a stop sign is actually a speed limit
+next_head: bad examples to the AI during training. They don't break the system. Right. The
+
+[Token-Based | podcast | chunk-size=500,overlap=100 | boundary 1]
+prev_tail: on their arm. OK, let's start with the big picture. The source material defines
+next_head: mission for this deep dive is to figure out how to operationalize that. We aren
+
+[Token-Based | podcast | chunk-size=500,overlap=100 | boundary 2]
+prev_tail: ut it feels hard to measure. It is hard to measure. But to make it concrete, the
+next_head: this whole ethical approach in something very specific, fundamental rights. Yes
+
+[Token-Based | podcast | chunk-size=500,overlap=100 | boundary 3]
+prev_tail: rical crime data is biased, which it almost always is, you're violating fairness
+next_head: formula. There are only tradeoffs. The example that stood out to me was predict
+
+[Token-Based | podcast | chunk-size=500,overlap=100 | boundary 4]
+prev_tail: ely abort an operation. It sounds obvious, but a kill switch that actually works
+next_head: human sitting there isn't enough. They need to have the actual capacity to over
+
+[Token-Based | podcast | chunk-size=500,overlap=100 | boundary 5]
+prev_tail: hink everyone listening will appreciate. Identification. It's simple. AI systems
+next_head: grocery list. Your grocery list. The AI can infer those details with a frighten
+
+[Token-Based | podcast | chunk-size=1000,overlap=0 | boundary 1]
+prev_tail: m. Safety first. This covers physical integrity, like a robotic arm not swinging
+next_head: into a worker, but also mental integrity and, of course, protection from malici
+
+[Token-Based | podcast | chunk-size=1000,overlap=0 | boundary 2]
+prev_tail: based on your location data, your typing speed, the time of day you browse. Your
+next_head: grocery list. Your grocery list. The AI can infer those details with a frighten
+
+[Token-Based | podcast | chunk-size=1000,overlap=50 | boundary 1]
+prev_tail: m. Safety first. This covers physical integrity, like a robotic arm not swinging
+next_head: condition us or manipulate us. It shouldn't deceive you into clicking something
+
+[Token-Based | podcast | chunk-size=1000,overlap=50 | boundary 2]
+prev_tail: to think privacy means, okay, I won't tell the app my medical history. But AI is
+next_head: all know about things like GDPR, but the source focuses on something called inf
+
+[Token-Based | podcast | chunk-size=1000,overlap=100 | boundary 1]
+prev_tail: m. Safety first. This covers physical integrity, like a robotic arm not swinging
+next_head: experts derive four ethical principles from those rights. These are the non-neg
+
+[Token-Based | podcast | chunk-size=1000,overlap=100 | boundary 2]
+prev_tail: different beast in AI. Requirement three is privacy and data governance. Now, we
+next_head: bad examples to the AI during training. They don't break the system. Right. The
+
+[Semantic | podcast | threshold=0.65,sample=5000 | boundary 1]
+prev_tail: e for a second you're driving across, I don't know, a massive suspension bridge.
+next_head: OK.
+
+[Semantic | podcast | threshold=0.65,sample=5000 | boundary 2]
+prev_tail: OK.
+next_head: You don't pull over halfway across, get out, and demand to see the blueprints, r
+
+[Semantic | podcast | threshold=0.65,sample=5000 | boundary 3]
+prev_tail: on't pull over halfway across, get out, and demand to see the blueprints, right?
+next_head: You don't interview the welding crew.
+
+[Semantic | podcast | threshold=0.65,sample=5000 | boundary 4]
+prev_tail: You don't interview the welding crew.
+next_head: No, you just trust it.
+
+[Semantic | podcast | threshold=0.65,sample=5000 | boundary 5]
+prev_tail: No, you just trust it.
+next_head: You just drive, you trust the bridge, you trust the engineering standards, the i
+
+[Semantic | podcast | threshold=0.70,sample=5000 | boundary 1]
+prev_tail: e for a second you're driving across, I don't know, a massive suspension bridge.
+next_head: OK.
+
+[Semantic | podcast | threshold=0.70,sample=5000 | boundary 2]
+prev_tail: OK.
+next_head: You don't pull over halfway across, get out, and demand to see the blueprints, r
+
+[Semantic | podcast | threshold=0.70,sample=5000 | boundary 3]
+prev_tail: on't pull over halfway across, get out, and demand to see the blueprints, right?
+next_head: You don't interview the welding crew.
+
+[Semantic | podcast | threshold=0.70,sample=5000 | boundary 4]
+prev_tail: You don't interview the welding crew.
+next_head: No, you just trust it.
+
+[Semantic | podcast | threshold=0.70,sample=5000 | boundary 5]
+prev_tail: No, you just trust it.
+next_head: You just drive, you trust the bridge, you trust the engineering standards, the i
+
+[Semantic | podcast | threshold=0.75,sample=5000 | boundary 1]
+prev_tail: e for a second you're driving across, I don't know, a massive suspension bridge.
+next_head: OK.
+
+[Semantic | podcast | threshold=0.75,sample=5000 | boundary 2]
+prev_tail: OK.
+next_head: You don't pull over halfway across, get out, and demand to see the blueprints, r
+
+[Semantic | podcast | threshold=0.75,sample=5000 | boundary 3]
+prev_tail: on't pull over halfway across, get out, and demand to see the blueprints, right?
+next_head: You don't interview the welding crew.
+
+[Semantic | podcast | threshold=0.75,sample=5000 | boundary 4]
+prev_tail: You don't interview the welding crew.
+next_head: No, you just trust it.
+
+[Semantic | podcast | threshold=0.75,sample=5000 | boundary 5]
+prev_tail: No, you just trust it.
+next_head: You just drive, you trust the bridge, you trust the engineering standards, the i
+
+[Fixed-Size | pdf | chunk-size=500,overlap=0 | boundary 1]
+prev_tail: té rédigé par le groupe d’experts de haut niveau sur l’intelligence artificielle
+next_head: (GEHN IA). Les membres du GEHN IA qui y sont cités soutiennent le cadre général
+
+[Fixed-Size | pdf | chunk-size=500,overlap=0 | boundary 2]
+prev_tail: apitre III du présent document. Une version  révisée de cette liste d’évaluation
+next_head: tenant compte des commentaires recueillis au cours de la phase pilote sera  prés
+
+[Fixed-Size | pdf | chunk-size=500,overlap=0 | boundary 3]
+prev_tail: Document rendu public le X avril 2019.    Un premier projet de ce document a
+next_head: été publié le 18 décembre 2018 et a fait l’objet d’une consultation ouverte à  l
+
+[Fixed-Size | pdf | chunk-size=500,overlap=0 | boundary 4]
+prev_tail: européenne ni aucune personne agissant au nom de la Commission n’est responsable
+next_head: de l’usage qui  pourrait être fait des informations données ci -après. Le conten
+
+[Fixed-Size | pdf | chunk-size=500,overlap=0 | boundary 5]
+prev_tail: , en aucune circonstance, être considérés comme reflétant une prise de  position
+next_head: officielle de la Commission européenne.        De plus amples informations sur l
+
+[Fixed-Size | pdf | chunk-size=500,overlap=50 | boundary 1]
+prev_tail: té rédigé par le groupe d’experts de haut niveau sur l’intelligence artificielle
+next_head: de haut niveau sur l’intelligence artificielle  (GEHN IA). Les membres du GEHN I
+
+[Fixed-Size | pdf | chunk-size=500,overlap=50 | boundary 2]
+prev_tail: our une IA digne de confiance présentée au chapitre III du présent document. Une
+next_head: présentée au chapitre III du présent document. Une version  révisée de cette lis
+
+[Fixed-Size | pdf | chunk-size=500,overlap=50 | boundary 3]
+prev_tail: ur l’IA  Adresse électronique CNECT-HLG-AI@ec.europa.eu    Commission européenne
+next_head: CNECT-HLG-AI@ec.europa.eu    Commission européenne  B-1049 Bruxelles    Document
+
+[Fixed-Size | pdf | chunk-size=500,overlap=50 | boundary 4]
+prev_tail: premier projet de ce document. Ces  commentaires ont été pris en compte dans le
+next_head: Ces  commentaires ont été pris en compte dans le cadre de l’élaboration de cette
+
+[Fixed-Size | pdf | chunk-size=500,overlap=50 | boundary 5]
+prev_tail: (GEHN IA). Bien que des membres du  personnel de la Commission aient facilité la
+next_head: du  personnel de la Commission aient facilité la préparation des lignes directri
+
+[Fixed-Size | pdf | chunk-size=500,overlap=100 | boundary 1]
+prev_tail: té rédigé par le groupe d’experts de haut niveau sur l’intelligence artificielle
+next_head: présent document a été rédigé par le groupe d’experts de haut niveau sur l’intel
+
+[Fixed-Size | pdf | chunk-size=500,overlap=100 | boundary 2]
+prev_tail: antes soumettront à une phase pilote la liste  d’évaluation pour une IA digne de
+next_head: les parties prenantes soumettront à une phase pilote la liste  d’évaluation pour
+
+[Fixed-Size | pdf | chunk-size=500,overlap=100 | boundary 3]
+prev_tail: ne en juin 2018.    Personne de contact Nathalie Smuha – coordinatrice du groupe
+next_head: Commission européenne en juin 2018.    Personne de contact Nathalie Smuha – coor
+
+[Fixed-Size | pdf | chunk-size=500,overlap=100 | boundary 4]
+prev_tail: uteurs ont apporté des commentaires. Nous souhaitons remercier expliciteme nt et
+next_head: plus de 500 contributeurs ont apporté des commentaires. Nous souhaitons remercie
+
+[Fixed-Size | pdf | chunk-size=500,overlap=100 | boundary 5]
+prev_tail: ’usage qui  pourrait être fait des informations données ci -après. Le contenu du
+next_head: responsable de l’usage qui  pourrait être fait des informations données ci -aprè
+
+[Fixed-Size | pdf | chunk-size=1000,overlap=0 | boundary 1]
+prev_tail: apitre III du présent document. Une version  révisée de cette liste d’évaluation
+next_head: tenant compte des commentaires recueillis au cours de la phase pilote sera  prés
+
+[Fixed-Size | pdf | chunk-size=1000,overlap=0 | boundary 2]
+prev_tail: européenne ni aucune personne agissant au nom de la Commission n’est responsable
+next_head: de l’usage qui  pourrait être fait des informations données ci -après. Le conten
+
+[Fixed-Size | pdf | chunk-size=1000,overlap=0 | boundary 3]
+prev_tail: ur toute utilisation ou reproduction de photos ou d’autres éléments non couverts
+next_head: par le droit  d’auteur de l’UE, l’autorisation doit être obtenue directement aup
+
+[Fixed-Size | pdf | chunk-size=1000,overlap=0 | boundary 4]
+prev_tail: ractéristiques suivantes, qui devraient être respectées tout au long du cycle de
+next_head: vie du  système: a) elle doit être licite, en assurant le respect des législatio
+
+[Fixed-Size | pdf | chunk-size=1000,overlap=0 | boundary 5]
+prev_tail: istique d’une IA digne de confiance (IA  licite)1. Il vise plutôt à proposer des
+next_head: orientations pour encourager et garantir une IA éthique et robuste (les  deuxièm
+
+[Fixed-Size | pdf | chunk-size=1000,overlap=50 | boundary 1]
+prev_tail: apitre III du présent document. Une version  révisée de cette liste d’évaluation
+next_head: Une version  révisée de cette liste d’évaluation tenant compte des commentaires
+
+[Fixed-Size | pdf | chunk-size=1000,overlap=50 | boundary 2]
+prev_tail: tion de cette version révisée.    Ni la Commission européenne ni aucune personne
+next_head: Ni la Commission européenne ni aucune personne agissant au nom de la Commission
+
+[Fixed-Size | pdf | chunk-size=1000,overlap=50 | boundary 3]
+prev_tail: de la Commission européenne est régie par la décision 2011/833/UE (JO L 330  du
+next_head: régie par la décision 2011/833/UE (JO L 330  du 14.12.2011, p. 39). Pour toute u
+
+[Fixed-Size | pdf | chunk-size=1000,overlap=50 | boundary 4]
+prev_tail: 2    RÉSUMÉ  (1) Les présentes lignes directrices visent à promouvoir une IA
+next_head: lignes directrices visent à promouvoir une IA digne de confiance. Une IA digne d
+
+[Fixed-Size | pdf | chunk-size=1000,overlap=50 | boundary 5]
+prev_tail: er d’y remédier.  (2) Les présentes lignes directrices établissent un cadre pour
+next_head: lignes directrices établissent un cadre pour parvenir à la réalisation d’une IA
+
+[Fixed-Size | pdf | chunk-size=1000,overlap=100 | boundary 1]
+prev_tail: apitre III du présent document. Une version  révisée de cette liste d’évaluation
+next_head: présentée au chapitre III du présent document. Une version  révisée de cette lis
+
+[Fixed-Size | pdf | chunk-size=1000,overlap=100 | boundary 2]
+prev_tail: ont été pris en compte dans le cadre de l’élaboration de cette version révisée.
+next_head: Ces  commentaires ont été pris en compte dans le cadre de l’élaboration de cette
+
+[Fixed-Size | pdf | chunk-size=1000,overlap=100 | boundary 3]
+prev_tail: high-level-expert-group-artificial-intelligence).  La politique de réutilisation
+next_head: La politique de réutilisation des documents de la Commission européenne est régi
+
+[Fixed-Size | pdf | chunk-size=1000,overlap=100 | boundary 4]
+prev_tail: DE PREOCCUPATIONS MAJEURES SOULEVEES PAR L’IA 42  D. CONCLUSION 46  GLOSSAIRE 48
+next_head: POSSIBILITES ET DE PREOCCUPATIONS MAJEURES SOULEVEES PAR L’IA 42  D. CONCLUSION
+
+[Fixed-Size | pdf | chunk-size=1000,overlap=100 | boundary 5]
+prev_tail: chevauchent. Si, dans la pratique, des tensions venaient à apparaître entre ces
+next_head: en  harmonie et se chevauchent. Si, dans la pratique, des tensions venaient à ap
+
+[Fixed-Size | pdf | chunk-size=2000,overlap=0 | boundary 1]
+prev_tail: européenne ni aucune personne agissant au nom de la Commission n’est responsable
+next_head: de l’usage qui  pourrait être fait des informations données ci -après. Le conten
+
+[Fixed-Size | pdf | chunk-size=2000,overlap=0 | boundary 2]
+prev_tail: éristiques suivantes, qui devraient être respectées tout au long du cycle de vie
+next_head: du  système: a) elle doit être licite, en assurant le respect des législations e
+
+[Fixed-Size | pdf | chunk-size=2000,overlap=0 | boundary 3]
+prev_tail: ées du chapitre I:   Mettre au point, déployer et utiliser des systèmes d’IA en
+next_head: respectant les principes éthiques suivants:  respect de l’autonomie humaine, pré
+
+[Fixed-Size | pdf | chunk-size=2000,overlap=0 | boundary 4]
+prev_tail: gration des personnes handicapées et les droits des travailleurs. Voir également
+next_head: l’article 38 portant sur la protection  des consommateurs.  3    II. S’appuyant
+
+[Fixed-Size | pdf | chunk-size=2000,overlap=0 | boundary 5]
+prev_tail: s soient renseignées sur l’IA digne de confiance et  formées dans ce domaine.  
+next_head: Savoir qu’il peut exister des tensions fondamentales entre différents principes
+
+[Fixed-Size | pdf | chunk-size=2000,overlap=50 | boundary 1]
+prev_tail: européenne ni aucune personne agissant au nom de la Commission n’est responsable
+next_head: agissant au nom de la Commission n’est responsable de l’usage qui  pourrait être
+
+[Fixed-Size | pdf | chunk-size=2000,overlap=50 | boundary 2]
+prev_tail: e. Une IA digne de confiance  présente les trois caractéristiques suivantes, qui
+next_head: les trois caractéristiques suivantes, qui devraient être respectées tout au long
+
+[Fixed-Size | pdf | chunk-size=2000,overlap=50 | boundary 3]
+prev_tail: se au point, du  déploiement et de l’utilisation de systèmes d’IA.  Orientations
+next_head: de l’utilisation de systèmes d’IA.  Orientations essentielles dérivées du chapit
+
+[Fixed-Size | pdf | chunk-size=2000,overlap=50 | boundary 4]
+prev_tail: 27 de la charte des droits fondamentaux de l’Union européenne (charte de l’UE),
+next_head: de l’Union européenne (charte de l’UE), portant sur les droits de l’enfant et  d
+
+[Fixed-Size | pdf | chunk-size=2000,overlap=50 | boundary 5]
+prev_tail: xtes ou situations  critiques.   Associer les parties prenantes tout au long du
+next_head:  Associer les parties prenantes tout au long du cycle de vie du système d’IA. E
+
+[Fixed-Size | pdf | chunk-size=2000,overlap=100 | boundary 1]
+prev_tail: européenne ni aucune personne agissant au nom de la Commission n’est responsable
+next_head: Ni la Commission européenne ni aucune personne agissant au nom de la Commission
+
+[Fixed-Size | pdf | chunk-size=2000,overlap=100 | boundary 2]
+prev_tail: ctrices visent à promouvoir une IA digne de confiance. Une IA digne de confiance
+next_head: lignes directrices visent à promouvoir une IA digne de confiance. Une IA digne d
+
+[Fixed-Size | pdf | chunk-size=2000,overlap=100 | boundary 3]
+prev_tail: recense les principes  éthiques et les valeurs correspondantes qu’il convient de
+next_head: le chapitre I recense les principes  éthiques et les valeurs correspondantes qu’
+
+[Fixed-Size | pdf | chunk-size=2000,overlap=100 | boundary 4]
+prev_tail: de ces éléments sont dans une certaine mesure déjà  présents dans la législation
+next_head: part importante de ces éléments sont dans une certaine mesure déjà  présents dan
+
+[Fixed-Size | pdf | chunk-size=2000,overlap=100 | boundary 5]
+prev_tail: exigences sont mises en œuvre. Faire preuve de transparence sur le fait qu’elles
+next_head: manière dont les exigences sont mises en œuvre. Faire preuve de transparence sur
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=500,overlap=0 | boundary 1]
+prev_tail: principes éthiques 12  II. Chapitre II: Parvenir à une IA digne de confiance 17
+next_head: 1. Exigences d’une IA digne de confiance 17  2. Méthodes techniques et non techn
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=500,overlap=0 | boundary 2]
+prev_tail: société, mais qu’ils présen tent également certains risques et peuvent avoir des
+next_head: incidences négatives, y compris des incidences pouvant s’avérer difficiles à ant
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=500,overlap=0 | boundary 3]
+prev_tail: ntes soient renseignées sur l’IA digne de confiance et  formées dans ce domaine.
+next_head:  Savoir qu’il peut exister des tensions fondamentales entre différents principe
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=500,overlap=0 | boundary 4]
+prev_tail: nt ou produits ailleurs mais déployés et utilisés au sein de l’UE. Lorsqu’il est
+next_head: fait référence à l’«Europe» dans le présent document, ce sont les États membres
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=500,overlap=0 | boundary 5]
+prev_tail: é des êtres humains. S’ils offrent de brillantes possibilités, les systèmes d’IA
+next_head: soulèvent également certains risques qui doivent être traités de manière appropr
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=500,overlap=50 | boundary 1]
+prev_tail: principes éthiques 12  II. Chapitre II: Parvenir à une IA digne de confiance 17
+next_head: B. CADRE POUR UNE IA DIGNE DE CONFIANCE 7  I. Chapitre I: Fondements d’une IA di
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=500,overlap=50 | boundary 2]
+prev_tail: rsonnes handicapées et d’autres groupes historiquement défavorisés ou exposés au
+next_head: respect de l’autonomie humaine, prévention de toute atteinte, équité et explicab
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=500,overlap=50 | boundary 3]
+prev_tail: atière d’IA soit  systématiquement dispensée à la nouvelle génération d’experts.
+next_head: soutenir la mise en œuvre des exigences; diffuser les résultats et les questions
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=500,overlap=50 | boundary 4]
+prev_tail: é la mesure dans laquelle les systèmes d’IA  sont spécifiques à leurs contextes.
+next_head: caractéristiques d’une IA digne de confiance (une IA éthique et robuste).  4
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=500,overlap=50 | boundary 5]
+prev_tail: s, nos 52 membres se sont réunis, ont discuté et ont interagi, sans déroger à la
+next_head: travaux du Groupe européen d’éthiqu e des sciences et des nouvelles technologies
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=500,overlap=100 | boundary 1]
+prev_tail: principes éthiques 12  II. Chapitre II: Parvenir à une IA digne de confiance 17
+next_head: du 14.12.2011, p.  39). Pour toute utilisation ou  reproduction de photos ou d’a
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=500,overlap=100 | boundary 2]
+prev_tail: e humaine, prévention de toute atteinte, équité et explicabilité. Reconnaître et
+next_head: chapitre III, et se concluant par des exemples de possibilités et de préoccupati
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=500,overlap=100 | boundary 3]
+prev_tail: ation et équité, 6) bien-être sociétal et environnemental, et 7) responsabilité.
+next_head: confiance peut être réalisée, en présentant sept exigences  que tout système d’I
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=500,overlap=100 | boundary 4]
+prev_tail: occupations soulevées par les systèmes d’IA qu’il convient d’examiner avec soin.
+next_head: cocher des cases pour garantir une IA digne de confiance. Il convient de détermi
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=500,overlap=100 | boundary 5]
+prev_tail: sion de la Commission repose sur trois piliers: i) accroître les investissements
+next_head: Norvège et la Suisse font partie du plan coordonné dans le domaine de l’IA adopt
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=1000,overlap=0 | boundary 1]
+prev_tail: société, mais qu’ils présen tent également certains risques et peuvent avoir des
+next_head: incidences négatives, y compris des incidences pouvant s’avérer difficiles à ant
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=1000,overlap=0 | boundary 2]
+prev_tail: nt ou produits ailleurs mais déployés et utilisés au sein de l’UE. Lorsqu’il est
+next_head: fait référence à l’«Europe» dans le présent document, ce sont les États membres
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=1000,overlap=0 | boundary 3]
+prev_tail: que un pilier  essentiel pour garantir et développer une IA digne  de confiance.
+next_head: (14) La confiance dans la mise au point, le déploiement et l’utilisation de syst
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=1000,overlap=0 | boundary 4]
+prev_tail: leurs observations. Sur la base des commentaires recueillis lors de cette phase
+next_head: pilote, nous réviserons la liste d’évaluation des présentes lignes directrices d
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=1000,overlap=0 | boundary 5]
+prev_tail: re en œuvre et respecter tout au long de leur cycle de vie. En outre, il propose
+next_head: des méthodes tant techniques que non techniques pouvant être appliquées aux fins
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=1000,overlap=50 | boundary 1]
+prev_tail: société, mais qu’ils présen tent également certains risques et peuvent avoir des
+next_head: exemple entre les employeurs et les travailleurs, ou entre les entreprises et le
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=1000,overlap=50 | boundary 2]
+prev_tail: et la  discussion sur un cadre éthique pour les systèmes d’IA au niveau mondial.
+next_head: conçu comme le point de départ de la discussion sur «Une IA digne de confiance p
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=1000,overlap=50 | boundary 3]
+prev_tail: des droits de l’homme, la démocratie et l’état de droit.   IA digne de confiance
+next_head: citoyens européens, nous pourrons bénéficier  de ses avantages d’une manière qui
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=1000,overlap=50 | boundary 4]
+prev_tail: yeur à employé et de la sphère publique aux citoyens ou, plus généralement, dans
+next_head: mêmes préoccupations éthiques que les systèmes d’IA proposant des traitements mé
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=1000,overlap=50 | boundary 5]
+prev_tail: echnique (veiller à la robustesse technique du système selon les besoins dans un
+next_head: involontaires. Il est par conséquent important de veiller à la robustesse des sy
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=1000,overlap=100 | boundary 1]
+prev_tail: société, mais qu’ils présen tent également certains risques et peuvent avoir des
+next_head: résoudre les tensions potentielles entre ces principes.    Accorder une attenti
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=1000,overlap=100 | boundary 2]
+prev_tail: environnements sociaux et nos connaissances évolueront. Le présent document est
+next_head: caractéristiques d’une IA digne de confiance (une IA éthique et robuste).  4
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=1000,overlap=100 | boundary 3]
+prev_tail: avoir confiance dans le développement de la technologie et dans ses applications
+next_head: 8  Le glossaire figurant à la fin du présent document fournit une définition des
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=1000,overlap=100 | boundary 4]
+prev_tail: de la société civile, particuliers, travailleurs et consommateurs.   Les parties
+next_head: travailler à l’élaboration d’un cadre mondial  pour une IA digne de confiance, e
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=1000,overlap=100 | boundary 5]
+prev_tail: lignes directrices partent du  principe que l’ensemble des droits et obligations
+next_head: (25) Aucune partie du présent document ne peut s’entendre ou être interprétée co
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=2000,overlap=0 | boundary 1]
+prev_tail: nt ou produits ailleurs mais déployés et utilisés au sein de l’UE. Lorsqu’il est
+next_head: fait référence à l’«Europe» dans le présent document, ce sont les États membres
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=2000,overlap=0 | boundary 2]
+prev_tail: leurs observations. Sur la base des commentaires recueillis lors de cette phase
+next_head: pilote, nous réviserons la liste d’évaluation des présentes lignes directrices d
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=2000,overlap=0 | boundary 3]
+prev_tail: deuxième caractéristique d’une IA digne de confiance, à savoir une «IA éthique».
+next_head: 10      Figure 1: les lignes directrices en tant que cadre pour une IA digne de
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=2000,overlap=0 | boundary 4]
+prev_tail: igure 1: les lignes directrices en tant que cadre pour une IA digne de confiance
+next_head: 11    I. Chapitre I: Fondements d’une IA digne de confiance   (31) Ce chapitre é
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=2000,overlap=0 | boundary 5]
+prev_tail: olère le fait d’établir des distinctions entre des situations différentes sur la
+next_head: base de justifications objectives. Dans un contex te d’IA, l’égalité implique qu
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=2000,overlap=50 | boundary 1]
+prev_tail: nt ou produits ailleurs mais déployés et utilisés au sein de l’UE. Lorsqu’il est
+next_head: 4  Cet idéal est destiné à être appliqué aux systèmes d’IA mis au point, déployé
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=2000,overlap=50 | boundary 2]
+prev_tail: mprendre la manière dont ces orientations pe uvent être mises en œuvre au niveau
+next_head: laquelle une approche sectorielle supplémentaire pourrait être nécessaire pour c
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=2000,overlap=50 | boundary 3]
+prev_tail: deuxième caractéristique d’une IA digne de confiance, à savoir une «IA éthique».
+next_head: 10      Figure 1: les lignes directrices en tant que cadre pour une IA digne de
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=2000,overlap=50 | boundary 4]
+prev_tail: igure 1: les lignes directrices en tant que cadre pour une IA digne de confiance
+next_head: 11    I. Chapitre I: Fondements d’une IA digne de confiance   (31) Ce chapitre é
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=2000,overlap=50 | boundary 5]
+prev_tail: olère le fait d’établir des distinctions entre des situations différentes sur la
+next_head: convient d’assurer u n respect égal de la valeur morale et de la dignité de tous
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=2000,overlap=100 | boundary 1]
+prev_tail: nt ou produits ailleurs mais déployés et utilisés au sein de l’UE. Lorsqu’il est
+next_head: conçu comme le point de départ de la discussion sur «Une IA digne de confiance p
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=2000,overlap=100 | boundary 2]
+prev_tail: ontexte, il est par conséquent reconnu que la mise en œuvre des présentes lignes
+next_head: différentes posent des défis différents.  Les systèmes d’IA de recommandation mu
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=2000,overlap=100 | boundary 3]
+prev_tail: deuxième caractéristique d’une IA digne de confiance, à savoir une «IA éthique».
+next_head: 10      Figure 1: les lignes directrices en tant que cadre pour une IA digne de
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=2000,overlap=100 | boundary 4]
+prev_tail: igure 1: les lignes directrices en tant que cadre pour une IA digne de confiance
+next_head: 11    I. Chapitre I: Fondements d’une IA digne de confiance   (31) Ce chapitre é
+
+[Recursive-Character | pdf | profile=semantic,chunk-size=2000,overlap=100 | boundary 5]
+prev_tail: olère le fait d’établir des distinctions entre des situations différentes sur la
+next_head: fondamentaux sur lesquels se fondent l’état de droi t, les législations et règle
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=500,overlap=0 | boundary 1]
+prev_tail: principes éthiques 12  II. Chapitre II: Parvenir à une IA digne de confiance 17
+next_head: 1. Exigences d’une IA digne de confiance 17  2. Méthodes techniques et non techn
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=500,overlap=0 | boundary 2]
+prev_tail: société, mais qu’ils présen tent également certains risques et peuvent avoir des
+next_head: incidences négatives, y compris des incidences pouvant s’avérer difficiles à ant
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=500,overlap=0 | boundary 3]
+prev_tail: ntes soient renseignées sur l’IA digne de confiance et  formées dans ce domaine.
+next_head:  Savoir qu’il peut exister des tensions fondamentales entre différents principe
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=500,overlap=0 | boundary 4]
+prev_tail: nt ou produits ailleurs mais déployés et utilisés au sein de l’UE. Lorsqu’il est
+next_head: fait référence à l’«Europe» dans le présent document, ce sont les États membres
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=500,overlap=0 | boundary 5]
+prev_tail: é des êtres humains. S’ils offrent de brillantes possibilités, les systèmes d’IA
+next_head: soulèvent également certains risques qui doivent être traités de manière appropr
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=500,overlap=50 | boundary 1]
+prev_tail: principes éthiques 12  II. Chapitre II: Parvenir à une IA digne de confiance 17
+next_head: B. CADRE POUR UNE IA DIGNE DE CONFIANCE 7  I. Chapitre I: Fondements d’une IA di
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=500,overlap=50 | boundary 2]
+prev_tail: rsonnes handicapées et d’autres groupes historiquement défavorisés ou exposés au
+next_head: respect de l’autonomie humaine, prévention de toute atteinte, équité et explicab
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=500,overlap=50 | boundary 3]
+prev_tail: atière d’IA soit  systématiquement dispensée à la nouvelle génération d’experts.
+next_head: soutenir la mise en œuvre des exigences; diffuser les résultats et les questions
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=500,overlap=50 | boundary 4]
+prev_tail: é la mesure dans laquelle les systèmes d’IA  sont spécifiques à leurs contextes.
+next_head: caractéristiques d’une IA digne de confiance (une IA éthique et robuste).  4
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=500,overlap=50 | boundary 5]
+prev_tail: s, nos 52 membres se sont réunis, ont discuté et ont interagi, sans déroger à la
+next_head: travaux du Groupe européen d’éthiqu e des sciences et des nouvelles technologies
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=500,overlap=100 | boundary 1]
+prev_tail: principes éthiques 12  II. Chapitre II: Parvenir à une IA digne de confiance 17
+next_head: du 14.12.2011, p.  39). Pour toute utilisation ou  reproduction de photos ou d’a
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=500,overlap=100 | boundary 2]
+prev_tail: e humaine, prévention de toute atteinte, équité et explicabilité. Reconnaître et
+next_head: chapitre III, et se concluant par des exemples de possibilités et de préoccupati
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=500,overlap=100 | boundary 3]
+prev_tail: ation et équité, 6) bien-être sociétal et environnemental, et 7) responsabilité.
+next_head: confiance peut être réalisée, en présentant sept exigences  que tout système d’I
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=500,overlap=100 | boundary 4]
+prev_tail: occupations soulevées par les systèmes d’IA qu’il convient d’examiner avec soin.
+next_head: cocher des cases pour garantir une IA digne de confiance. Il convient de détermi
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=500,overlap=100 | boundary 5]
+prev_tail: sion de la Commission repose sur trois piliers: i) accroître les investissements
+next_head: Norvège et la Suisse font partie du plan coordonné dans le domaine de l’IA adopt
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=1000,overlap=0 | boundary 1]
+prev_tail: société, mais qu’ils présen tent également certains risques et peuvent avoir des
+next_head: incidences négatives, y compris des incidences pouvant s’avérer difficiles à ant
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=1000,overlap=0 | boundary 2]
+prev_tail: nt ou produits ailleurs mais déployés et utilisés au sein de l’UE. Lorsqu’il est
+next_head: fait référence à l’«Europe» dans le présent document, ce sont les États membres
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=1000,overlap=0 | boundary 3]
+prev_tail: que un pilier  essentiel pour garantir et développer une IA digne  de confiance.
+next_head: (14) La confiance dans la mise au point, le déploiement et l’utilisation de syst
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=1000,overlap=0 | boundary 4]
+prev_tail: leurs observations. Sur la base des commentaires recueillis lors de cette phase
+next_head: pilote, nous réviserons la liste d’évaluation des présentes lignes directrices d
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=1000,overlap=0 | boundary 5]
+prev_tail: re en œuvre et respecter tout au long de leur cycle de vie. En outre, il propose
+next_head: des méthodes tant techniques que non techniques pouvant être appliquées aux fins
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=1000,overlap=50 | boundary 1]
+prev_tail: société, mais qu’ils présen tent également certains risques et peuvent avoir des
+next_head: exemple entre les employeurs et les travailleurs, ou entre les entreprises et le
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=1000,overlap=50 | boundary 2]
+prev_tail: et la  discussion sur un cadre éthique pour les systèmes d’IA au niveau mondial.
+next_head: conçu comme le point de départ de la discussion sur «Une IA digne de confiance p
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=1000,overlap=50 | boundary 3]
+prev_tail: des droits de l’homme, la démocratie et l’état de droit.   IA digne de confiance
+next_head: citoyens européens, nous pourrons bénéficier  de ses avantages d’une manière qui
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=1000,overlap=50 | boundary 4]
+prev_tail: yeur à employé et de la sphère publique aux citoyens ou, plus généralement, dans
+next_head: mêmes préoccupations éthiques que les systèmes d’IA proposant des traitements mé
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=1000,overlap=50 | boundary 5]
+prev_tail: echnique (veiller à la robustesse technique du système selon les besoins dans un
+next_head: involontaires. Il est par conséquent important de veiller à la robustesse des sy
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=1000,overlap=100 | boundary 1]
+prev_tail: société, mais qu’ils présen tent également certains risques et peuvent avoir des
+next_head: résoudre les tensions potentielles entre ces principes.    Accorder une attenti
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=1000,overlap=100 | boundary 2]
+prev_tail: environnements sociaux et nos connaissances évolueront. Le présent document est
+next_head: caractéristiques d’une IA digne de confiance (une IA éthique et robuste).  4
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=1000,overlap=100 | boundary 3]
+prev_tail: avoir confiance dans le développement de la technologie et dans ses applications
+next_head: 8  Le glossaire figurant à la fin du présent document fournit une définition des
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=1000,overlap=100 | boundary 4]
+prev_tail: de la société civile, particuliers, travailleurs et consommateurs.   Les parties
+next_head: travailler à l’élaboration d’un cadre mondial  pour une IA digne de confiance, e
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=1000,overlap=100 | boundary 5]
+prev_tail: lignes directrices partent du  principe que l’ensemble des droits et obligations
+next_head: (25) Aucune partie du présent document ne peut s’entendre ou être interprétée co
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=2000,overlap=0 | boundary 1]
+prev_tail: nt ou produits ailleurs mais déployés et utilisés au sein de l’UE. Lorsqu’il est
+next_head: fait référence à l’«Europe» dans le présent document, ce sont les États membres
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=2000,overlap=0 | boundary 2]
+prev_tail: leurs observations. Sur la base des commentaires recueillis lors de cette phase
+next_head: pilote, nous réviserons la liste d’évaluation des présentes lignes directrices d
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=2000,overlap=0 | boundary 3]
+prev_tail: e l’Union, 15 la charte des droits fondamentaux de l’Union européenne (charte de
+next_head: l’Union) et le droit international en matière de droits de l’h omme.16Le respect
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=2000,overlap=0 | boundary 4]
+prev_tail: également à limiter l’insécurité réglementaire, car elle peut s’appuyer sur des
+next_head: décennies de pratique en matière de protection des droits fondamentaux dans l’UE
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=2000,overlap=0 | boundary 5]
+prev_tail: nt les personnes qui interagissent directemen t ou indirectement avec le système
+next_head: d’IA. Enfin, la société au sens large englobe tous les autres acteurs qui sont d
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=2000,overlap=50 | boundary 1]
+prev_tail: nt ou produits ailleurs mais déployés et utilisés au sein de l’UE. Lorsqu’il est
+next_head: 4  Cet idéal est destiné à être appliqué aux systèmes d’IA mis au point, déployé
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=2000,overlap=50 | boundary 2]
+prev_tail: mprendre la manière dont ces orientations pe uvent être mises en œuvre au niveau
+next_head: laquelle une approche sectorielle supplémentaire pourrait être nécessaire pour c
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=2000,overlap=50 | boundary 3]
+prev_tail: nces rester sensible aux éléments de contexte, qui ne peuvent jamais être rendus
+next_head: et de détail de ses futures versions – ne pourra jamais se substituer à un raiso
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=2000,overlap=50 | boundary 4]
+prev_tail: mie humaine  (ii) prévention de toute atteinte  (iii) équité  (iv) explicabilité
+next_head: refléter l’ordre d’apparition, dans la charte de l’Union, des droits fondamentau
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=2000,overlap=50 | boundary 5]
+prev_tail: exigences qui devraient être respectées, s’appuyant sur les principes énoncés au
+next_head: II. Chapitre II: Parvenir à une IA digne de confiance  (55) Ce chapitre fournit
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=2000,overlap=100 | boundary 1]
+prev_tail: nt ou produits ailleurs mais déployés et utilisés au sein de l’UE. Lorsqu’il est
+next_head: conçu comme le point de départ de la discussion sur «Une IA digne de confiance p
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=2000,overlap=100 | boundary 2]
+prev_tail: ontexte, il est par conséquent reconnu que la mise en œuvre des présentes lignes
+next_head: différentes posent des défis différents.  Les systèmes d’IA de recommandation mu
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=2000,overlap=100 | boundary 3]
+prev_tail: notion d’IA digne de confiance qui est, selon nous, la manière adaptée de bâtir
+next_head: équitable, à ce que ces systèmes soient conformes aux valeurs inaliénables et ca
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=2000,overlap=100 | boundary 4]
+prev_tail: re et à apporter un soutien. Ces principes éthiques peuvent inspirer de nouveaux
+next_head: élaborer des cadres éthiques pour les systèmes d’IA. 23 Dans l’UE, le Groupe eur
+
+[Recursive-Character | pdf | profile=line_first,chunk-size=2000,overlap=100 | boundary 5]
+prev_tail: upable d’une infraction pénale  devrait être mis en liberté conditionnelle.   17
+next_head: compris de propriété intellectuelle et de confidentialité), d’une part, et des d
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=500,overlap=0 | boundary 1]
+prev_tail: nfiance 11  1. Les droits fondamentaux en tant que droits moraux et légaux 12  2
+next_head: . Des droits fondamentaux aux principes éthiques 12  II. Chapitre II: Parvenir à
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=500,overlap=0 | boundary 2]
+prev_tail: cabilité. Reconnaître et  résoudre les tensions potentielles entre ces principes
+next_head: .    Accorder une attention particulière aux situations concernant des groupes
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=500,overlap=0 | boundary 3]
+prev_tail: matière d’IA soit  systématiquement dispensée à la nouvelle génération d’experts
+next_head: .   Fournir de façon proactive des informations claires aux parties prenantes s
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=500,overlap=0 | boundary 4]
+prev_tail: aboration de  politiques ou de réglementations ni à en décourager l’introduction
+next_head: . Il faut les considérer comme un document  évolutif qu’il conviendra de réviser
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=500,overlap=0 | boundary 5]
+prev_tail: cus que l’IA est susceptible de transformer  la société de manière significative
+next_head: .  L’IA n’est pas une fin en soi, mais plutôt un moyen prometteur d’accroître  l
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=500,overlap=50 | boundary 1]
+prev_tail: nfiance 11  1. Les droits fondamentaux en tant que droits moraux et légaux 12  2
+next_head: .   1        TABLE DES MATIERES      RÉSUMÉ 2  A. INTRODUCTION 5  B. CADRE POUR
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=500,overlap=50 | boundary 2]
+prev_tail: cabilité. Reconnaître et  résoudre les tensions potentielles entre ces principes
+next_head: .   Orientations essentielles dérivées du chapitre I:   Mettre au point, déploy
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=500,overlap=50 | boundary 3]
+prev_tail: es techniques et non techniques pour garantir la mise en œuvre de ces  exigences
+next_head: .    Envisager des méthodes techniques et non techniques pour garantir la mise
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=500,overlap=50 | boundary 4]
+prev_tail: IA digne de confiance, des situations  différentes posent des défis différen ts
+next_head: .    (4) Si l’objectif des présentes lignes directrices est de proposer des orie
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=500,overlap=50 | boundary 5]
+prev_tail: cadre éthique et juridique approp rié afin de renforcer les valeurs  européennes
+next_head: . 5 La vision de la Commission repose sur trois piliers: i) accroître les invest
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=500,overlap=100 | boundary 1]
+prev_tail: nfiance 11  1. Les droits fondamentaux en tant que droits moraux et légaux 12  2
+next_head: .  39). Pour toute utilisation ou  reproduction de photos ou d’autres éléments n
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=500,overlap=100 | boundary 2]
+prev_tail: r lors de la mise au point, du  déploiement et de l’utilisation de systèmes d’IA
+next_head: . Ces orientations se  présentent sous la forme de trois niveaux d’abstraction,
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=500,overlap=100 | boundary 3]
+prev_tail: hniques que non techniques peuvent être utilisées aux fins de leur mise en œuvre
+next_head: . Voir également l’article 38 portant sur la protection  des consommateurs.   3
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=500,overlap=100 | boundary 4]
+prev_tail: e. Il ne suffit pas de  cocher des cases pour garantir une IA digne de confiance
+next_head: . Cette liste d’évaluation devra être adaptée au  cas d’utilisation spécifique d
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=500,overlap=100 | boundary 5]
+prev_tail: es lignes directrices aspirent également à être pertinentes en dehors de l’Union
+next_head: .                                                               4  Cet idéal est
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=1000,overlap=0 | boundary 1]
+prev_tail: cabilité. Reconnaître et  résoudre les tensions potentielles entre ces principes
+next_head: .    Accorder une attention particulière aux situations concernant des groupes
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=1000,overlap=0 | boundary 2]
+prev_tail: aboration de  politiques ou de réglementations ni à en décourager l’introduction
+next_head: . Il faut les considérer comme un document  évolutif qu’il conviendra de réviser
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=1000,overlap=0 | boundary 3]
+prev_tail: rsqu’un cadre clair et exhaustif pour la rendre digne de confiance sera en place
+next_head: .    (12) Il s’agit, de notre point de vue, de la voie que devrait suivre l’Euro
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=1000,overlap=0 | boundary 4]
+prev_tail: peut également compléter, et donc intégrer, les processus d’évaluation existants
+next_head: .   (20) L’objectif des présentes lignes directrices est de proposer des orienta
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=1000,overlap=0 | boundary 5]
+prev_tail: onc également être éthiques, en veillant à l’alignement sur les  normes éthiques
+next_head: .   IA robuste  (27) Même lorsqu’une finalité éthique est garantie, les individu
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=1000,overlap=50 | boundary 1]
+prev_tail: cabilité. Reconnaître et  résoudre les tensions potentielles entre ces principes
+next_head: .   Orientations essentielles dérivées du chapitre I:   Mettre au point, déploy
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=1000,overlap=50 | boundary 2]
+prev_tail: né la mesure dans laquelle les systèmes d’IA  sont spécifiques à leurs contextes
+next_head: .  4    transversal, une approche sectorielle est nécessaire, étant donné la mes
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=1000,overlap=50 | boundary 3]
+prev_tail: lines» (Définition de l’IA: principales  capacités et disciplines scientifiques)
+next_head: . Cette définition est davantage détaillée dans un document spécifique élaboré p
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=1000,overlap=50 | boundary 4]
+prev_tail: organisations de la société civile, particuliers, travailleurs et consommateurs
+next_head: .   Les parties  prenantes résolues à réaliser une IA digne de confiance peuvent
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=1000,overlap=50 | boundary 5]
+prev_tail: s caractéristiques pour parvenir à la mise en œuvre d’une IA digne de  confiance
+next_head: .    IA éthique   (26) Le respect du droit n’est qu’une des trois caractéristiqu
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=1000,overlap=100 | boundary 1]
+prev_tail: cabilité. Reconnaître et  résoudre les tensions potentielles entre ces principes
+next_head: .  I. Sur la base d’une approche fondée sur les droits fondamentaux, le chapitre
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=1000,overlap=100 | boundary 2]
+prev_tail: IA digne de confiance, des situations  différentes posent des défis différen ts
+next_head: .   (3) La section finale du document vise à concrétiser certaines des questions
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=1000,overlap=100 | boundary 3]
+prev_tail: e le terme «made in Europe» est employé par la Commission  dans sa communication
+next_head: . Cet objectif nécessite de chercher à  optimiser les avantages offerts par les
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=1000,overlap=100 | boundary 4]
+prev_tail: la prospérité individuelle des êtres humains que le bien  commun de la socié té
+next_head: .    10  Cela n’exclut pas le fait que des conditions supplémentaires pourraient
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=1000,overlap=100 | boundary 5]
+prev_tail: ce qui ne peut pas être fait, mais aussi en lien avec ce qui devrait être  fait
+next_head: . Outre les règles  applicables au niveau transversal, il existe différentes règ
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=2000,overlap=0 | boundary 1]
+prev_tail: que la technologie, nos environnements sociaux et nos connaissances évolueront
+next_head: . Le présent document est  conçu comme le point de départ de la discussion sur «
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=2000,overlap=0 | boundary 2]
+prev_tail: ns éthiques que les systèmes d’IA proposant des traitements médicaux es sentiels
+next_head: . De  même, les systèmes d’IA utilisés dans le contexte des relations d’entrepri
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=2000,overlap=0 | boundary 3]
+prev_tail: udiée, mise au  point, déployée et utilisée en Europe pour réaliser cette vision
+next_head: . Avec ce document, nous souhaitons contribuer  à cet effort en introduisant la
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=2000,overlap=0 | boundary 4]
+prev_tail: fins l’ensemble de ces  principes cherchent à répondre et à apporter un soutien
+next_head: . Ces principes éthiques peuvent inspirer de nouveaux  instruments réglementaire
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=2000,overlap=0 | boundary 5]
+prev_tail: nnu coupable d’une infraction pénale  devrait être mis en liberté conditionnelle
+next_head: .   17     Mettre au point, déployer et utiliser des systèmes d’IA en respect a
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=2000,overlap=50 | boundary 1]
+prev_tail: que la technologie, nos environnements sociaux et nos connaissances évolueront
+next_head: . Il faut les considérer comme un document  évolutif qu’il conviendra de réviser
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=2000,overlap=50 | boundary 2]
+prev_tail: de confiance. Toutefois, des situations  différentes posent des défis différents
+next_head: .   (20) L’objectif des présentes lignes directrices est de proposer des orienta
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=2000,overlap=50 | boundary 3]
+prev_tail: les individus et la société, les capacités de prise de  décision et la sécurité
+next_head: . Comme toute  technologie puissante, l’utilisation de systèmes d’IA au sein de
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=2000,overlap=50 | boundary 4]
+prev_tail: sur les droits des citoyens; il convient par   conséquent de protéger ces droits
+next_head: .  14    biens et des services publics à une échelle et avec une efficience supé
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=2000,overlap=50 | boundary 5]
+prev_tail: ent dépendre d’un exercice de  mise en balance (par exemple, la dignité humaine)
+next_head: .  Il pourrait toutefois exister  des situations dans lesquelles aucun arbitrage
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=2000,overlap=100 | boundary 1]
+prev_tail: que la technologie, nos environnements sociaux et nos connaissances évolueront
+next_head: .  4    transversal, une approche sectorielle est nécessaire, étant donné la mes
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=2000,overlap=100 | boundary 2]
+prev_tail: e  III dans leurs processus de mise au point et de déploiement de systèmes  d’IA
+next_head: .   Les parties  prenantes résolues à réaliser une IA digne de confiance peuvent
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=2000,overlap=100 | boundary 3]
+prev_tail: réparer un avenir meilleur tout en préservant la compétitivité au niveau mondial
+next_head: . Elle peut contribuer à la réalisation d’une société juste, en  contribuant à l
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=2000,overlap=100 | boundary 4]
+prev_tail: Dignity in Context. Explorations of a Contested Concept, 2018, pp. 325  et suiv
+next_head: . Grâce aux systèmes d’IA, les pouvoirs publics s eront en mesure de fournir à l
+
+[Recursive-Character | pdf | profile=sentence,chunk-size=2000,overlap=100 | boundary 5]
+prev_tail: solutions, ils n’en demeurent pas moins  des prescriptions éthiques abstraites
+next_head: . Ainsi, l’utilisation  de systèmes d’IA aux fins d’une «police prédictive» pour
+
+[Token-Based | pdf | chunk-size=500,overlap=0 | boundary 1]
+prev_tail: nts constitué par la Commission européenne en juin 2018.     Personne de contact
+next_head: Nathalie Smuha – coordinatrice du groupe d’experts de haut niveau sur l’IA   Ad
+
+[Token-Based | pdf | chunk-size=500,overlap=0 | boundary 2]
+prev_tail: sur le groupe d’experts de haut niveau sur l’intelligence artificielle sont disp
+next_head: onibles en ligne  (https://ec.europa.eu/digital-single-market/en/high-level-expe
+
+[Token-Based | pdf | chunk-size=500,overlap=0 | boundary 3]
+prev_tail: ne de confiance  présente les trois caractéristiques  suivantes, qui devraient �
+next_head: �tre respectées tout au long du cycle de vie du  système: a) elle doit être lici
+
+[Token-Based | pdf | chunk-size=500,overlap=0 | boundary 4]
+prev_tail: , à fournir des orientations sur la  manière dont ces principes peuvent être mis
+next_head: en œuvre dans des systèmes sociotechniques. Ces orientations se  présentent sou
+
+[Token-Based | pdf | chunk-size=500,overlap=0 | boundary 5]
+prev_tail: onscient que les systèmes d’IA apportent certes des avantages considérables aux
+next_head: individus et à la société, mais qu’ils présen tent également certains risques e
+
+[Token-Based | pdf | chunk-size=500,overlap=50 | boundary 1]
+prev_tail: nts constitué par la Commission européenne en juin 2018.     Personne de contact
+next_head: but 2020.      Le GEHN IA est un groupe d’experts indépendants constitué par la
+
+[Token-Based | pdf | chunk-size=500,overlap=50 | boundary 2]
+prev_tail: ne circonstance, être considérés comme reflétant une prise de  position officiel
+next_head: tent l’opinion du GEHN  IA et ne peuvent,  en aucune circonstance, être considér
+
+[Token-Based | pdf | chunk-size=500,overlap=50 | boundary 3]
+prev_tail: confiance 30  C. EXEMPLES DE POSSIBILITES ET DE PREOCCUPATIONS MAJEURES SOULEVE
+next_head: III. Chapitre III: évaluation d’une IA digne de confiance 30  C. EXEMPLES DE PO
+
+[Token-Based | pdf | chunk-size=500,overlap=50 | boundary 4]
+prev_tail: on d’une IA digne de  confiance. Ce cadre ne traite pas explicitement de la prem
+next_head: ésentes lignes directrices établissent un cadre pour parvenir à la réalisation d
+
+[Token-Based | pdf | chunk-size=500,overlap=50 | boundary 5]
+prev_tail: tonomie humaine, prévention de toute atteinte, équité et explicabilité. Reconnaî
+next_head: respectant les principes éthiques suivants:   respect de l’autonomie humaine, p
+
+[Token-Based | pdf | chunk-size=500,overlap=100 | boundary 1]
+prev_tail: nts constitué par la Commission européenne en juin 2018.     Personne de contact
+next_head: révisée de cette liste d’évaluation tenant compte des commentaires recueillis a
+
+[Token-Based | pdf | chunk-size=500,overlap=100 | boundary 2]
+prev_tail: paration des lignes directrices, les avis que le présent document exprime  reflè
+next_head: du présent document de travail relève de la seule  responsabilité du groupe d’e
+
+[Token-Based | pdf | chunk-size=500,overlap=100 | boundary 3]
+prev_tail: s droits fondamentaux aux principes éthiques 12  II. Chapitre II: Parvenir à une
+next_head: TRODUCTION 5  B. CADRE POUR UNE IA DIGNE DE CONFIANCE 7  I. Chapitre I: Fondemen
+
+[Token-Based | pdf | chunk-size=500,overlap=100 | boundary 4]
+prev_tail: -mêmes, mais elles ne sauraient  suffire à la réalisation d’une IA digne de conf
+next_head: tre robuste, sur le  plan tant technique que social car, même avec de bonnes int
+
+[Token-Based | pdf | chunk-size=500,overlap=100 | boundary 5]
+prev_tail: concluant par des exemples de possibilités et de préoccupations graves soulevées
+next_head: en œuvre dans des systèmes sociotechniques. Ces orientations se  présentent sou
+
+[Token-Based | pdf | chunk-size=1000,overlap=0 | boundary 1]
+prev_tail: sur le groupe d’experts de haut niveau sur l’intelligence artificielle sont disp
+next_head: onibles en ligne  (https://ec.europa.eu/digital-single-market/en/high-level-expe
+
+[Token-Based | pdf | chunk-size=1000,overlap=0 | boundary 2]
+prev_tail: , à fournir des orientations sur la  manière dont ces principes peuvent être mis
+next_head: en œuvre dans des systèmes sociotechniques. Ces orientations se  présentent sou
+
+[Token-Based | pdf | chunk-size=1000,overlap=0 | boundary 3]
+prev_tail: roits de l’enfant et  des personnes âgées, l’intégration des personnes handicapé
+next_head: es et les droits des travailleurs. Voir également l’article 38 portant sur la pr
+
+[Token-Based | pdf | chunk-size=1000,overlap=0 | boundary 4]
+prev_tail: our une IA digne de confiance lors de la mise au point, du déploiement ou  de l’
+next_head: utilisation de systèmes d’IA, et l’adapter au cas d’utilisation spécifique du sy
+
+[Token-Based | pdf | chunk-size=1000,overlap=0 | boundary 5]
+prev_tail: ppliqué aux systèmes d’IA mis au point, déployés et utilisés dans les États memb
+next_head: res de  l’Union européenne, ainsi qu’aux systèmes mis au point ou produits aille
+
+[Token-Based | pdf | chunk-size=1000,overlap=50 | boundary 1]
+prev_tail: sur le groupe d’experts de haut niveau sur l’intelligence artificielle sont disp
+next_head: le de la Commission européenne.         De plus amples informations sur le group
+
+[Token-Based | pdf | chunk-size=1000,overlap=50 | boundary 2]
+prev_tail: ristiques). S’adressant à l’ensemble des parties prenantes, les présentes lignes
+next_head: ique et robuste (les  deuxième et troisième caractéristiques). S’adressant à l’e
+
+[Token-Based | pdf | chunk-size=1000,overlap=50 | boundary 3]
+prev_tail: e part importante de ces éléments sont dans une certaine mesure déjà  présents d
+next_head: la  législation applicable, bien qu’il soit reconnu qu’une part importante de c
+
+[Token-Based | pdf | chunk-size=1000,overlap=50 | boundary 4]
+prev_tail: e ces arbitrages et leurs solutions.   III. Le chapitre III fournit une liste d�
+next_head: igences. Recenser,  évaluer, documenter et communiquer de manière continue ces a
+
+[Token-Based | pdf | chunk-size=1000,overlap=50 | boundary 5]
+prev_tail: os connaissances évolueront. Le présent document est  conçu comme le point de dé
+next_head: pertinence, à mesure  que la technologie, nos environnements sociaux et nos con
+
+[Token-Based | pdf | chunk-size=1000,overlap=100 | boundary 1]
+prev_tail: sur le groupe d’experts de haut niveau sur l’intelligence artificielle sont disp
+next_head: tent l’opinion du GEHN  IA et ne peuvent,  en aucune circonstance, être considér
+
+[Token-Based | pdf | chunk-size=1000,overlap=100 | boundary 2]
+prev_tail: l vise plutôt à proposer des orientations pour encourager et garantir une IA éth
+next_head: ésentes lignes directrices établissent un cadre pour parvenir à la réalisation d
+
+[Token-Based | pdf | chunk-size=1000,overlap=100 | boundary 3]
+prev_tail: deuxième et troisième caractéristiques d’une IA digne de confiance (une IA éth
+next_head: 1  Tous les éléments normatifs du présent docume
+
+[Token-Based | pdf | chunk-size=1000,overlap=100 | boundary 4]
+prev_tail: contextes ou situations  critiques.    Associer les parties prenantes tout au
+next_head: de transparence sur le fait qu’elles  interagissent avec un système d’IA.   Fa
+
+[Token-Based | pdf | chunk-size=1000,overlap=100 | boundary 5]
+prev_tail: thique et robuste).  4    transversal, une approche sectorielle est nécessaire,
+next_head: aucun conseil pour  veiller à la conformité juridique (IA licite), mais se limi
+
+[Semantic | pdf | threshold=0.65,sample=5000 | boundary 1]
+prev_tail: r le groupe d’experts de haut niveau sur l’intelligence artificielle  (GEHN IA).
+next_head: Les membres du GEHN IA qui y sont cités soutiennent le cadre général pour une IA
+
+[Semantic | pdf | threshold=0.65,sample=5000 | boundary 2]
+prev_tail: s approuver nécessairement chacune des  affirmations formulées dans le document.
+next_head: Afin de recueillir des commentaires pratiques, les parties prenantes soumettront
+
+[Semantic | pdf | threshold=0.65,sample=5000 | boundary 3]
+prev_tail: pour une IA digne de confiance présentée  au chapitre  III du présent document.
+next_head: Une version  révisée de cette liste d’évaluation tenant compte des commentaires
+
+[Semantic | pdf | threshold=0.65,sample=5000 | boundary 4]
+prev_tail: cours de la phase pilote sera  présentée à la Commission européenne début 2020.
+next_head: Le GEHN IA est un groupe d’experts indépendants constitué par la Commission euro
+
+[Semantic | pdf | threshold=0.65,sample=5000 | boundary 5]
+prev_tail: oupe d’experts indépendants constitué par la Commission européenne en juin 2018.
+next_head: Personne de contact Nathalie Smuha – coordinatrice du groupe d’experts de haut n
+
+[Semantic | pdf | threshold=0.70,sample=5000 | boundary 1]
+prev_tail: r le groupe d’experts de haut niveau sur l’intelligence artificielle  (GEHN IA).
+next_head: Les membres du GEHN IA qui y sont cités soutiennent le cadre général pour une IA
+
+[Semantic | pdf | threshold=0.70,sample=5000 | boundary 2]
+prev_tail: s approuver nécessairement chacune des  affirmations formulées dans le document.
+next_head: Afin de recueillir des commentaires pratiques, les parties prenantes soumettront
+
+[Semantic | pdf | threshold=0.70,sample=5000 | boundary 3]
+prev_tail: pour une IA digne de confiance présentée  au chapitre  III du présent document.
+next_head: Une version  révisée de cette liste d’évaluation tenant compte des commentaires
+
+[Semantic | pdf | threshold=0.70,sample=5000 | boundary 4]
+prev_tail: cours de la phase pilote sera  présentée à la Commission européenne début 2020.
+next_head: Le GEHN IA est un groupe d’experts indépendants constitué par la Commission euro
+
+[Semantic | pdf | threshold=0.70,sample=5000 | boundary 5]
+prev_tail: oupe d’experts indépendants constitué par la Commission européenne en juin 2018.
+next_head: Personne de contact Nathalie Smuha – coordinatrice du groupe d’experts de haut n
+
+[Semantic | pdf | threshold=0.75,sample=5000 | boundary 1]
+prev_tail: r le groupe d’experts de haut niveau sur l’intelligence artificielle  (GEHN IA).
+next_head: Les membres du GEHN IA qui y sont cités soutiennent le cadre général pour une IA
+
+[Semantic | pdf | threshold=0.75,sample=5000 | boundary 2]
+prev_tail: s approuver nécessairement chacune des  affirmations formulées dans le document.
+next_head: Afin de recueillir des commentaires pratiques, les parties prenantes soumettront
+
+[Semantic | pdf | threshold=0.75,sample=5000 | boundary 3]
+prev_tail: pour une IA digne de confiance présentée  au chapitre  III du présent document.
+next_head: Une version  révisée de cette liste d’évaluation tenant compte des commentaires
+
+[Semantic | pdf | threshold=0.75,sample=5000 | boundary 4]
+prev_tail: cours de la phase pilote sera  présentée à la Commission européenne début 2020.
+next_head: Le GEHN IA est un groupe d’experts indépendants constitué par la Commission euro
+
+[Semantic | pdf | threshold=0.75,sample=5000 | boundary 5]
+prev_tail: oupe d’experts indépendants constitué par la Commission européenne en juin 2018.
+next_head: Personne de contact Nathalie Smuha – coordinatrice du groupe d’experts de haut n

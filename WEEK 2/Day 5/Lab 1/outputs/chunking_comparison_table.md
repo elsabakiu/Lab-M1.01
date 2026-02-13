@@ -1,0 +1,93 @@
+```
+           strategy document                                         config  total_chunks  min_size  max_size  avg_size  sentence_boundary_rate  paragraph_boundary_rate
+         Fixed-Size      pdf                      chunk-size=1000,overlap=0           193       346      1000    992.47                   0.057                    0.000
+         Fixed-Size      pdf                    chunk-size=1000,overlap=100           214       120      1000    991.57                   0.038                    0.000
+         Fixed-Size      pdf                     chunk-size=1000,overlap=50           202       884      1000    995.05                   0.030                    0.000
+         Fixed-Size      pdf                      chunk-size=2000,overlap=0            97        13      2000   1975.81                   0.010                    0.000
+         Fixed-Size      pdf                    chunk-size=2000,overlap=100           101      1773      2000   1993.70                   0.010                    0.000
+         Fixed-Size      pdf                     chunk-size=2000,overlap=50            99       649      2000   1982.51                   0.031                    0.000
+         Fixed-Size      pdf                       chunk-size=500,overlap=0           386       446       500    495.67                   0.044                    0.000
+         Fixed-Size      pdf                     chunk-size=500,overlap=100           481       132       500    494.60                   0.042                    0.000
+         Fixed-Size      pdf                      chunk-size=500,overlap=50           427       120       500    494.77                   0.014                    0.000
+Recursive-Character      pdf   profile=line_first,chunk-size=1000,overlap=0            29      6411      7152   6692.10                   0.214                    0.000
+Recursive-Character      pdf profile=line_first,chunk-size=1000,overlap=100            32      5548      7220   6674.75                   0.129                    0.000
+Recursive-Character      pdf  profile=line_first,chunk-size=1000,overlap=50            31      1489      7364   6546.71                   0.300                    0.000
+Recursive-Character      pdf   profile=line_first,chunk-size=2000,overlap=0            15      5659     13957  12944.13                   0.143                    0.000
+Recursive-Character      pdf profile=line_first,chunk-size=2000,overlap=100            16      1489     14264  12738.81                   0.133                    0.000
+Recursive-Character      pdf  profile=line_first,chunk-size=2000,overlap=50            15      9607     14031  13187.87                   0.000                    0.000
+Recursive-Character      pdf    profile=line_first,chunk-size=500,overlap=0            59       624      3948   3286.07                   0.172                    0.000
+Recursive-Character      pdf  profile=line_first,chunk-size=500,overlap=100            72      2586      3749   3316.32                   0.239                    0.000
+Recursive-Character      pdf   profile=line_first,chunk-size=500,overlap=50            64      2035      3750   3316.88                   0.286                    0.000
+Recursive-Character      pdf     profile=semantic,chunk-size=1000,overlap=0            32        89      7194   6065.78                   0.323                    0.000
+Recursive-Character      pdf   profile=semantic,chunk-size=1000,overlap=100            35        89      7292   6108.54                   0.206                    0.000
+Recursive-Character      pdf    profile=semantic,chunk-size=1000,overlap=50            33        89      7379   6131.03                   0.219                    0.000
+Recursive-Character      pdf     profile=semantic,chunk-size=2000,overlap=0            17        89     14164  11419.76                   0.250                    0.000
+Recursive-Character      pdf   profile=semantic,chunk-size=2000,overlap=100            18        89     14107  11254.50                   0.235                    0.000
+Recursive-Character      pdf    profile=semantic,chunk-size=2000,overlap=50            17        89     14235  11620.24                   0.312                    0.000
+Recursive-Character      pdf      profile=semantic,chunk-size=500,overlap=0            61        89      3750   3180.87                   0.250                    0.000
+Recursive-Character      pdf    profile=semantic,chunk-size=500,overlap=100            73        89      3770   3244.07                   0.208                    0.000
+Recursive-Character      pdf     profile=semantic,chunk-size=500,overlap=50            67        89      3943   3165.73                   0.182                    0.000
+Recursive-Character      pdf     profile=sentence,chunk-size=1000,overlap=0            32      3133      6884   6068.47                   0.065                    0.000
+Recursive-Character      pdf   profile=sentence,chunk-size=1000,overlap=100            35      3623      6747   6006.54                   0.000                    0.029
+Recursive-Character      pdf    profile=sentence,chunk-size=1000,overlap=50            33      3139      6788   6066.94                   0.062                    0.000
+Recursive-Character      pdf     profile=sentence,chunk-size=2000,overlap=0            15     12123     13598  12946.00                   0.071                    0.000
+Recursive-Character      pdf   profile=sentence,chunk-size=2000,overlap=100            16      8471     13560  12567.56                   0.067                    0.000
+Recursive-Character      pdf    profile=sentence,chunk-size=2000,overlap=50            16      5166     13535  12316.31                   0.067                    0.000
+Recursive-Character      pdf      profile=sentence,chunk-size=500,overlap=0            65       818      3531   2987.49                   0.031                    0.000
+Recursive-Character      pdf    profile=sentence,chunk-size=500,overlap=100            76       353      3897   3016.80                   0.013                    0.000
+Recursive-Character      pdf     profile=sentence,chunk-size=500,overlap=50            69       895      3604   2992.51                   0.015                    0.000
+           Semantic      pdf                     threshold=0.65,sample=5000            35         4       507    140.74                   1.000                    0.000
+           Semantic      pdf                     threshold=0.70,sample=5000            35         4       507    140.74                   1.000                    0.000
+           Semantic      pdf                     threshold=0.75,sample=5000            35         4       507    140.74                   1.000                    0.000
+        Token-Based      pdf                      chunk-size=1000,overlap=0            72      2288      2906   2697.24                   0.042                    0.000
+        Token-Based      pdf                    chunk-size=1000,overlap=100            80      2049      2931   2696.54                   0.013                    0.000
+        Token-Based      pdf                     chunk-size=1000,overlap=50            76      1729      2979   2690.96                   0.027                    0.000
+        Token-Based      pdf                       chunk-size=500,overlap=0           144      1105      1506   1348.65                   0.028                    0.000
+        Token-Based      pdf                     chunk-size=500,overlap=100           180       892      1505   1349.53                   0.039                    0.000
+        Token-Based      pdf                      chunk-size=500,overlap=50           160      1005      1527   1349.30                   0.044                    0.000
+         Fixed-Size  podcast                      chunk-size=1000,overlap=0            10       920      1000    989.70                   0.000                    0.000
+         Fixed-Size  podcast                    chunk-size=1000,overlap=100            11       891      1000    989.09                   0.300                    0.000
+         Fixed-Size  podcast                     chunk-size=1000,overlap=50            11       410       999    942.55                   0.000                    0.000
+         Fixed-Size  podcast                      chunk-size=2000,overlap=0             5      1910      2000   1980.40                   0.500                    0.000
+         Fixed-Size  podcast                    chunk-size=2000,overlap=100             6       410      2000   1732.17                   0.400                    0.000
+         Fixed-Size  podcast                     chunk-size=2000,overlap=50             6       133      2000   1687.83                   0.200                    0.000
+         Fixed-Size  podcast                       chunk-size=500,overlap=0            20       449       500    494.35                   0.211                    0.000
+         Fixed-Size  podcast                     chunk-size=500,overlap=100            25       315       500    489.72                   0.083                    0.000
+         Fixed-Size  podcast                      chunk-size=500,overlap=50            22       452       500    495.77                   0.095                    0.000
+Recursive-Character  podcast   profile=line_first,chunk-size=1000,overlap=0             2      4599      5307   4953.00                   0.000                    0.000
+Recursive-Character  podcast profile=line_first,chunk-size=1000,overlap=100             2      5131      5307   5219.00                   0.000                    0.000
+Recursive-Character  podcast  profile=line_first,chunk-size=1000,overlap=50             2      4774      5307   5040.50                   0.000                    0.000
+Recursive-Character  podcast   profile=line_first,chunk-size=2000,overlap=0             1      9906      9906   9906.00                   0.000                    0.000
+Recursive-Character  podcast profile=line_first,chunk-size=2000,overlap=100             1      9906      9906   9906.00                   0.000                    0.000
+Recursive-Character  podcast  profile=line_first,chunk-size=2000,overlap=50             1      9906      9906   9906.00                   0.000                    0.000
+Recursive-Character  podcast    profile=line_first,chunk-size=500,overlap=0             4      2072      2719   2476.50                   0.000                    0.000
+Recursive-Character  podcast  profile=line_first,chunk-size=500,overlap=100             5      1466      2747   2392.00                   0.000                    0.000
+Recursive-Character  podcast   profile=line_first,chunk-size=500,overlap=50             5       386      2674   2181.00                   0.000                    0.000
+Recursive-Character  podcast     profile=semantic,chunk-size=1000,overlap=0             2      4599      5307   4953.00                   0.000                    0.000
+Recursive-Character  podcast   profile=semantic,chunk-size=1000,overlap=100             2      5131      5307   5219.00                   0.000                    0.000
+Recursive-Character  podcast    profile=semantic,chunk-size=1000,overlap=50             2      4774      5307   5040.50                   0.000                    0.000
+Recursive-Character  podcast     profile=semantic,chunk-size=2000,overlap=0             1      9906      9906   9906.00                   0.000                    0.000
+Recursive-Character  podcast   profile=semantic,chunk-size=2000,overlap=100             1      9906      9906   9906.00                   0.000                    0.000
+Recursive-Character  podcast    profile=semantic,chunk-size=2000,overlap=50             1      9906      9906   9906.00                   0.000                    0.000
+Recursive-Character  podcast      profile=semantic,chunk-size=500,overlap=0             4      2072      2719   2476.50                   0.000                    0.000
+Recursive-Character  podcast    profile=semantic,chunk-size=500,overlap=100             5      1466      2747   2392.00                   0.000                    0.000
+Recursive-Character  podcast     profile=semantic,chunk-size=500,overlap=50             5       386      2674   2181.00                   0.000                    0.000
+Recursive-Character  podcast     profile=sentence,chunk-size=1000,overlap=0             2      4599      5307   4953.00                   0.000                    0.000
+Recursive-Character  podcast   profile=sentence,chunk-size=1000,overlap=100             2      5131      5307   5219.00                   0.000                    0.000
+Recursive-Character  podcast    profile=sentence,chunk-size=1000,overlap=50             2      4774      5307   5040.50                   0.000                    0.000
+Recursive-Character  podcast     profile=sentence,chunk-size=2000,overlap=0             1      9906      9906   9906.00                   0.000                    0.000
+Recursive-Character  podcast   profile=sentence,chunk-size=2000,overlap=100             1      9906      9906   9906.00                   0.000                    0.000
+Recursive-Character  podcast    profile=sentence,chunk-size=2000,overlap=50             1      9906      9906   9906.00                   0.000                    0.000
+Recursive-Character  podcast      profile=sentence,chunk-size=500,overlap=0             4      2072      2719   2476.50                   0.000                    0.000
+Recursive-Character  podcast    profile=sentence,chunk-size=500,overlap=100             5      1466      2747   2392.00                   0.000                    0.000
+Recursive-Character  podcast     profile=sentence,chunk-size=500,overlap=50             5       386      2674   2181.00                   0.000                    0.000
+           Semantic  podcast                     threshold=0.65,sample=5000            91         3       151     53.96                   1.000                    0.000
+           Semantic  podcast                     threshold=0.70,sample=5000            92         3       151     53.36                   1.000                    0.000
+           Semantic  podcast                     threshold=0.75,sample=5000            92         3       151     53.36                   1.000                    0.000
+        Token-Based  podcast                      chunk-size=1000,overlap=0             3       609      4744   3302.33                   0.000                    0.000
+        Token-Based  podcast                    chunk-size=1000,overlap=100             3      1542      4780   3625.33                   0.000                    0.000
+        Token-Based  podcast                     chunk-size=1000,overlap=50             3      1076      4775   3468.33                   0.000                    0.000
+        Token-Based  podcast                       chunk-size=500,overlap=0             5       609      2396   1981.40                   0.000                    0.000
+        Token-Based  podcast                     chunk-size=500,overlap=100             6       609      2449   2054.83                   0.000                    0.000
+        Token-Based  podcast                      chunk-size=500,overlap=50             5      1542      2460   2169.40                   0.000                    0.000
+```
