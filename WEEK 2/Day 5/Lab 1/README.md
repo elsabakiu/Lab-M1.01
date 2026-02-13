@@ -1,34 +1,39 @@
 # Week 2 Day 5 - Lab 1 (Chunking for RAG)
 
-Starter project for experimenting with chunking strategies on:
+This project compares chunking strategies for two content types:
 - Trustworthy AI podcast transcript
 - Trustworthy AI PDF
 
+The pipeline runs four strategies and generates chunk files, comparison tables, charts, and trade-off notes.
+
 ## Project Structure
 
-- `src/lab1_chunking/`: Python package for chunking + evaluation logic
-- `tests/`: unit/smoke tests
-- `data/raw/`: source files from TA (podcast transcript, PDF)
-- `data/processed/`: cleaned/intermediate files
-- `notebooks/`: exploratory notebook work
-- `docs/`: notes, findings, and final recommendations
-- `outputs/`: generated reports/charts
-- `chunks/`: exported chunk outputs by strategy
+- `src/lab1_chunking/`: core code (`prepare_data.py`, `chunking.py`, `main.py`)
+- `data/raw/`: source audio/PDF files
+- `data/processed/`: extracted transcript/PDF text used by analysis
+- `chunks/`: exported chunk text files per strategy
+- `outputs/`: analysis artifacts (tables, charts, boundary diagnostics)
+- `tests/`: smoke/unit tests
 
-## Quick Start
+## Strategies Implemented
 
-1. Create and activate a virtual environment.
+- `Fixed-Size Chunking`
+- `Recursive-Character Chunking`
+- `Token-Based Chunking`
+- `Semantic Chunking`
+
+## Setup
+
+1. Create and activate a Python environment.
 2. Install dependencies:
    - `pip install -r requirements.txt`
-3. Create local env file:
+3. Copy env template:
    - `cp .env.example .env`
-4. Add your API keys to `.env`.
-5. Run tests:
-   - `pytest -q`
+4. Add your `OPENAI_API_KEY` to `.env`.
 
-## Data Preparation (Lab Step-by-Step)
+## Data Preparation
 
-This first iteration uses fixed file names in `prepare_data.py`:
+`prepare_data.py` is currently configured for these exact source files:
 - `data/raw/The_Blueprint_For_Trustworthy_AI.m4a`
 - `data/raw/ethics_guidelines_for_trustworthy_ai-fr_87FE7A3C-D03D-9305-81A653DDA84B5A60_60427.pdf`
 
@@ -39,15 +44,33 @@ Run from VS Code:
 Run from terminal:
 - `PYTHONPATH=src python -m lab1_chunking.prepare_data`
 
-Outputs:
-- `data/raw/podcast_transcript.txt`
-- `data/raw/trustworthy_ai.pdf`
+Generated files:
+- `data/processed/podcast_transcript.txt`
 - `data/processed/trustworthy_ai_extracted.txt`
 
-## Suggested Step-by-Step Lab Flow
+## Run Chunking Analysis
 
-1. Load podcast transcript and PDF from `data/raw/`.
-2. Implement 2+ chunking strategies in `src/lab1_chunking/chunking.py`.
-3. Compare chunk stats (count, min/max/avg size, overlap).
-4. Visualize chunk boundaries and quality in `notebooks/`.
-5. Write trade-offs and recommendations in `docs/`.
+Run from VS Code:
+- Open `src/lab1_chunking/main.py`
+- Click Run File
+
+Run from terminal:
+- `PYTHONPATH=src python -m lab1_chunking.main`
+
+## Output Artifacts
+
+Chunk files:
+- `chunks/Fixed-Size-Chunking/`
+- `chunks/Recursive-Character-Chunking/`
+- `chunks/Token-Based-Chunking/`
+- `chunks/Semantic-Chunking/`
+
+Analysis outputs:
+- `outputs/chunking_comparison_table.csv`
+- `outputs/chunking_comparison_table.md`
+- `outputs/chunk_boundary_quality.csv`
+- `outputs/chunk_boundary_samples.txt`
+- `outputs/chunk_size_distributions.png`
+- `outputs/chunk_count_comparison.png`
+- `outputs/chunking_tradeoffs.md`
+
