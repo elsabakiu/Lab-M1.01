@@ -1,0 +1,17 @@
+[
+  {
+    "ticker": "NVDA",
+    "url": "https://investor.nvidia.com/files/doc_financials/2025/ar/nvidia-company-overview.pdf",
+    "status": "failed: HTTP Error 404: Not Found"
+  },
+  {
+    "ticker": "AMD",
+    "url": "https://ir.amd.com/static-files/04d53f8b-e0f3-457d-88ac-01b8e86f9fa0",
+    "status": "failed: HTTP Error 404: Not Found"
+  },
+  {
+    "ticker": "TSLA",
+    "url": "https://q4cdn.s3.us-west-2.amazonaws.com/264943617/files/doc_financials/2025/q4/TSLA-Q4-2025-Update.pdf",
+    "status": "failed: HTTP Error 404: Not Found"
+  }
+]

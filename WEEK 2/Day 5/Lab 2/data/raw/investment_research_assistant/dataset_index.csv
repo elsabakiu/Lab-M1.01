@@ -1,0 +1,13 @@
+ticker,resource_type,file,source_url
+NVDA,10-K,NVDA/filings/NVDA_10-K_2025-02-26_nvda-20250126.htm,https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm
+NVDA,10-Q,NVDA/filings/NVDA_10-Q_2025-11-19_nvda-20251026.htm,https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm
+NVDA,Latest earnings call transcript,NVDA/transcripts/NVDA_latest_earnings_call_transcript_fool.html,https://www.fool.com/earnings/call-transcripts/2025/11/19/nvidia-nvda-q3-2026-earnings-call-transcript/
+NVDA,Investor presentation/material,NVDA/presentations/NVDA_8K_2026-01-23_nvda-20260120.htm,https://www.sec.gov/Archives/edgar/data/1045810/000104581026000003/nvda-20260120.htm
+AMD,10-K,AMD/filings/AMD_10-K_2026-02-04_amd-20251227.htm,https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm
+AMD,10-Q,AMD/filings/AMD_10-Q_2025-11-05_amd-20250927.htm,https://www.sec.gov/Archives/edgar/data/2488/000000248825000166/amd-20250927.htm
+AMD,Latest earnings call transcript,AMD/transcripts/AMD_latest_earnings_call_transcript_fool.html,https://www.fool.com/earnings/call-transcripts/2026/02/03/amd-amd-q4-2025-earnings-call-transcript/
+AMD,Investor presentation/material,AMD/presentations/AMD_8K_2026-02-03_q42025991.htm,https://www.sec.gov/Archives/edgar/data/2488/000000248826000014/q42025991.htm
+TSLA,10-K,TSLA/filings/TSLA_10-K_2026-01-29_tsla-20251231.htm,https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm
+TSLA,10-Q,TSLA/filings/TSLA_10-Q_2025-10-23_tsla-20250930.htm,https://www.sec.gov/Archives/edgar/data/1318605/000162828025045968/tsla-20250930.htm
+TSLA,Latest earnings call transcript,TSLA/transcripts/TSLA_latest_earnings_call_transcript_fool.html,https://www.fool.com/earnings/call-transcripts/2026/01/28/tesla-tsla-q4-2025-earnings-call-transcript/
+TSLA,Investor presentation/material,TSLA/presentations/TSLA_8K_2026-01-28_exhibit991.htm,https://www.sec.gov/Archives/edgar/data/1318605/000162828026003837/exhibit991.htm

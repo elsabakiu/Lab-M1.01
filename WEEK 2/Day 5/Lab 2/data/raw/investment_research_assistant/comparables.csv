@@ -1,0 +1,4 @@
+ticker,period_end,revenue_growth_pct,gross_margin_pct,fcf_margin_pct,notes
+NVDA,2025-10-26,21.96,73.41,,Derived from SEC companyfacts using revenue tag Revenues; revenue growth is QoQ (latest quarter vs previous quarter).
+AMD,2025-09-27,20.31,51.7,47.12,Derived from SEC companyfacts using revenue tag RevenueFromContractWithCustomerExcludingAssessedTax; revenue growth is QoQ (latest quarter vs previous quarter).
+TSLA,2025-09-30,24.89,17.99,17.08,Derived from SEC companyfacts using revenue tag RevenueFromContractWithCustomerExcludingAssessedTax; revenue growth is QoQ (latest quarter vs previous quarter).

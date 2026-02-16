@@ -1,0 +1,17 @@
+[
+  {
+    "ticker": "NVDA",
+    "url": "https://seekingalpha.com/article/4845855-nvidia-corporation-nvda-q3-2026-earnings-call-transcript",
+    "status": "failed: HTTP Error 403: Forbidden"
+  },
+  {
+    "ticker": "AMD",
+    "url": "https://seekingalpha.com/article/4865498-advanced-micro-devices-inc-amd-q4-2025-earnings-call-transcript",
+    "status": "failed: HTTP Error 403: Forbidden"
+  },
+  {
+    "ticker": "TSLA",
+    "url": "https://seekingalpha.com/article/4863626-tesla-inc-tsla-q4-2025-earnings-call-transcript",
+    "status": "failed: HTTP Error 403: Forbidden"
+  }
+]

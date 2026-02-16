@@ -1,0 +1,43 @@
+[
+  {
+    "ticker": "NVDA",
+    "latest_8k": "0001045810-26-000003",
+    "date": "2026-01-23",
+    "downloaded": [
+      {
+        "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000003/nvda-20260120.htm",
+        "file": "data/raw/investment_research_assistant/NVDA/presentations/NVDA_8K_2026-01-23_nvda-20260120.htm"
+      }
+    ]
+  },
+  {
+    "ticker": "AMD",
+    "latest_8k": "0000002488-26-000014",
+    "date": "2026-02-03",
+    "downloaded": [
+      {
+        "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000014/amd-20260203.htm",
+        "file": "data/raw/investment_research_assistant/AMD/presentations/AMD_8K_2026-02-03_amd-20260203.htm"
+      },
+      {
+        "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000014/q42025991.htm",
+        "file": "data/raw/investment_research_assistant/AMD/presentations/AMD_8K_2026-02-03_q42025991.htm"
+      }
+    ]
+  },
+  {
+    "ticker": "TSLA",
+    "latest_8k": "0001628280-26-003837",
+    "date": "2026-01-28",
+    "downloaded": [
+      {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003837/tsla-20260128.htm",
+        "file": "data/raw/investment_research_assistant/TSLA/presentations/TSLA_8K_2026-01-28_tsla-20260128.htm"
+      },
+      {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003837/exhibit991.htm",
+        "file": "data/raw/investment_research_assistant/TSLA/presentations/TSLA_8K_2026-01-28_exhibit991.htm"
+      }
+    ]
+  }
+]

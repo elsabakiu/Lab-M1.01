@@ -1,0 +1,20 @@
+[
+  {
+    "ticker": "NVDA",
+    "url": "https://www.fool.com/earnings/call-transcripts/2025/11/19/nvidia-nvda-q3-2026-earnings-call-transcript/",
+    "file": "data/raw/investment_research_assistant/NVDA/transcripts/NVDA_latest_earnings_call_transcript_fool.html",
+    "status": "downloaded"
+  },
+  {
+    "ticker": "AMD",
+    "url": "https://www.fool.com/earnings/call-transcripts/2026/02/03/amd-amd-q4-2025-earnings-call-transcript//",
+    "file": "data/raw/investment_research_assistant/AMD/transcripts/AMD_latest_earnings_call_transcript_fool.html",
+    "status": "downloaded"
+  },
+  {
+    "ticker": "TSLA",
+    "url": "https://www.fool.com/earnings/call-transcripts/2026/01/28/tesla-tsla-q4-2025-earnings-call-transcript/",
+    "file": "data/raw/investment_research_assistant/TSLA/transcripts/TSLA_latest_earnings_call_transcript_fool.html",
+    "status": "downloaded"
+  }
+]

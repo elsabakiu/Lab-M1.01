@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Lab2: Run main.py",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/Weekly Assignments/WEEK 2/Day 5/Lab 2/src/lab2_rag_openai/main.py",
+      "cwd": "${workspaceFolder}/Weekly Assignments/WEEK 2/Day 5/Lab 2",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/Weekly Assignments/WEEK 2/Day 5/Lab 2/src"
+      },
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
+}

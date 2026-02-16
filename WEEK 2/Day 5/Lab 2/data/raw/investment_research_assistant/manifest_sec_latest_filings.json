@@ -1,0 +1,50 @@
+[
+  {
+    "ticker": "NVDA",
+    "cik": "0001045810",
+    "10-K": {
+      "date": "2025-02-26",
+      "accession": "0001045810-25-000023",
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+      "file": "data/raw/investment_research_assistant/NVDA/filings/NVDA_10-K_2025-02-26_nvda-20250126.htm"
+    },
+    "10-Q": {
+      "date": "2025-11-19",
+      "accession": "0001045810-25-000230",
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm",
+      "file": "data/raw/investment_research_assistant/NVDA/filings/NVDA_10-Q_2025-11-19_nvda-20251026.htm"
+    }
+  },
+  {
+    "ticker": "AMD",
+    "cik": "0000002488",
+    "10-K": {
+      "date": "2026-02-04",
+      "accession": "0000002488-26-000018",
+      "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "file": "data/raw/investment_research_assistant/AMD/filings/AMD_10-K_2026-02-04_amd-20251227.htm"
+    },
+    "10-Q": {
+      "date": "2025-11-05",
+      "accession": "0000002488-25-000166",
+      "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000166/amd-20250927.htm",
+      "file": "data/raw/investment_research_assistant/AMD/filings/AMD_10-Q_2025-11-05_amd-20250927.htm"
+    }
+  },
+  {
+    "ticker": "TSLA",
+    "cik": "0001318605",
+    "10-K": {
+      "date": "2026-01-29",
+      "accession": "0001628280-26-003952",
+      "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+      "file": "data/raw/investment_research_assistant/TSLA/filings/TSLA_10-K_2026-01-29_tsla-20251231.htm"
+    },
+    "10-Q": {
+      "date": "2025-10-23",
+      "accession": "0001628280-25-045968",
+      "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025045968/tsla-20250930.htm",
+      "file": "data/raw/investment_research_assistant/TSLA/filings/TSLA_10-Q_2025-10-23_tsla-20250930.htm"
+    }
+  }
+]
