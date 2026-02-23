@@ -1,0 +1,167 @@
+
+Testing workflow with sample complaints...
+
+
+================================================================================
+Complaint 1: Who: Joyce Byers. What: The Downside Up portal at Hawkins Lab gate flickers and opens unpredictably. When: 2026-02-20 around 22:10 and 2026-02-21 around 03:40. Where: Hawkins Lab service entrance.
+================================================================================
+Result summary:
+- category: portal
+- status: closed
+- current_step: close
+- validation_passed: True
+- manual_review_required: False
+- evidence_count: 4
+- effectiveness_rating: high
+- follow_up_required: False
+- workflow_path: intake -> validate -> investigate -> resolve -> close
+- audit trail:
+  - intake: category=portal, missing_details=none
+  - intake: duplicate=false
+  - validate: passed (category=portal, manual_review=False)
+  - investigate: completed=True, category=portal, evidence_count=4
+  - resolve: applied resolution (category=portal, effectiveness=high, escalation=False)
+  - close: completed (satisfaction=satisfied, follow_up_required=False)
+
+================================================================================
+Complaint 2: Who: Steve Harrington. What: A demogorgon near the old rail yard alternates between hunting alone and coordinating with another creature. When: 2026-02-18 at 23:00 and 2026-02-19 at 01:20. Where: Hawkins rail yard.
+================================================================================
+Result summary:
+- category: monster
+- status: closed
+- current_step: close
+- validation_passed: True
+- manual_review_required: False
+- evidence_count: 5
+- effectiveness_rating: high
+- follow_up_required: False
+- workflow_path: intake -> validate -> investigate -> resolve -> close
+- audit trail:
+  - intake: category=monster, missing_details=none
+  - intake: duplicate=false
+  - validate: passed (category=monster, manual_review=False)
+  - investigate: completed=True, category=monster, evidence_count=5
+  - resolve: applied resolution (category=monster, effectiveness=high, escalation=True)
+  - close: completed (satisfaction=satisfied, follow_up_required=False)
+
+================================================================================
+Complaint 3: Who: Eleven. What: Psychic ability limitation: can move bikes but fails when lifting heavy rocks after 10 minutes of use. When: 2026-02-22 at 16:00 during controlled testing. Where: Hopper cabin training field.
+================================================================================
+Result summary:
+- category: psychic
+- status: closed
+- current_step: close
+- validation_passed: True
+- manual_review_required: False
+- evidence_count: 5
+- effectiveness_rating: medium
+- follow_up_required: False
+- workflow_path: intake -> validate -> investigate -> resolve -> close
+- audit trail:
+  - intake: category=psychic, missing_details=none
+  - intake: duplicate=false
+  - validate: passed (category=psychic, manual_review=False)
+  - investigate: completed=True, category=psychic, evidence_count=5
+  - resolve: applied resolution (category=psychic, effectiveness=medium, escalation=False)
+  - close: completed (satisfaction=satisfied, follow_up_required=False)
+
+================================================================================
+Complaint 4: Who: Utility crew lead Tom. What: Environmental anomaly where power lines arc and creatures become agitated during storm fronts. When: 2026-02-17 between 19:00 and 20:00. Where: East Hawkins substation.
+================================================================================
+Result summary:
+- category: environmental
+- status: closed
+- current_step: close
+- validation_passed: True
+- manual_review_required: False
+- evidence_count: 4
+- effectiveness_rating: high
+- follow_up_required: False
+- workflow_path: intake -> validate -> investigate -> resolve -> close
+- audit trail:
+  - intake: category=environmental, missing_details=none
+  - intake: duplicate=false
+  - validate: passed (category=environmental, manual_review=False)
+  - investigate: completed=True, category=environmental, evidence_count=4
+  - resolve: applied resolution (category=environmental, effectiveness=high, escalation=True)
+  - close: completed (satisfaction=satisfied, follow_up_required=False)
+
+================================================================================
+Complaint 5: Who: Karen Wheeler. What: I have a random complaint about strange vibes and unrelated noise with no clear downside-up category. When: 2026-02-21 at 12:00. Where: Downtown Hawkins.
+================================================================================
+Result summary:
+- category: other
+- status: closed
+- current_step: close
+- validation_passed: True
+- manual_review_required: True
+- evidence_count: 4
+- effectiveness_rating: medium
+- follow_up_required: False
+- workflow_path: intake -> validate -> manual_review -> investigate -> resolve -> close
+- audit trail:
+  - intake: category=other, missing_details=none
+  - intake: duplicate=false
+  - validate: category=other -> manual review escalation
+  - validate: passed (category=other, manual_review=True)
+  - manual_review: escalated case acknowledged
+  - investigate: completed=True, category=other, evidence_count=4
+  - resolve: applied resolution (category=other, effectiveness=medium, escalation=False)
+  - close: completed (satisfaction=no_response, follow_up_required=False)
+
+================================================================================
+Complaint 6: This is weird and broken somehow. Please fix it.
+================================================================================
+Result summary:
+- category: other
+- status: needs_clarification
+- current_step: intake
+- validation_passed: False
+- manual_review_required: False
+- evidence_count: 0
+- effectiveness_rating: n/a
+- follow_up_required: False
+- workflow_path: intake
+- audit trail:
+  - intake: category=other, missing_details=who,when,where
+  - intake: duplicate=false
+
+================================================================================
+Complaint 7: Who: Mike Wheeler. What: Portal concern, but no anomaly detail beyond saying it feels odd. When: yesterday. Where: somewhere near town.
+================================================================================
+Result summary:
+- category: portal
+- status: rejected
+- current_step: validate
+- validation_passed: False
+- manual_review_required: False
+- evidence_count: 0
+- effectiveness_rating: n/a
+- follow_up_required: False
+- workflow_path: intake -> validate
+- validation_errors: ['Portal complaint must reference specific location/timing anomaly.']
+- audit trail:
+  - intake: category=portal, missing_details=none
+  - intake: duplicate=false
+  - validate: failed (category=portal, errors=Portal complaint must reference specific location/timing anomaly.)
+
+================================================================================
+Complaint 8: Who: Joyce Byers. What: The Downside Up portal at Hawkins Lab gate flickers and opens unpredictably. When: 2026-02-25 around 22:05. Where: Hawkins Lab service entrance.
+================================================================================
+Result summary:
+- category: portal
+- status: closed
+- current_step: close
+- validation_passed: True
+- manual_review_required: False
+- evidence_count: 3
+- effectiveness_rating: high
+- follow_up_required: False
+- workflow_path: intake -> validate -> investigate -> resolve -> close
+- audit trail:
+  - intake: category=portal, missing_details=none
+  - intake: duplicate=true linked_to=CMP-001 consolidated=['CMP-001', 'CMP-008']
+  - validate: passed (category=portal, manual_review=False)
+  - investigate: completed=True, category=portal, evidence_count=3
+  - resolve: applied resolution (category=portal, effectiveness=high, escalation=False)
+  - close: completed (satisfaction=satisfied, follow_up_required=False)

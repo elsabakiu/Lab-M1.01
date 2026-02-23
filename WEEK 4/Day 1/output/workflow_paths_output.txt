@@ -1,0 +1,8 @@
+Complaint 1: status=closed | path=intake -> validate -> investigate -> resolve -> close
+Complaint 2: status=closed | path=intake -> validate -> investigate -> resolve -> close
+Complaint 3: status=closed | path=intake -> validate -> investigate -> resolve -> close
+Complaint 4: status=closed | path=intake -> validate -> investigate -> resolve -> close
+Complaint 5: status=closed | path=intake -> validate -> manual_review -> investigate -> resolve -> close
+Complaint 6: status=needs_clarification | path=intake
+Complaint 7: status=rejected | path=intake -> validate
+Complaint 8: status=closed | path=intake -> validate -> investigate -> resolve -> close
