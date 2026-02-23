@@ -1,127 +1,110 @@
 # MCP + LangChain Agent (Week 3 / Day 5)
 
-This project is a Python MCP client + LangChain agent demo that connects to:
+This project is a multi-server MCP client and LangChain agent demo.
 
-- Google Calendar MCP server (`@cocal/google-calendar-mcp`)
-- Google Drive MCP server (`@modelcontextprotocol/server-gdrive`)
+It connects to:
+- Google Calendar MCP (`@cocal/google-calendar-mcp`)
+- Google Drive MCP (`@modelcontextprotocol/server-gdrive@2025.1.14`)
 
-It demonstrates:
-
-- loading MCP tools through `MultiServerMCPClient`
-- printing a per-server inventory of tools/resources
-- running an agent with real calendar + drive tool usage
-- simulating a practical 2-turn workflow (check tomorrow events, then create a constrained blocker)
+and demonstrates:
+- loading tools from multiple MCP servers via `MultiServerMCPClient`
+- printing a structured server inventory (tools + resources per server)
+- running an agentic calendar workflow that also attempts Drive lookup
 
 ## Project structure
-
-- `mcp_langchain.py`: thin entrypoint wrapper
-- `mcp_app/app.py`: main runtime orchestration
-- `mcp_app/config.py`: environment loading + MCP server connection config
-- `mcp_app/mcp_helpers.py`: tool/resource loading, inventory printing, helper utilities
-- `mcp_app/calendar_logic.py`: non-agent helper checks (smoke test, today event listing)
-- `mcp_app/agent_flows.py`: agent prompts, tests, and conversation simulation
+- `mcp_langchain.py`: top-level entrypoint
+- `mcp_app/app.py`: main orchestration (connect, inventory, run agent flow, teardown)
+- `mcp_app/config.py`: `.env` loading + server connection builders
+- `mcp_app/mcp_helpers.py`: tool loading, inventory printing, tool filtering, client teardown
+- `mcp_app/agent_flows.py`: agent tests and 2-turn simulated conversation
+- `mcp_app/calendar_logic.py`: optional non-agent calendar checks
 - `.env`: local runtime configuration
-- `.env.example`: template configuration
+- `.env.example`: template values
 
 ## Requirements
-
 - Python 3.11+
-- Node.js + npm (`npx` required)
-- Google OAuth client JSON file (Desktop app type)
-- Python deps in `requirements.txt`
+- Node.js + npm (`npx`)
+- Google OAuth client JSON (Desktop app credentials)
+- Python dependencies from `requirements.txt`
 
-Install Python deps:
+Install dependencies:
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-## Environment setup
+## Environment configuration
+Set values in `WEEK 3/Day 5/.env`.
 
-Configure `WEEK 3/Day 5/.env`.
-
-Minimum required values:
-
+Core:
 - `OPENAI_API_KEY`
-- `OAUTH_CREDENTIALS_PATH` (path to Google OAuth client JSON)
+- `OAUTH_CREDENTIALS_PATH=/absolute/path/to/google-client-secret.json`
 
 Calendar MCP:
-
 - `MCP_SERVER_COMMAND=npx`
 - `MCP_SERVER_ARGS=@cocal/google-calendar-mcp`
+- `GOOGLE_CALENDAR_ACCOUNT=normal` (recommended if your account alias is `normal`)
 
 Drive MCP:
-
 - `ENABLE_GDRIVE_MCP=true`
 - `GDRIVE_MCP_COMMAND=npx`
 - `GDRIVE_MCP_ARGS="-y @modelcontextprotocol/server-gdrive@2025.1.14"`
-- `GDRIVE_OAUTH_PATH` (optional if central `OAUTH_CREDENTIALS_PATH` is set)
-- `GDRIVE_CREDENTIALS_PATH` (token output path)
+- `GDRIVE_OAUTH_PATH` (optional when `OAUTH_CREDENTIALS_PATH` is set)
+- `GDRIVE_CREDENTIALS_PATH` (optional; defaults to `~/.config/.gdrive-server-credentials.json`)
+
+Notes:
+- `OAUTH_CREDENTIALS_PATH` is treated as the central credentials file and mapped to server-specific env vars where needed.
+- `config.py` suppresses Node warning noise with `NODE_NO_WARNINGS=1` for cleaner logs.
 
 ## Run
-
 From `WEEK 3/Day 5`:
 
 ```bash
 python mcp_langchain.py
 ```
 
-or directly:
+or:
 
 ```bash
 python mcp_app/app.py
 ```
 
-## What happens at runtime
+## Runtime behavior
+`mcp_app/app.py` performs:
+1. Load environment and print key config checks.
+2. Build MCP server connection configs (calendar + optional drive).
+3. Initialize `MultiServerMCPClient`.
+4. Load tools once and filter out unsafe account-management tool for agent usage.
+5. Print inventory per server:
+   - `tools_count` and tool names
+   - `resources_count` and resource URIs (or `resources_error`)
+6. Verify LangChain tool interfaces (`invoke`, `ainvoke`).
+7. Run simulated 2-turn agent conversation.
+8. Execute explicit best-effort MCP teardown (`close_mcp_client`).
 
-1. Loads `.env` and validates key paths
-2. Builds MCP connections for Calendar + Drive
-3. Loads tools via `MultiServerMCPClient`
-4. Prints server inventory:
-   - tools for each server
-   - resources (or resource errors if unsupported)
-5. Runs agent simulation
+## Agent flow in this project
+Current simulation (`simulate_calendar_conversation`) runs:
+- Turn 1: “Retrieve my calendar events for tomorrow.”
+- Turn 2: “Create a 1-hour ‘Review AI concepts’ event tomorrow in earliest free slot (08:00-20:00), no overlap, and use Drive file `ACFT02_AI Dictionary.pptx` with PDF attach/link fallback.”
 
-## Current agent scenario
+If Turn 2 fails, a retry prompt is sent with stricter schema-safe instructions.
 
-In `simulate_calendar_conversation`:
+## Known limitations
+1. `google_calendar` may report resource-listing errors.
+Calendar server typically exposes tools, not MCP resources. This is expected.
 
-- **Turn 1**: retrieve tomorrow’s calendar events
-- **Turn 2**: create a 1-hour blocker for tomorrow with constraints:
-  - no overlap
-  - within 08:00–20:00
-  - use Google Drive file `ACFT02_AI Dictionary.pptx` (PDF attach/link fallback)
+2. Drive tool calls may fail with `invalid_request`.
+This is usually due to server/tool schema/runtime mismatch, not calendar auth.
 
-This is implemented as a prompt-driven (agentic) flow, not a hard-coded scheduling function.
+3. Some MCP servers break stdio framing.
+If a server writes plain text logs to stdout, MCP JSON-RPC parsing fails.
 
-## Known caveats / troubleshooting
+4. Adapter API differences by version.
+`close_mcp_client` uses best-effort teardown (`aclose`, `close`, or fallback message).
 
-### 1) `resources_error` on `google_calendar`
-
-Expected in many setups. Calendar MCP commonly exposes tools but not MCP resources.
-
-### 2) `invalid_request` during Drive tool calls
-
-If Turn 2 fails with `invalid_request`, it is usually Drive server/runtime/tool compatibility, not basic Calendar auth. Verify:
-
-- Drive OAuth/token validity
-- correct Drive MCP package/version
-- tool argument schema compliance
-
-### 3) `Failed to parse JSONRPC message from server`
-
-This indicates a server writing non-JSON logs to stdout (breaks MCP stdio framing). Use a server/version that is MCP-stdio clean.
-
-### 4) `No module named langchain_mcp_adapters`
-
-Install/update dependencies in the active environment.
-
-## Notes on client lifecycle
-
-This code uses `MultiServerMCPClient` directly (no async context manager), because installed adapter versions may not support context manager usage uniformly.
-
-## Next improvements
-
-- Add robust preflight checks per tool schema before agent run
-- Add server capability registry (which server supports resources vs tools)
-- Add structured logs and save run traces under `output/`
+## Troubleshooting checklist
+- Confirm Python env has `langchain-mcp-adapters`, `langchain-openai`, `mcp`, `python-dotenv`.
+- Confirm `npx` works in shell (`npx --version`).
+- Confirm OAuth path exists and points to a valid desktop OAuth JSON.
+- Re-auth Drive/Calendar server if token files are missing or stale.
+- Ensure `GOOGLE_CALENDAR_ACCOUNT` matches a real account alias returned by your calendar MCP.

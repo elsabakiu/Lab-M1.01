@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import re
 from pathlib import Path
 import urllib.error
 import urllib.request
@@ -134,6 +135,66 @@ def _step_4_retrieve_candidates(
     return retrieved
 
 
+def _parse_relevance_score(text: str) -> float:
+    """Parse numeric relevance score from LLM output and clamp to [0, 1]."""
+    match = re.search(r"([01](?:\\.\\d+)?)", text.strip())
+    if not match:
+        return 0.0
+    value = float(match.group(1))
+    return max(0.0, min(1.0, value))
+
+
+def _llm_chunk_relevance_score(llm: ChatOpenAI, query: str, chunk: str) -> float:
+    """Score one chunk's relevance to a query using an LLM judge."""
+    prompt = ChatPromptTemplate.from_messages(
+        [
+            (
+                "system",
+                "You score retrieval relevance for legal RAG. "
+                "Return only a single number between 0 and 1, where 1 means highly relevant.",
+            ),
+            (
+                "user",
+                "Query:\n{query}\n\nChunk:\n{chunk}\n\n"
+                "Score the chunk for answering the query. Return only the numeric score.",
+            ),
+        ]
+    )
+    chain = prompt | llm | StrOutputParser()
+    raw = chain.invoke({"query": query, "chunk": chunk[:1800]})
+    return _parse_relevance_score(raw)
+
+
+def _step_5_llm_relevance_scoring(
+    settings,
+    llm: ChatOpenAI,
+    query: str,
+    retrieved: list[tuple[Document, float]],
+) -> tuple[list[tuple[Document, float]], str]:
+    """Step 5: Score retrieved chunks with an LLM and reorder by combined score."""
+    if not settings.enable_llm_relevance:
+        return retrieved, "llm-relevance-disabled"
+    if not retrieved:
+        return retrieved, "llm-relevance-empty"
+
+    top_n = min(max(1, settings.llm_relevance_top_n), len(retrieved))
+    scored: list[tuple[Document, float]] = []
+    for idx, (doc, sim_score) in enumerate(retrieved):
+        llm_score = (
+            _llm_chunk_relevance_score(llm, query, doc.page_content)
+            if idx < top_n
+            else 0.0
+        )
+        combined = (
+            settings.llm_similarity_weight * sim_score
+            + settings.llm_relevance_weight * llm_score
+        )
+        scored.append((doc, combined))
+
+    scored.sort(key=lambda x: x[1], reverse=True)
+    return scored, f"llm-relevance(top_n={top_n})"
+
+
 def _cohere_dedicated_rerank(
     settings,
     query: str,
@@ -210,9 +271,11 @@ def _run_manual_evaluation(
     queries: list[str],
     metadata_filter: dict | None,
 ) -> None:
-    """Compare baseline vs reranked retrieval for manual quality evaluation."""
-    print("\n=== Manual Evaluation: Baseline vs Reranked ===")
-    print("For each query, review both answers and mark which one is better.\n")
+    """Controlled comparison across baseline, LLM-only, Cohere-only, and combined."""
+    print("\n=== Manual Evaluation: Controlled Method Comparison ===")
+    print(
+        "For each query, review all methods independently and compare their outputs.\n"
+    )
 
     for i, query in enumerate(queries, start=1):
         retrieved = _step_4_retrieve_candidates(
@@ -222,18 +285,39 @@ def _run_manual_evaluation(
             metadata_filter=metadata_filter,
         )
         baseline_top = retrieved[: settings.rerank_top_n]
-        reranked, backend = _step_5_dedicated_rerank(
+        llm_scored, llm_backend = _step_5_llm_relevance_scoring(
+            settings=settings,
+            llm=llm,
+            query=query,
+            retrieved=retrieved,
+        )
+        llm_only_top = llm_scored[: settings.rerank_top_n]
+
+        cohere_only_ranked, cohere_backend = _step_5_dedicated_rerank(
             settings=settings,
             query=query,
             retrieved=retrieved,
         )
-        reranked_top = reranked[: settings.rerank_top_n]
+        cohere_only_top = cohere_only_ranked[: settings.rerank_top_n]
+
+        combined_ranked, combined_backend = _step_5_dedicated_rerank(
+            settings=settings,
+            query=query,
+            retrieved=llm_scored,
+        )
+        combined_top = combined_ranked[: settings.rerank_top_n]
 
         baseline_answer = _step_6_generate_answer(
             llm=llm, query=query, top_chunks=baseline_top
         )
-        reranked_answer = _step_6_generate_answer(
-            llm=llm, query=query, top_chunks=reranked_top
+        llm_only_answer = _step_6_generate_answer(
+            llm=llm, query=query, top_chunks=llm_only_top
+        )
+        cohere_only_answer = _step_6_generate_answer(
+            llm=llm, query=query, top_chunks=cohere_only_top
+        )
+        combined_answer = _step_6_generate_answer(
+            llm=llm, query=query, top_chunks=combined_top
         )
 
         print(f"\n{'=' * 80}")
@@ -242,18 +326,30 @@ def _run_manual_evaluation(
         print("\nBaseline top sources:")
         for doc, score in baseline_top:
             print(f"- {doc.metadata.get('source', 'unknown')} ({score:.4f})")
-        print(f"\nReranked top sources ({backend}):")
-        for doc, score in reranked_top:
+        print(f"\nLLM-only top sources ({llm_backend}):")
+        for doc, score in llm_only_top:
+            print(f"- {doc.metadata.get('source', 'unknown')} ({score:.4f})")
+        print(f"\nCohere-only top sources ({cohere_backend}):")
+        for doc, score in cohere_only_top:
+            print(f"- {doc.metadata.get('source', 'unknown')} ({score:.4f})")
+        print(f"\nCombined top sources ({llm_backend} -> {combined_backend}):")
+        for doc, score in combined_top:
             print(f"- {doc.metadata.get('source', 'unknown')} ({score:.4f})")
 
         print("\nBaseline answer:")
         print(baseline_answer)
-        print("\nReranked answer:")
-        print(reranked_answer)
+        print("\nLLM-only answer:")
+        print(llm_only_answer)
+        print("\nCohere-only answer:")
+        print(cohere_only_answer)
+        print("\nCombined answer:")
+        print(combined_answer)
         print("\nManual score template:")
         print("- Baseline correctness (0-1): ____")
-        print("- Reranked correctness (0-1): ____")
-        print("- Preferred answer (baseline/reranked): ____")
+        print("- LLM-only correctness (0-1): ____")
+        print("- Cohere-only correctness (0-1): ____")
+        print("- Combined correctness (0-1): ____")
+        print("- Preferred answer (baseline/llm/cohere/combined): ____")
 
 
 def main() -> int:

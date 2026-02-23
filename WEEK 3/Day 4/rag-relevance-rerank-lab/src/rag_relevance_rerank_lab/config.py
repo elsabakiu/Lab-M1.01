@@ -22,6 +22,10 @@ class Settings:
     embedding_model: str
     chat_model: str
     cohere_rerank_model: str = "rerank-v3.5"
+    enable_llm_relevance: bool = True
+    llm_relevance_top_n: int = 12
+    llm_similarity_weight: float = 0.4
+    llm_relevance_weight: float = 0.6
     chunk_size: int = 900
     chunk_overlap: int = 150
     top_k: int = 8
@@ -58,4 +62,8 @@ def load_settings() -> Settings:
         embedding_model=os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"),
         chat_model=os.getenv("OPENAI_CHAT_MODEL", "gpt-4o-mini"),
         cohere_rerank_model=os.getenv("COHERE_RERANK_MODEL", "rerank-v3.5"),
+        enable_llm_relevance=os.getenv("ENABLE_LLM_RELEVANCE", "true").strip().lower() in {"1", "true", "yes", "on"},
+        llm_relevance_top_n=int(os.getenv("LLM_RELEVANCE_TOP_N", "12")),
+        llm_similarity_weight=float(os.getenv("LLM_SIMILARITY_WEIGHT", "0.4")),
+        llm_relevance_weight=float(os.getenv("LLM_RELEVANCE_WEIGHT", "0.6")),
     )

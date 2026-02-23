@@ -2,146 +2,156 @@
 
 ## Scope
 
-This report compares retrieval and answer quality before and after reranking in the Week 3 / Day 4 RAG pipeline using the latest manual evaluation run.
+This report compares retrieval and answer quality across four methods using the latest manual evaluation run.
 
 - Baseline retrieval: Pinecone similarity search + metadata filter
-- Reranked retrieval: Cohere rerank (dedicated reranker)
+- LLM-only retrieval: similarity + LLM relevance score reordering
+- Cohere-only retrieval: dedicated reranker on baseline candidates
+- Combined retrieval: LLM relevance scoring followed by Cohere rerank
 - Evaluation mode: manual correctness review per query
 
-## 1) Retrieval Results Before/After Reranking
+Run summary:
 
-All results below are copied from the run output.
+- Loaded source docs: 1 PDF + 2 transcripts
+- Chunk count: 331
+
+## 1) Retrieval Results by Method
 
 ### Query 1
 
 `What does the EU AI Act require for high-risk AI transparency?`
 
-- Baseline top sources:
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.8487)
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.8486)
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.8486)
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.8486)
-- Reranked top sources:
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.8655)
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.8655)
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.8655)
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.8655)
-- Change summary:
-  - No source diversity change; same source dominates baseline and reranked sets.
-  - Reranker increased combined scores but did not materially change retrieval composition.
+- Baseline top source pattern:
+  - Dominated by `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (~0.8486-0.8487)
+- LLM-only top source pattern:
+  - Same source dominance (~0.3395)
+- Cohere-only top source pattern:
+  - Same source dominance (~0.8655)
+- Combined top source pattern:
+  - Same source dominance (~0.6623)
+
+Observed answer behavior:
+
+- Baseline and LLM-only are very similar and mostly say requirements are missing.
+- Cohere-only and Combined provide a slightly more specific “missing obligations/measures” framing.
 
 ### Query 2
 
 `What obligations exist around human oversight in high-risk AI systems?`
 
-- Baseline top sources:
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.8273)
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.8273)
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.8273)
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.8273)
-- Reranked top sources:
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.7461)
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.7460)
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.7460)
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.7460)
-- Change summary:
-  - No meaningful ranking diversity changes.
-  - Reranked answer became more conservative, but not more specific.
+- Baseline top source pattern:
+  - Same source dominance (~0.8273)
+- LLM-only top source pattern:
+  - Same source dominance (~0.3309)
+- Cohere-only top source pattern:
+  - Same source dominance (~0.7460-0.7461)
+- Combined top source pattern:
+  - Same source dominance (~0.5481)
+
+Observed answer behavior:
+
+- Baseline and LLM-only keep more contextual detail from available text.
+- Cohere-only and Combined become more generic and less informative.
 
 ### Query 3
 
 `How does the EU AI Act describe risk management requirements?`
 
-- Baseline top sources:
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.8432)
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.8432)
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.8432)
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.8432)
-- Reranked top sources:
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.7460)
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.7460)
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.7460)
-  - `Living_Repository_AI_Literacy_Practices_Update_16042025_UqmogIt2HpLVokdcuzJL4mDvHk8_112203.pdf` (0.7460)
-- Change summary:
-  - Retrieval remained concentrated on one source.
-  - Reranked answer included slightly more contextual detail but still lacked direct legal requirement text.
+- Baseline top source pattern:
+  - Same source dominance (~0.8432)
+- LLM-only top source pattern:
+  - Same source dominance (~0.3373)
+- Cohere-only top source pattern:
+  - Same source dominance (~0.7460)
+- Combined top source pattern:
+  - Same source dominance (~0.5481)
 
-## 2) Performance Metrics
+Observed answer behavior:
 
-The current pipeline uses manual scoring (no labeled relevance dataset yet).
+- All methods correctly indicate context is insufficient for full legal detail.
+- Cohere-only and Combined produce slightly clearer summaries of what is missing.
 
-### Manual metrics table
+## 2) Manual Metrics (Filled)
 
-| Query | Baseline correctness (0-1) | Reranked correctness (0-1) | Preferred |
-|---|---:|---:|---|
-| Q1 | 0.40 | 0.45 | reranked |
-| Q2 | 0.45 | 0.35 | baseline |
-| Q3 | 0.40 | 0.42 | reranked |
+Scoring scale: 0.0 (incorrect/useless) to 1.0 (fully correct and sufficiently specific).
 
-### Optional aggregate metrics
+| Query | Baseline | LLM-only | Cohere-only | Combined | Preferred |
+|---|---:|---:|---:|---:|---|
+| Q1 | 0.40 | 0.40 | 0.45 | 0.45 | cohere/combined |
+| Q2 | 0.45 | 0.45 | 0.35 | 0.35 | baseline/llm |
+| Q3 | 0.40 | 0.40 | 0.42 | 0.42 | cohere/combined |
 
-- Average baseline correctness: 0.42
-- Average reranked correctness: 0.41
-- Absolute lift (reranked - baseline): -0.01
-- Preference rate for reranked answers: 66.7% (2/3 queries)
+Aggregate:
 
-## 3) Analysis: When Reranking Helps Most
+- Average baseline correctness: **0.42**
+- Average LLM-only correctness: **0.42**
+- Average Cohere-only correctness: **0.41**
+- Average combined correctness: **0.41**
+- Absolute lift (LLM-only - baseline): **0.00**
+- Absolute lift (Cohere-only - baseline): **-0.01**
+- Absolute lift (Combined - baseline): **-0.01**
 
-Reranking tends to help most when:
+Preference counts (including ties):
 
-- top similarity results are semantically close but not directly answering the query
-- legal language is dense and requires selecting the most specific chunk
-- multiple chunks mention related policy terms but only one contains the actual requirement detail
+- Baseline/LLM preferred in Q2
+- Cohere/Combined preferred in Q1 and Q3
 
-Reranking tends to help less when:
+## 3) Controlled Comparison Analysis (Method Isolation)
 
-- baseline retrieval is already highly precise
-- query is very narrow and metadata filtering already isolates the right section
+### Method-level findings
 
-Observed in this lab run:
+1. Baseline
+- Strongest average tie with LLM-only in this run.
+- Retains slightly richer context on human-oversight query (Q2).
 
-- Reranking helped when it made answers more explicit about missing context (Q1, Q3).
-- Reranking hurt when it became too generic and removed partial useful detail (Q2).
-- The biggest bottleneck was not ranking quality but corpus coverage:
-  - retrieval repeatedly returned chunks from the same `Living_Repository...pdf`
-  - answers often stated that key legal details were missing from context.
+2. LLM-only relevance scoring
+- Did not materially change source distribution (same PDF dominated all top chunks).
+- Produced near-identical answer quality to baseline.
 
-## 4) Example Queries and Answers Showing Improvement
+3. Cohere-only rerank
+- Helped phrasing clarity when context was incomplete (Q1, Q3).
+- Hurt informativeness for Q2 by becoming overly generic.
 
-### Example A
+4. Combined (LLM -> Cohere)
+- Tracked Cohere-only behavior closely in this run.
+- No measurable aggregate lift over baseline.
 
-- Query: `What does the EU AI Act require for high-risk AI transparency?`
-- Baseline answer: `...context does not specify the exact requirements...`
-- Reranked answer: `...does not detail transparency obligations or specific measures...`
-- Why reranked is better:
-  - Slightly clearer about what is missing (obligations/measures), not just that details are absent.
+### Root cause hypothesis
 
-### Example B
+The bottleneck appears to be corpus/retrieval diversity, not ranking sophistication:
 
-- Query: `What obligations exist around human oversight in high-risk AI systems?`
-- Baseline answer: `...decision bodies... ensure transparency, human oversight, and AI literacy...`
-- Reranked answer: `...context does not specify the obligations...`
-- Why reranked is better:
-  - In this case, reranked was not better; baseline retained more concrete context references.
+- Top chunks across all methods are repeatedly drawn from one source document.
+- When candidate diversity is low, reranking has limited room to improve outcomes.
 
-## 5) Recommendations: When to Use Reranking
+## 4) Example Before/After Highlights
 
-Use reranking when:
+### Improvement case (Q1)
 
-- precision matters (legal/compliance/regulated domains)
-- retrieved chunks are long and semantically similar
-- you can afford extra latency and token/API cost
+- Baseline: generic statement that details are missing.
+- Cohere/Combined: more specific statement that transparency obligations/measures are missing.
 
-Skip or limit reranking when:
+### Regression case (Q2)
 
-- latency/cost constraints are strict
-- baseline retrieval quality is already consistently high
-- query set is simple and narrow with strong metadata filters
+- Baseline/LLM-only: includes mention of decision bodies/transparency/human oversight context.
+- Cohere/Combined: too generic, loses partial useful detail.
 
-Practical recommendation for this project:
+## 5) Recommendations
 
-1. Keep metadata filtering always on (`category`, `doc_type`, `section` when possible).
-2. Retrieve a broader candidate set (already implemented) and rerank top candidates.
-3. Improve corpus coverage for EU AI Act requirements (current evidence is dominated by one source file).
-4. Keep manual correctness checks for development and small test sets.
-5. Move to automated evaluation (precision@k, recall@k, MRR) once labeled relevance data is available.
+1. Improve candidate diversity first
+- Increase retrieval breadth and source diversity before reranking.
+- Add stricter metadata segmentation (e.g., article/chapter-level for EU AI Act).
+
+2. Keep both reranking methods available
+- Use Cohere for precision-sensitive questions.
+- Keep LLM-only scoring as optional fallback when Cohere is unavailable.
+
+3. Add explicit retrieval diagnostics
+- Track source diversity@k and unique-section coverage per query.
+
+4. Move from manual-only to mixed evaluation
+- Keep manual scoring for answer quality.
+- Add automated retrieval metrics (precision@k, MRR, nDCG) with labeled relevance when possible.
+
+## 6) Conclusion
+
+The pipeline now supports baseline, LLM-only, Cohere-only, and combined reranking in a controlled setup. In this run, reranking did not produce a net aggregate gain, but it improved answer framing for some queries. The next quality gains are likely to come from better candidate diversity and richer metadata granularity rather than ranking changes alone.
