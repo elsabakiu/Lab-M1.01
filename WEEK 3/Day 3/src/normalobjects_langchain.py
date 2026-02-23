@@ -333,10 +333,10 @@ def main() -> int:
     print(f"User: {SAMPLE_USER_MESSAGE}")
     print(f"Assistant: {reply}")
 
-    # Test the agent with sample complaints (first 2).
+    # Test the agent with sample complaints (first 3 for submission requirement).
     tracker = ToolUsageTracker(tools)
     print("\nTesting agent with sample complaints...\n")
-    for complaint in SAMPLE_COMPLAINTS[:2]:
+    for complaint in SAMPLE_COMPLAINTS[:4]:
         response = handle_complaint(agent_executor, complaint, tracker)
         print(f"\nRESPONSE: {response}\n")
 
