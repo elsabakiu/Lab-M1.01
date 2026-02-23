@@ -137,3 +137,27 @@ def tools_for_agent(tools: list) -> list:
             continue
         filtered.append(tool)
     return filtered
+
+
+async def close_mcp_client(client: Any) -> None:
+    """Best-effort MCP client teardown for adapter-version compatibility.
+
+    Current adapter versions may not expose explicit close methods, but this keeps
+    teardown explicit and forward-compatible if `aclose()` or `close()` becomes
+    available in future versions.
+    """
+    try:
+        if hasattr(client, "aclose"):
+            await client.aclose()
+            print("\nMCP client disconnected via aclose().")
+            return
+        if hasattr(client, "close"):
+            client.close()
+            print("\nMCP client disconnected via close().")
+            return
+        print(
+            "\nMCP client teardown: no explicit close API on this "
+            "langchain-mcp-adapters version."
+        )
+    except Exception as exc:
+        print(f"\nMCP client teardown warning: {exc}")

@@ -17,6 +17,7 @@ if __package__ is None or __package__ == "":
     from mcp_app.calendar_logic import smoke_test_current_time, test_today_primary_events
     from mcp_app.config import build_connections, load_environment
     from mcp_app.mcp_helpers import (
+        close_mcp_client,
         load_langchain_tools,
         print_full_inventory,
         tools_for_agent,
@@ -27,6 +28,7 @@ else:
     from .calendar_logic import smoke_test_current_time, test_today_primary_events
     from .config import build_connections, load_environment
     from .mcp_helpers import (
+        close_mcp_client,
         load_langchain_tools,
         print_full_inventory,
         tools_for_agent,
@@ -49,19 +51,21 @@ async def async_main() -> None:
     client = MultiServerMCPClient(
         connections, tool_name_prefix=len(connections) > 1
     )
+    try:
+        # Load tools once and reuse them across all demo steps.
+        loaded_tools = await load_langchain_tools(client, server_name=None)
+        tools = tools_for_agent(loaded_tools)
 
-    # Load tools once and reuse them across all demo steps.
-    loaded_tools = await load_langchain_tools(client, server_name=None)
-    tools = tools_for_agent(loaded_tools)
+        await print_full_inventory(client, connections)
+        verify_langchain_tools(tools)
 
-    await print_full_inventory(client, connections)
-    verify_langchain_tools(tools)
+        #await smoke_test_current_time(tools)
+        #await test_today_primary_events(tools)
 
-    #await smoke_test_current_time(tools)
-    #await test_today_primary_events(tools)
-
-    #await run_agent_tests(tools)
-    await simulate_calendar_conversation(tools)
+        #await run_agent_tests(tools)
+        await simulate_calendar_conversation(tools)
+    finally:
+        await close_mcp_client(client)
 
 
 def main() -> None:
