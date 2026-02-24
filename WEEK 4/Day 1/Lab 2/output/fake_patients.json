@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Alice Johnson",
+    "notes": "Monitor blood pressure regularly.",
+    "condition": "Hypertension",
+    "age": "34",
+    "patient_id": "P-1001",
+    "email": "alice.johnson@example.com",
+    "last_visit": "2023-09-15",
+    "phone": "555-0123"
+  },
+  {
+    "name": "Brian Smith",
+    "notes": "Adjust insulin dosage as needed.",
+    "condition": "Type 2 Diabetes",
+    "age": "45",
+    "patient_id": "P-1002",
+    "email": "brian.smith@example.com",
+    "last_visit": "2023-08-22",
+    "phone": "555-0456"
+  },
+  {
+    "name": "Catherine Lee",
+    "notes": "Ensure inhaler is always accessible.",
+    "condition": "Asthma",
+    "age": "29",
+    "patient_id": "P-1003",
+    "email": "catherine.lee@example.com",
+    "last_visit": "2023-10-01",
+    "phone": "555-0789"
+  },
+  {
+    "name": "David Brown",
+    "notes": "Dietary changes recommended.",
+    "condition": "Cholesterol",
+    "age": "52",
+    "patient_id": "P-1004",
+    "email": "david.brown@example.com",
+    "last_visit": "2023-07-30",
+    "phone": "555-1011"
+  },
+  {
+    "name": "Eva Green",
+    "notes": "Continue therapy sessions.",
+    "condition": "Anxiety",
+    "age": "41",
+    "patient_id": "P-1005",
+    "email": "eva.green@example.com",
+    "last_visit": "2023-09-10",
+    "phone": "555-1213"
+  },
+  {
+    "name": "Frank White",
+    "notes": "Physical therapy recommended.",
+    "condition": "Arthritis",
+    "age": "60",
+    "patient_id": "P-1006",
+    "email": "frank.white@example.com",
+    "last_visit": "2023-08-05",
+    "phone": "555-1415"
+  },
+  {
+    "name": "Grace Taylor",
+    "notes": "Keep a headache diary.",
+    "condition": "Migraine",
+    "age": "37",
+    "patient_id": "P-1007",
+    "email": "grace.taylor@example.com",
+    "last_visit": "2023-09-25",
+    "phone": "555-1617"
+  },
+  {
+    "name": "Henry Wilson",
+    "notes": "Regular exercise and diet monitoring.",
+    "condition": "Heart Disease",
+    "age": "50",
+    "patient_id": "P-1008",
+    "email": "henry.wilson@example.com",
+    "last_visit": "2023-06-15",
+    "phone": "555-1819"
+  }
+]

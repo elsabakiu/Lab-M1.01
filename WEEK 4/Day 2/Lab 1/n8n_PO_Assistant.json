@@ -1,0 +1,769 @@
+{
+  "name": "Feature Brief to Linear Epic and Stories Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "story-generator",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "f0cd9723-b0db-4ddb-b440-d7969d93c54f",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        256,
+        704
+      ],
+      "webhookId": "45efa97b-0137-4e80-83f0-8975a290dfc0"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\"type\":\"object\",\"properties\":{\"problem_statement\":{\"type\":\"string\"},\"users\":{\"type\":\"string\"},\"business_goal\":{\"type\":\"string\"},\"unknowns\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}}},\"required\":[\"problem_statement\",\"users\",\"business_goal\",\"unknowns\"]}"
+      },
+      "id": "2939c119-45a9-41d2-8669-8e56b41cfc37",
+      "name": "Intent Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        624,
+        528
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "id": "b2a49d22-b716-467f-acf6-4ff46009d1ef",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        496,
+        528
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "K8QRG8Bd0VUEa6Ah",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Slack Doc Loader - Keyword-based document matching\n\n// Static array of curated Slack documentation excerpts\nconst slackDocs = [\n  {\n    id: 'channels-basics',\n    title: 'Channels Overview',\n    content: 'Channels are where work happens in Slack. They can be organized by project, team, topic, or anything else that makes sense for your organization. Public channels are visible to everyone, while private channels are invite-only.',\n    keywords: ['channel', 'channels', 'public', 'private', 'organize', 'team', 'project', 'workspace']\n  },\n  {\n    id: 'threads-usage',\n    title: 'Using Threads',\n    content: 'Threads help you create organized discussions around specific messages. When you reply in a thread, your response is grouped with the original message, keeping conversations focused and channels tidy. Thread participants can follow along without cluttering the main channel.',\n    keywords: ['thread', 'threads', 'reply', 'conversation', 'discussion', 'organized', 'focused', 'message']\n  },\n  {\n    id: 'search-functionality',\n    title: 'Search in Slack',\n    content: 'Slack search helps you find messages, files, and channels quickly. Use modifiers like from:, in:, on:, and has: to narrow results. Search supports boolean operators and can filter by date, person, channel, or file type.',\n    keywords: ['search', 'find', 'filter', 'query', 'lookup', 'discover', 'modifiers', 'results']\n  },\n  {\n    id: 'notifications-settings',\n    title: 'Notification Preferences',\n    content: 'Customize your notification settings to stay informed without being overwhelmed. Set notification schedules, choose which messages trigger alerts, and configure desktop, mobile, and email notifications separately. Use Do Not Disturb to pause notifications.',\n    keywords: ['notification', 'notifications', 'alert', 'alerts', 'notify', 'dnd', 'do not disturb', 'settings', 'preferences']\n  },\n  {\n    id: 'mentions-tags',\n    title: 'Mentions and Tags',\n    content: 'Use @mentions to notify specific people or groups. @channel notifies everyone in a channel, @here notifies active members, and @username notifies individuals. Mentions ensure important messages reach the right people.',\n    keywords: ['mention', 'mentions', 'tag', 'tags', '@channel', '@here', 'notify', 'attention', 'ping']\n  },\n  {\n    id: 'files-sharing',\n    title: 'File Sharing',\n    content: 'Share files directly in Slack by dragging and dropping or using the attachment button. Files are searchable and can be organized by channel. Set permissions, add comments, and collaborate on documents without leaving Slack.',\n    keywords: ['file', 'files', 'upload', 'share', 'attachment', 'document', 'documents', 'collaborate', 'sharing']\n  },\n  {\n    id: 'integrations-apps',\n    title: 'Apps and Integrations',\n    content: 'Connect your favorite tools to Slack with apps and integrations. Automate workflows, receive notifications from external services, and access third-party features directly in Slack. Browse the App Directory to find integrations.',\n    keywords: ['integration', 'integrations', 'app', 'apps', 'connect', 'workflow', 'automation', 'third-party', 'external']\n  },\n  {\n    id: 'reactions-emoji',\n    title: 'Reactions and Emoji',\n    content: 'React to messages with emoji to acknowledge, agree, or express sentiment without adding clutter. Custom emoji can be added to personalize your workspace. Reactions provide quick, lightweight feedback.',\n    keywords: ['reaction', 'reactions', 'emoji', 'emojis', 'acknowledge', 'feedback', 'sentiment', 'custom']\n  },\n  {\n    id: 'direct-messages',\n    title: 'Direct Messages',\n    content: 'Send direct messages (DMs) for private conversations with one or more people. DMs are separate from channels and can be converted to private channels if needed. Use DMs for quick questions or sensitive discussions.',\n    keywords: ['dm', 'dms', 'direct message', 'direct messages', 'private', 'conversation', 'chat', 'one-on-one']\n  },\n  {\n    id: 'workspace-admin',\n    title: 'Workspace Administration',\n    content: 'Workspace admins manage settings, permissions, and members. Control who can create channels, invite guests, install apps, and customize workspace policies. Admins ensure security and maintain organizational standards.',\n    keywords: ['admin', 'administration', 'workspace', 'settings', 'permissions', 'manage', 'control', 'policy', 'security']\n  },\n  {\n    id: 'mobile-app',\n    title: 'Slack Mobile App',\n    content: 'Stay connected on the go with Slack mobile apps for iOS and Android. Access channels, send messages, share files, and receive notifications from anywhere. Mobile apps support most desktop features with a touch-optimized interface.',\n    keywords: ['mobile', 'app', 'ios', 'android', 'phone', 'tablet', 'on-the-go', 'portable', 'device']\n  },\n  {\n    id: 'shortcuts-commands',\n    title: 'Keyboard Shortcuts and Slash Commands',\n    content: 'Speed up your workflow with keyboard shortcuts and slash commands. Press Cmd/Ctrl+K to jump to a channel, use /remind to set reminders, and type /shortcuts to see all available commands. Shortcuts boost productivity.',\n    keywords: ['shortcut', 'shortcuts', 'keyboard', 'command', 'commands', 'slash', 'productivity', 'quick', 'fast']\n  },\n  {\n    id: 'status-presence',\n    title: 'Status and Presence',\n    content: 'Set your status to let others know your availability. Choose from preset statuses or create custom ones. Your presence indicator shows if you are active, away, or in Do Not Disturb mode. Status helps coordinate communication.',\n    keywords: ['status', 'presence', 'availability', 'active', 'away', 'busy', 'available', 'indicator', 'online']\n  },\n  {\n    id: 'bookmarks-pins',\n    title: 'Bookmarks and Pinned Messages',\n    content: 'Pin important messages to keep them easily accessible at the top of a channel. Add bookmarks to channels for quick access to frequently used links, documents, or resources. Pins and bookmarks help organize critical information.',\n    keywords: ['bookmark', 'bookmarks', 'pin', 'pinned', 'important', 'save', 'organize', 'access', 'reference']\n  },\n  {\n    id: 'huddles-audio',\n    title: 'Huddles and Audio',\n    content: 'Start a huddle for quick audio conversations in any channel or DM. Huddles are lightweight, spontaneous calls that anyone can join. Share your screen, turn on video, or use huddles for casual check-ins without scheduling a formal meeting.',\n    keywords: ['huddle', 'huddles', 'audio', 'call', 'voice', 'meeting', 'screen share', 'video', 'spontaneous']\n  },\n  {\n    id: 'workflows-automation',\n    title: 'Workflow Builder',\n    content: 'Automate routine tasks with Workflow Builder. Create custom workflows triggered by events, scheduled times, or manual actions. Collect information with forms, send notifications, and integrate with apps—all without code.',\n    keywords: ['workflow', 'workflows', 'automation', 'automate', 'builder', 'routine', 'task', 'trigger', 'form', 'no-code']\n  },\n  {\n    id: 'canvas-documents',\n    title: 'Slack Canvas',\n    content: 'Canvas is a document editor built into Slack for creating and sharing rich content. Collaborate on project plans, meeting notes, or knowledge bases directly in channels. Canvas supports formatting, embeds, and real-time collaboration.',\n    keywords: ['canvas', 'document', 'documents', 'editor', 'content', 'collaborate', 'notes', 'knowledge', 'formatting', 'rich']\n  },\n  {\n    id: 'guest-access',\n    title: 'Guest Access',\n    content: 'Invite external partners, contractors, or clients as guests to specific channels. Guests have limited access to only the channels they are invited to, keeping your workspace secure while enabling collaboration with people outside your organization.',\n    keywords: ['guest', 'guests', 'external', 'partner', 'contractor', 'client', 'outside', 'limited', 'access', 'invite']\n  },\n  {\n    id: 'analytics-insights',\n    title: 'Analytics and Insights',\n    content: 'Workspace analytics provide insights into how your team uses Slack. Track message activity, active users, app usage, and engagement trends. Use analytics to optimize communication patterns and identify opportunities for improvement.',\n    keywords: ['analytics', 'insights', 'metrics', 'data', 'usage', 'activity', 'trends', 'engagement', 'track', 'measure']\n  },\n  {\n    id: 'security-compliance',\n    title: 'Security and Compliance',\n    content: 'Slack provides enterprise-grade security with encryption, data retention policies, and compliance certifications. Configure SSO, manage data exports, and set up security policies to meet your organization regulatory requirements.',\n    keywords: ['security', 'compliance', 'encryption', 'sso', 'data', 'retention', 'policy', 'regulatory', 'enterprise', 'certification']\n  }\n];\n\n// Extract keywords from feature brief\nfunction extractKeywords(text) {\n  // Convert to lowercase and remove punctuation\n  const cleaned = text.toLowerCase().replace(/[^a-z0-9\\s]/g, ' ');\n  \n  // Split into words and filter out common stop words\n  const stopWords = new Set(['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'as', 'is', 'was', 'are', 'be', 'been', 'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'should', 'could', 'may', 'might', 'can', 'this', 'that', 'these', 'those', 'it', 'its', 'we', 'our', 'you', 'your', 'they', 'their']);\n  \n  const words = cleaned.split(/\\s+/).filter(word => \n    word.length > 2 && !stopWords.has(word)\n  );\n  \n  // Count word frequency\n  const frequency = {};\n  words.forEach(word => {\n    frequency[word] = (frequency[word] || 0) + 1;\n  });\n  \n  return frequency;\n}\n\n// Score each document section by keyword matches\nfunction scoreDocument(doc, keywords) {\n  let score = 0;\n  \n  // Check keywords in doc's keyword array\n  doc.keywords.forEach(docKeyword => {\n    if (keywords[docKeyword]) {\n      score += keywords[docKeyword] * 2; // Weight matches in predefined keywords higher\n    }\n  });\n  \n  // Check keywords in doc content and title\n  const docText = (doc.title + ' ' + doc.content).toLowerCase();\n  Object.keys(keywords).forEach(keyword => {\n    const regex = new RegExp('\\\\b' + keyword + '\\\\b', 'g');\n    const matches = docText.match(regex);\n    if (matches) {\n      score += matches.length * keywords[keyword];\n    }\n  });\n  \n  return score;\n}\n\n// Main execution\nconst featureBrief = $input.first().json.body.feature_brief || '';\n\nif (!featureBrief) {\n  return [{ json: { internal_context: [], message: 'No feature brief provided' } }];\n}\n\n// Extract keywords from feature brief\nconst keywords = extractKeywords(featureBrief);\n\n// Score all documents\nconst scoredDocs = slackDocs.map(doc => ({\n  ...doc,\n  score: scoreDocument(doc, keywords)\n}));\n\n// Sort by score and take top 3-6 (we'll take top 5)\nconst topDocs = scoredDocs\n  .sort((a, b) => b.score - a.score)\n  .slice(0, 5)\n  .filter(doc => doc.score > 0); // Only include docs with at least some relevance\n\n// Format as internal_context array\nconst internalContext = topDocs.map(doc => ({\n  source: 'slack_docs',\n  doc_id: doc.id,\n  title: doc.title,\n  content: doc.content,\n  relevance_score: doc.score\n}));\n\nreturn [{ \n  json: { \n    internal_context: internalContext,\n    keywords_extracted: Object.keys(keywords).slice(0, 10),\n    total_docs_scored: slackDocs.length,\n    relevant_docs_found: internalContext.length\n  } \n}];"
+      },
+      "id": "c667e629-45b2-43fc-9b4a-952e7677e52f",
+      "name": "Slack Doc Loader",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        544,
+        704
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Market Snapshot: Competitor Analysis and Review Data\n\n// Define competitor feature data\nconst competitorFeatures = [\n  {\n    \"competitor\": \"Microsoft Teams\",\n    \"feature\": \"Threaded Conversations\",\n    \"description\": \"Organized message threads within channels to keep discussions focused\",\n    \"adoption\": \"High\",\n    \"user_sentiment\": \"Positive - reduces channel noise\"\n  },\n  {\n    \"competitor\": \"Microsoft Teams\",\n    \"feature\": \"Integrated Task Management\",\n    \"description\": \"Built-in Planner and To-Do integration for task tracking within conversations\",\n    \"adoption\": \"Medium\",\n    \"user_sentiment\": \"Mixed - powerful but complex\"\n  },\n  {\n    \"competitor\": \"Discord\",\n    \"feature\": \"Voice Channels\",\n    \"description\": \"Persistent voice rooms that users can join/leave freely\",\n    \"adoption\": \"Very High\",\n    \"user_sentiment\": \"Extremely positive - low friction collaboration\"\n  },\n  {\n    \"competitor\": \"Discord\",\n    \"feature\": \"Server Templates\",\n    \"description\": \"Pre-configured server structures for different use cases\",\n    \"adoption\": \"High\",\n    \"user_sentiment\": \"Positive - speeds up onboarding\"\n  },\n  {\n    \"competitor\": \"Notion\",\n    \"feature\": \"Real-time Collaborative Editing\",\n    \"description\": \"Multiple users editing documents simultaneously with live cursors\",\n    \"adoption\": \"Very High\",\n    \"user_sentiment\": \"Extremely positive - seamless collaboration\"\n  },\n  {\n    \"competitor\": \"Notion\",\n    \"feature\": \"Linked Databases\",\n    \"description\": \"Connected data views across different pages and workspaces\",\n    \"adoption\": \"Medium\",\n    \"user_sentiment\": \"Positive - powerful for advanced users\"\n  }\n];\n\n// Define sample G2 reviews\nconst g2Reviews = [\n  // Slack Reviews\n  {\n    \"product\": \"Slack\",\n    \"rating\": 4,\n    \"title\": \"Great for communication, lacks project management\",\n    \"excerpt\": \"Slack is excellent for quick team communication, but we constantly lose track of action items in threads. We end up using external tools to manage tasks.\",\n    \"pain_point\": \"No native task management\",\n    \"date\": \"2024-01-15\"\n  },\n  {\n    \"product\": \"Slack\",\n    \"rating\": 5,\n    \"title\": \"Best team collaboration tool\",\n    \"excerpt\": \"The integrations are powerful, but I wish there was a better way to organize conversations by project rather than just channels.\",\n    \"pain_point\": \"Limited organizational structures\",\n    \"date\": \"2024-02-03\"\n  },\n  {\n    \"product\": \"Slack\",\n    \"rating\": 3,\n    \"title\": \"Good but overwhelming\",\n    \"excerpt\": \"Too many channels and messages. Hard to find important information later. Search helps but not enough.\",\n    \"pain_point\": \"Information overload and retrieval\",\n    \"date\": \"2024-01-28\"\n  },\n  {\n    \"product\": \"Slack\",\n    \"rating\": 4,\n    \"title\": \"Solid communication platform\",\n    \"excerpt\": \"Love the real-time aspect, but threads can get messy. Sometimes important decisions get buried.\",\n    \"pain_point\": \"Thread management and decision tracking\",\n    \"date\": \"2024-02-10\"\n  },\n  {\n    \"product\": \"Slack\",\n    \"rating\": 5,\n    \"title\": \"Essential for remote teams\",\n    \"excerpt\": \"Couldn't work remotely without it. Only wish is better integration with our project management workflow.\",\n    \"pain_point\": \"Workflow integration gaps\",\n    \"date\": \"2024-01-20\"\n  },\n  // Microsoft Teams Reviews\n  {\n    \"product\": \"Microsoft Teams\",\n    \"rating\": 4,\n    \"title\": \"Comprehensive but complex\",\n    \"excerpt\": \"Teams has everything we need, but the learning curve is steep. The Planner integration is helpful for tracking tasks.\",\n    \"pain_point\": \"Complexity and usability\",\n    \"date\": \"2024-01-18\"\n  },\n  {\n    \"product\": \"Microsoft Teams\",\n    \"rating\": 3,\n    \"title\": \"Feature-rich but cluttered\",\n    \"excerpt\": \"So many features that it's hard to find what you need. The task management is there but feels disconnected from conversations.\",\n    \"pain_point\": \"Feature discoverability and integration\",\n    \"date\": \"2024-02-05\"\n  },\n  {\n    \"product\": \"Microsoft Teams\",\n    \"rating\": 5,\n    \"title\": \"Perfect for Microsoft ecosystem\",\n    \"excerpt\": \"If you're already using Office 365, Teams is a no-brainer. Everything connects seamlessly.\",\n    \"pain_point\": \"None - satisfied user\",\n    \"date\": \"2024-01-25\"\n  },\n  {\n    \"product\": \"Microsoft Teams\",\n    \"rating\": 4,\n    \"title\": \"Good for enterprise\",\n    \"excerpt\": \"Works well for large organizations. Threaded conversations help keep things organized, though they can be hard to follow.\",\n    \"pain_point\": \"Thread navigation\",\n    \"date\": \"2024-02-12\"\n  },\n  {\n    \"product\": \"Microsoft Teams\",\n    \"rating\": 3,\n    \"title\": \"Powerful but overwhelming\",\n    \"excerpt\": \"Has all the features but the UI is confusing. Takes time to train new team members.\",\n    \"pain_point\": \"User experience and onboarding\",\n    \"date\": \"2024-01-30\"\n  }\n];\n\n// Extract review themes\nconst reviewThemes = [\n  {\n    \"theme\": \"Task Management Gap\",\n    \"frequency\": \"High\",\n    \"products_affected\": [\"Slack\"],\n    \"description\": \"Users want native task/action item tracking within communication tools\",\n    \"example_quotes\": [\n      \"we constantly lose track of action items in threads\",\n      \"wish there was better integration with our project management workflow\"\n    ]\n  },\n  {\n    \"theme\": \"Information Organization\",\n    \"frequency\": \"High\",\n    \"products_affected\": [\"Slack\", \"Microsoft Teams\"],\n    \"description\": \"Difficulty organizing and retrieving important information from conversations\",\n    \"example_quotes\": [\n      \"Hard to find important information later\",\n      \"important decisions get buried\",\n      \"wish there was a better way to organize conversations by project\"\n    ]\n  },\n  {\n    \"theme\": \"Complexity vs Simplicity\",\n    \"frequency\": \"Medium\",\n    \"products_affected\": [\"Microsoft Teams\"],\n    \"description\": \"Feature-rich tools can be overwhelming and hard to learn\",\n    \"example_quotes\": [\n      \"learning curve is steep\",\n      \"So many features that it's hard to find what you need\",\n      \"UI is confusing\"\n    ]\n  },\n  {\n    \"theme\": \"Thread Management\",\n    \"frequency\": \"Medium\",\n    \"products_affected\": [\"Slack\", \"Microsoft Teams\"],\n    \"description\": \"Threads help organization but can become messy or hard to navigate\",\n    \"example_quotes\": [\n      \"threads can get messy\",\n      \"they can be hard to follow\"\n    ]\n  }\n];\n\n// Generate opportunity hypotheses\nconst opportunityHypotheses = [\n  {\n    \"hypothesis\": \"Integrated lightweight task management\",\n    \"rationale\": \"High frequency of complaints about losing track of action items in Slack. Users want task tracking without leaving their communication tool.\",\n    \"potential_impact\": \"High\",\n    \"risk_level\": \"Medium\",\n    \"validation_needed\": \"Survey users on desired task management features and willingness to use vs external tools\"\n  },\n  {\n    \"hypothesis\": \"Smart conversation summarization\",\n    \"rationale\": \"Users struggle to find important information and decisions in message history. AI-powered summaries could surface key points.\",\n    \"potential_impact\": \"High\",\n    \"risk_level\": \"Low\",\n    \"validation_needed\": \"Test prototype with power users who manage multiple channels\"\n  },\n  {\n    \"hypothesis\": \"Project-based organization layer\",\n    \"rationale\": \"Users want to organize conversations by project, not just channels. A meta-organizational structure could help.\",\n    \"potential_impact\": \"Medium\",\n    \"risk_level\": \"High\",\n    \"validation_needed\": \"User research on mental models for project organization\"\n  },\n  {\n    \"hypothesis\": \"Simplified onboarding with templates\",\n    \"rationale\": \"Discord's success with server templates shows value. Teams complexity issues suggest simpler starting points help adoption.\",\n    \"potential_impact\": \"Medium\",\n    \"risk_level\": \"Low\",\n    \"validation_needed\": \"A/B test template-based onboarding vs current flow\"\n  }\n];\n\n// Return structured data\nreturn [\n  {\n    json: {\n      competitor_features: competitorFeatures,\n      g2_reviews: g2Reviews,\n      review_themes: reviewThemes,\n      opportunity_hypotheses: opportunityHypotheses,\n      metadata: {\n        generated_at: new Date().toISOString(),\n        total_competitors: 3,\n        total_reviews: g2Reviews.length,\n        total_themes: reviewThemes.length,\n        total_hypotheses: opportunityHypotheses.length\n      }\n    }\n  }\n];"
+      },
+      "id": "bbaf794e-7a30-4bb0-8e14-d25d6f591934",
+      "name": "Market Snapshot Node",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        544,
+        896
+      ]
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "id": "6d46cd5f-91df-49b1-aabf-23bd9d9ffe5f",
+      "name": "Combine Contexts",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        832,
+        688
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4.1-mini",
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "id": "12b60265-ae1f-43e0-b653-5d0f895ffb13",
+      "name": "Strategic Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1056,
+        896
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "K8QRG8Bd0VUEa6Ah",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "feature_intent",
+              "value": "={{ $('Feature Intent Extractor').first().json }}",
+              "type": "object"
+            },
+            {
+              "id": "id-2",
+              "name": "internal_context",
+              "value": "={{ $('Slack Doc Loader').item.json }}",
+              "type": "object"
+            },
+            {
+              "id": "id-3",
+              "name": "market_context",
+              "value": "={{ $('Market Snapshot Node').first().json }}",
+              "type": "object"
+            },
+            {
+              "id": "id-4",
+              "name": "strategic_layer",
+              "value": "={{ $('Parse Strategic Output').item.json }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "084bdfe9-8ddc-47bd-b3f2-2706ba659e13",
+      "name": "Prepare Story Context",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1632,
+        704
+      ]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4.1-mini",
+        "options": {
+          "temperature": 0.3
+        }
+      },
+      "id": "c4f1fe2a-0e27-4c3f-95c0-5de0e0e792d8",
+      "name": "Story Generator Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1856,
+        912
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "K8QRG8Bd0VUEa6Ah",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Validation function for Story Generator output\n\n// Get the story data from the previous node\nconst storyData = $input.first().json;\n\n// Known Slack systems (to prevent hallucination)\nconst knownSlackSystems = [\n  'Slack API',\n  'Slack Web API',\n  'Slack Events API',\n  'Slack RTM API',\n  'Slack Conversations API',\n  'Slack Users API',\n  'Slack Channels API',\n  'Slack Messages API',\n  'Slack Files API',\n  'Slack Reactions API',\n  'Slack Reminders API',\n  'Slack Search API',\n  'Slack Workspace',\n  'Slack Enterprise Grid',\n  'Slack Connect',\n  'Slack Workflow Builder',\n  'Slack App Directory',\n  'Slack Bot',\n  'Slack Slash Commands',\n  'Slack Interactive Components',\n  'Slack Block Kit',\n  'Slack OAuth',\n  'Slack Permissions',\n  'Slack Scopes',\n  'Slack Webhooks',\n  'Slack Socket Mode',\n  'Slack Database',\n  'Slack Backend',\n  'Slack Frontend',\n  'Slack Mobile App',\n  'Slack Desktop App',\n  'Slack Notifications',\n  'Slack Authentication',\n  'Slack Authorization'\n];\n\nconst errors = [];\nlet valid = true;\n\n// Helper function to check if text contains testable conditions\nfunction isTestable(criteriaText) {\n  const testablePatterns = [\n    /given.*when.*then/i,\n    /should|must|will|can/i,\n    /verify|validate|check|ensure/i,\n    /displays?|shows?|returns?|creates?|updates?|deletes?/i\n  ];\n  return testablePatterns.some(pattern => pattern.test(criteriaText));\n}\n\n// Helper function to check for hallucinated systems\nfunction checkForHallucinatedSystems(text) {\n  const suspiciousPatterns = [\n    /\\b[A-Z][a-zA-Z]*\\s+(API|Service|System|Database|Engine|Platform)\\b/g\n  ];\n  \n  const foundSystems = [];\n  suspiciousPatterns.forEach(pattern => {\n    const matches = text.match(pattern);\n    if (matches) {\n      matches.forEach(match => {\n        const normalized = match.trim();\n        const isKnown = knownSlackSystems.some(known => \n          normalized.toLowerCase().includes(known.toLowerCase()) ||\n          known.toLowerCase().includes(normalized.toLowerCase())\n        );\n        if (!isKnown) {\n          foundSystems.push(normalized);\n        }\n      });\n    }\n  });\n  \n  return foundSystems;\n}\n\n// Validate epic structure\nif (!storyData.epic) {\n  errors.push('Missing epic object');\n  valid = false;\n} else {\n  if (!storyData.epic.title || storyData.epic.title.trim() === '') {\n    errors.push('Epic missing title');\n    valid = false;\n  }\n  if (!storyData.epic.description || storyData.epic.description.trim() === '') {\n    errors.push('Epic missing description');\n    valid = false;\n  }\n  if (!storyData.epic.success_metrics || !Array.isArray(storyData.epic.success_metrics) || storyData.epic.success_metrics.length === 0) {\n    errors.push('Epic missing success metrics');\n    valid = false;\n  }\n}\n\n// Validate stories array\nif (!storyData.stories || !Array.isArray(storyData.stories)) {\n  errors.push('Missing or invalid stories array');\n  valid = false;\n} else if (storyData.stories.length < 4 || storyData.stories.length > 8) {\n  errors.push(`Expected 4-8 stories, got ${storyData.stories.length}`);\n  valid = false;\n} else {\n  // Validate each story\n  storyData.stories.forEach((story, index) => {\n    const storyNum = index + 1;\n    \n    // Check required sections\n    if (!story.title || story.title.trim() === '') {\n      errors.push(`Story ${storyNum}: Missing title`);\n      valid = false;\n    }\n    \n    if (!story.user_story || story.user_story.trim() === '') {\n      errors.push(`Story ${storyNum}: Missing user_story`);\n      valid = false;\n    } else if (!story.user_story.match(/as a.*i want.*so that/i)) {\n      errors.push(`Story ${storyNum}: user_story not in proper format (As a... I want... So that...)`);\n      valid = false;\n    }\n    \n    if (!story.acceptance_criteria || !Array.isArray(story.acceptance_criteria) || story.acceptance_criteria.length === 0) {\n      errors.push(`Story ${storyNum}: Missing or empty acceptance_criteria`);\n      valid = false;\n    } else {\n      // Check if acceptance criteria are testable\n      story.acceptance_criteria.forEach((criteria, criteriaIndex) => {\n        if (!isTestable(criteria)) {\n          errors.push(`Story ${storyNum}, AC ${criteriaIndex + 1}: Not testable - \"${criteria.substring(0, 50)}...\"`);\n          valid = false;\n        }\n      });\n    }\n    \n    if (!story.technical_notes || story.technical_notes.trim() === '') {\n      errors.push(`Story ${storyNum}: Missing technical_notes`);\n      valid = false;\n    } else {\n      // Check for hallucinated systems in technical notes\n      const hallucinated = checkForHallucinatedSystems(story.technical_notes);\n      if (hallucinated.length > 0) {\n        errors.push(`Story ${storyNum}: Potentially hallucinated systems in technical_notes: ${hallucinated.join(', ')}`);\n        valid = false;\n      }\n    }\n    \n    if (!story.dependencies || !Array.isArray(story.dependencies)) {\n      errors.push(`Story ${storyNum}: Missing dependencies array`);\n      valid = false;\n    }\n    \n    if (!story.nfrs || !Array.isArray(story.nfrs) || story.nfrs.length === 0) {\n      errors.push(`Story ${storyNum}: Missing or empty NFRs`);\n      valid = false;\n    } else {\n      // Check if NFRs are specific (contain numbers or specific terms)\n      story.nfrs.forEach((nfr, nfrIndex) => {\n        const hasSpecifics = /\\d+|ms|seconds?|minutes?|MB|GB|%|percent|<|>|must|shall/i.test(nfr);\n        if (!hasSpecifics) {\n          errors.push(`Story ${storyNum}, NFR ${nfrIndex + 1}: Too vague, needs specific metrics - \"${nfr.substring(0, 50)}...\"`);\n          valid = false;\n        }\n      });\n    }\n    \n    if (!story.risks || !Array.isArray(story.risks)) {\n      errors.push(`Story ${storyNum}: Missing risks array`);\n      valid = false;\n    }\n  });\n}\n\n// Return validation result\nreturn [{\n  json: {\n    valid: valid,\n    errors: errors,\n    original_data: storyData,\n    validation_summary: {\n      total_errors: errors.length,\n      stories_validated: storyData.stories ? storyData.stories.length : 0,\n      timestamp: new Date().toISOString()\n    }\n  }\n}];"
+      },
+      "id": "3d695537-c109-4781-88cd-3e4e197f362b",
+      "name": "Validator",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2432,
+        704
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "id-1",
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "5e749862-b18e-41fe-9586-69b6530791e7",
+      "name": "Check Validation",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        2656,
+        704
+      ]
+    },
+    {
+      "parameters": {
+        "teamId": "67837580-02b5-4479-81cb-1ef576e31492",
+        "title": "={{ $json.original_data.epic.title }}",
+        "additionalFields": {
+          "description": "={{ `${$json.original_data.epic.description}\\n\\n Success metrics: \\n ${$json.original_data.epic.success_metrics.join(`\\n`)}` }}"
+        }
+      },
+      "id": "0b27eb2d-7da5-464b-8956-a7ea7f86a793",
+      "name": "Create Epic",
+      "type": "n8n-nodes-base.linear",
+      "typeVersion": 1,
+      "position": [
+        2880,
+        608
+      ],
+      "credentials": {
+        "linearApi": {
+          "id": "kPrKMqtkoTB3Hd1s",
+          "name": "Linear account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "stories",
+        "include": "selectedOtherFields",
+        "fieldsToInclude": "epic_id, epic_identifier",
+        "options": {}
+      },
+      "id": "6cea0c33-d009-4499-9d79-48befb371509",
+      "name": "Split Stories",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        3328,
+        608
+      ]
+    },
+    {
+      "parameters": {
+        "teamId": "67837580-02b5-4479-81cb-1ef576e31492",
+        "title": "={{ $json.stories.title }}",
+        "additionalFields": {
+          "description": "={{ 'User Story: ' + $json.stories.user_story + '\\n\\nAcceptance Criteria:\\n' + $json.stories.acceptance_criteria.join('\\n') + '\\n\\n Technical Notes:\\n' + $json.stories.technical_notes + '\\n\\nDependencies:\\n' + $json.stories.dependencies.join('\\n') + '\\n\\n NFRs:\\n' + $json.stories.nfrs.join('\\n') + '\\n\\n Risks:\\n' + $json.stories.risks.join('\\n') }}"
+        }
+      },
+      "id": "01b1a3ec-c2e1-450e-ae65-4e86a608cb18",
+      "name": "Create Stories",
+      "type": "n8n-nodes-base.linear",
+      "typeVersion": 1,
+      "position": [
+        3552,
+        608
+      ],
+      "credentials": {
+        "linearApi": {
+          "id": "kPrKMqtkoTB3Hd1s",
+          "name": "Linear account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "status",
+              "value": "validation_failed",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "errors",
+              "value": "={{ $json.errors }}",
+              "type": "array"
+            },
+            {
+              "id": "id-3",
+              "name": "error_count",
+              "value": "={{ $json.errors.length }}",
+              "type": "number"
+            },
+            {
+              "id": "id-4",
+              "name": "message",
+              "value": "Story generation failed validation. Please review errors and regenerate.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a228f1a2-3e3b-4b71-a63d-8311994d460a",
+      "name": "Format Validation Errors",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2880,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "status",
+              "value": "success",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "epic_id",
+              "value": "={{ $('Create Epic').item.json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "epic_url",
+              "value": "={{ $('Create Epic').item.json.url }}",
+              "type": "string"
+            },
+            {
+              "id": "id-4",
+              "name": "stories_created",
+              "value": "={{ $('Split Stories').all().length }}",
+              "type": "number"
+            },
+            {
+              "id": "id-5",
+              "name": "message",
+              "value": "Epic and stories successfully created in Linear",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "dc5546fb-dcd6-4121-9a16-1e6abf39c4ec",
+      "name": "Success Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3776,
+        608
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const agentOutput = $input.first().json.output;\n\n// Try to extract JSON from the output\nlet strategicData;\n\ntry {\n  // If output is already an object with the fields we need\n  if (typeof agentOutput === 'object' && agentOutput.competitive_positioning) {\n    strategicData = agentOutput;\n  } \n  // If output is a string, try to parse it\n  else if (typeof agentOutput === 'string') {\n    // Try to find JSON in the string\n    const jsonMatch = agentOutput.match(/\\{[\\s\\S]*\\}/);\n    if (jsonMatch) {\n      strategicData = JSON.parse(jsonMatch[0]);\n    } else {\n      throw new Error('No JSON found in output');\n    }\n  }\n  else {\n    throw new Error('Unexpected output format');\n  }\n  \n  // Validate required fields\n  const required = ['competitive_positioning', 'impact_type', 'mvp_critical', 'strategic_priority'];\n  const missing = required.filter(field => !(field in strategicData));\n  \n  if (missing.length > 0) {\n    throw new Error(`Missing required fields: ${missing.join(', ')}`);\n  }\n  \n  return [{ json: strategicData }];\n  \n} catch (error) {\n  // Return default values if parsing fails\n  return [{\n    json: {\n      competitive_positioning: 'Parity',\n      impact_type: 'Retention',\n      mvp_critical: true,\n      strategic_priority: 'Retention - Competitive Parity',\n      _parsing_error: error.message,\n      _original_output: agentOutput\n    }\n  }];\n}"
+      },
+      "id": "07d1516b-ea6d-4f57-836e-99c3ae98b8a4",
+      "name": "Parse Strategic Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1408,
+        704
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const agentOutput = $input.first().json.output;\n\nlet storyData;\n\ntry {\n  // Check if output is already a properly structured object with epic and stories\n  if (typeof agentOutput === 'object' && agentOutput !== null && agentOutput.epic && agentOutput.stories) {\n    // Output parser already structured the data correctly\n    storyData = agentOutput;\n  } \n  // If it's already an object but might need validation\n  else if (typeof agentOutput === 'object' && agentOutput !== null) {\n    storyData = agentOutput;\n  } \n  // Fallback: parse as string\n  else if (typeof agentOutput === 'string') {\n    let jsonText = agentOutput;\n    \n    // Remove markdown code blocks if present\n    jsonText = jsonText.replace(/```json\\n?/g, '').replace(/```\\n?/g, '');\n    \n    // Try to find JSON object in the text\n    const jsonMatch = jsonText.match(/\\{[\\s\\S]*\\}/);\n    if (!jsonMatch) {\n      throw new Error('No JSON object found in output');\n    }\n    \n    // Parse the JSON\n    storyData = JSON.parse(jsonMatch[0]);\n  }\n  else {\n    throw new Error('Unexpected output format');\n  }\n  \n  // Validate required fields\n  if (!storyData.epic || !storyData.stories) {\n    throw new Error('Missing required fields: epic or stories');\n  }\n  \n  // Return the parsed data\n  return [{ json: storyData }];\n  \n} catch (error) {\n  // Return error for debugging\n  return [{\n    json: {\n      error: true,\n      error_message: error.message,\n      raw_output: agentOutput,\n      parsing_failed: true\n    }\n  }];\n}"
+      },
+      "id": "bad8ae00-0571-436a-ba9f-cf6a0261aa35",
+      "name": "Parse Story JSON",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2208,
+        704
+      ]
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"epic\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"title\": {\n          \"type\": \"string\"\n        },\n        \"description\": {\n          \"type\": \"string\"\n        },\n        \"success_metrics\": {\n          \"type\": \"array\",\n          \"items\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"required\": [\"title\", \"description\", \"success_metrics\"]\n    },\n    \"stories\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"title\": {\n            \"type\": \"string\"\n          },\n          \"user_story\": {\n            \"type\": \"string\"\n          },\n          \"acceptance_criteria\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"string\"\n            }\n          },\n          \"technical_notes\": {\n            \"type\": \"string\"\n          },\n          \"dependencies\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"string\"\n            }\n          },\n          \"nfrs\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"string\"\n            }\n          },\n          \"risks\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"string\"\n            }\n          }\n        },\n        \"required\": [\"title\", \"user_story\", \"acceptance_criteria\", \"technical_notes\", \"dependencies\", \"nfrs\", \"risks\"]\n      }\n    }\n  },\n  \"required\": [\"epic\", \"stories\"]\n}"
+      },
+      "id": "5c130523-38cc-4502-bb38-8c16b7d8c13d",
+      "name": "Story Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2000,
+        912
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.feature_brief }}",
+        "hasOutputParser": true,
+        "batching": {}
+      },
+      "id": "23281855-72b2-4d64-8982-118dcbd3114f",
+      "name": "Feature Intent Extractor",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        480,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Feature Intent:\n{{ $items('Feature Intent Extractor')[0].json.output.problem_statement }}\n\nUsers: {{ $items('Feature Intent Extractor')[0].json.output.users }}\n\nBusiness Goal: {{ $items('Feature Intent Extractor')[0].json.output.business_goal }}\n\nInternal Context:\n{{ $('Slack Doc Loader').item.json.internal_context[0].content }}\n\nMarket Context:\nCompetitor Features: {{ $('Market Snapshot Node').first().json.competitor_features.length }} features analyzed\nReview Themes: {{ $('Market Snapshot Node').first().json.review_themes.map(t => t.theme).join(', ') }}\n\nAnalyze this and return ONLY a JSON object with these exact fields:\n{\n  \"competitive_positioning\": \"Parity\" or \"Differentiator\",\n  \"impact_type\": \"Activation\", \"Retention\", or \"Expansion\",\n  \"mvp_critical\": true or false,\n  \"strategic_priority\": \"[impact_type] - [competitive_positioning]\"\n}",
+        "batching": {}
+      },
+      "id": "effd0972-e90a-45ba-ace2-0c66ac728a91",
+      "name": "Strategic Framing Chain",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        1056,
+        704
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate epic and stories for this feature:\n\nFeature Intent:\nProblem: {{ $json.feature_intent.problem_statement }}\nUsers: {{ $json.feature_intent.users }}\nBusiness Goal: {{ $json.feature_intent.business_goal }}\nUnknowns: {{ $json.feature_intent.unknowns.join(\", \") }}\n\nInternal Context:\nRelevant Documentation: {{ $json.internal_context.internal_context[0].content }}\n\nMarket Context:\nCompetitor Features Analyzed: {{ $json.market_context.competitor_features.length }}\nKey Review Themes: {{ $json.market_context.review_themes.map(t => t.theme + \" - \" + t.description).join(\"; \") }}\nTop Opportunities: {{ $json.market_context.opportunity_hypotheses.map(h => h.hypothesis + \": \" + h.rationale).join(\"; \") }}\n\nStrategic Priority: {{ $json.strategic_layer.strategic_priority }}\nCompetitive Positioning: {{ $json.strategic_layer.competitive_positioning }}\nImpact Type: {{ $json.strategic_layer.impact_type }}\nMVP Critical: {{ $json.strategic_layer.mvp_critical }}\n\nCRITICAL REQUIREMENTS:\n\n1. STORY COUNT: Generate between 5 and 8 user stories (not fewer than 5, not more than 8)\n\n2. ACCEPTANCE CRITERIA MUST BE TESTABLE:\n   - Use GIVEN-WHEN-THEN format or explicit action-outcome pairs\n   - Include specific UI elements, actions, and expected results\n   - Examples of GOOD criteria:\n     ✓ \"Given a user clicks the thread icon, when the thread panel opens, then it displays all replies in chronological order\"\n     ✓ \"When a user creates a task from a message, the task appears in the channel sidebar with the message text as the task title\"\n     ✓ \"The thread summary displays at the top of the thread panel and updates in real-time as new messages are added\"\n   - Examples of BAD criteria (too vague):\n     ✗ \"Tasks have due dates and priority levels\"\n     ✗ \"Summaries highlight key decisions\"\n     ✗ \"Thread UI supports filtering\"\n\n3. NON-FUNCTIONAL REQUIREMENTS MUST BE SPECIFIC:\n   - Include measurable metrics with numbers\n   - Specify performance targets, limits, or thresholds\n   - Examples of GOOD NFRs:\n     ✓ \"Thread panel loads within 200ms for threads with up to 100 messages\"\n     ✓ \"Task creation API responds within 500ms at p95\"\n     ✓ \"Summary generation completes within 2 seconds for threads up to 50 messages\"\n     ✓ \"Access control checks must complete in <50ms\"\n   - Examples of BAD NFRs (too vague):\n     ✗ \"No data leakage between contexts\"\n     ✗ \"System performs well\"\n     ✗ \"Access controls are enforced\"\n\n4. TECHNICAL NOTES:\n   - Only reference real Slack systems: Slack API, Conversations API, Messages API, Users API, Channels API, etc.\n   - Do NOT invent systems like \"Thread Management Service\" or \"Task Engine\"\n   - Be specific about API endpoints and data structures\n\n5. STORY STRUCTURE:\n   - Each story should be independently deliverable\n   - Cover the full scope of the feature across all stories\n   - Break down complex features into logical, implementable chunks\n\nGenerate the complete epic and all stories now with TESTABLE acceptance criteria and SPECIFIC NFRs.",
+        "hasOutputParser": true,
+        "batching": {}
+      },
+      "id": "dbca11ef-5efe-4878-86ee-12214904d1c1",
+      "name": "Story Generator Chain",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        1856,
+        704
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "epic_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "epic_identifier",
+              "value": "={{ $json.identifier }}",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "stories",
+              "value": "={{ JSON.stringify($('Check Validation').item.json.original_data.stories) }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "83c7f407-9732-4470-9446-b0929efcc1d2",
+      "name": "Prepare Split Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3104,
+        608
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Slack Doc Loader",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Market Snapshot Node",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Feature Intent Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Feature Intent Extractor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Intent Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Feature Intent Extractor",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack Doc Loader": {
+      "main": [
+        [
+          {
+            "node": "Combine Contexts",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Market Snapshot Node": {
+      "main": [
+        [
+          {
+            "node": "Combine Contexts",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Combine Contexts": {
+      "main": [
+        [
+          {
+            "node": "Strategic Framing Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Strategic Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Strategic Framing Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Story Context": {
+      "main": [
+        [
+          {
+            "node": "Story Generator Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Story Generator Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Story Generator Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validator": {
+      "main": [
+        [
+          {
+            "node": "Check Validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Validation": {
+      "main": [
+        [
+          {
+            "node": "Create Epic",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Format Validation Errors",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Epic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Epic": {
+      "main": [
+        [
+          {
+            "node": "Prepare Split Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Stories": {
+      "main": [
+        [
+          {
+            "node": "Create Stories",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Stories": {
+      "main": [
+        [
+          {
+            "node": "Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Strategic Output": {
+      "main": [
+        [
+          {
+            "node": "Prepare Story Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Story JSON": {
+      "main": [
+        [
+          {
+            "node": "Validator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Story Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Story Generator Chain",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Feature Intent Extractor": {
+      "main": [
+        [
+          {
+            "node": "Combine Contexts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Strategic Framing Chain": {
+      "main": [
+        [
+          {
+            "node": "Parse Strategic Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Story Generator Chain": {
+      "main": [
+        [
+          {
+            "node": "Parse Story JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Split Data": {
+      "main": [
+        [
+          {
+            "node": "Split Stories",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "1b4d2e74-46d9-48e3-a88f-326724cc7c3a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "498b44b759fe6fd6aa7173bde51a49898f3619b4e4601d5d80d88251496769b8"
+  },
+  "id": "AWxs6E5nxlfXy561",
+  "tags": []
+}
