@@ -1,0 +1,536 @@
+{
+  "name": "Discord to Airtable Logger",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        64,
+        -16
+      ],
+      "id": "ed8a7d0a-3986-4daf-a919-6f1fb418384b",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "discord-logger",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        64,
+        224
+      ],
+      "id": "1f74bd30-51a9-4ee9-9e7f-0a2a040940f6",
+      "name": "Webhook",
+      "webhookId": "f30e0cae-8d38-4966-a553-0ae50a2115f6"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c1d580b2-74c2-47a6-92df-3d0793d99f50",
+              "name": "content",
+              "value": "How do I implement RAG for my documents?",
+              "type": "string"
+            },
+            {
+              "id": "b692377d-241b-4d5b-93e3-2f4338af3454",
+              "name": "username",
+              "value": "ClientName",
+              "type": "string"
+            },
+            {
+              "id": "7c5ab585-f5e1-4aa4-9126-516b2e48a11b",
+              "name": "channel_id",
+              "value": 123456789,
+              "type": "string"
+            },
+            {
+              "id": "67ac8d00-192b-4ed9-986b-4046bb68632b",
+              "name": "guild_id",
+              "value": 987654321,
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        272,
+        -16
+      ],
+      "id": "f76571b1-f2d6-48f9-99da-5e1f07cad3bd",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f904b526-34fc-4de4-b7c0-5000bb54e912",
+              "name": "Timestamp",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "a357621a-772c-43b7-9fa6-babf37cc2ca0",
+              "name": "Client Name",
+              "value": "={{ $json.username }}",
+              "type": "string"
+            },
+            {
+              "id": "b4516ce4-28d7-4cec-ae82-d761f1893054",
+              "name": "Channel",
+              "value": "={{ $json.channel_id }}",
+              "type": "string"
+            },
+            {
+              "id": "b07eb1f8-c036-440f-b885-721c3f4c3fd6",
+              "name": "Question",
+              "value": "={{ $json.content }}",
+              "type": "string"
+            },
+            {
+              "id": "f358d1f2-72b8-491c-a8bf-2c6b70fd91f1",
+              "name": "Status",
+              "value": "New",
+              "type": "string"
+            },
+            {
+              "id": "a789bc56-ebc3-4351-a406-cee257f1f00f",
+              "name": "Follow-up Date",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        480,
+        -16
+      ],
+      "id": "830cd55d-67ba-40dc-9e09-4ae3c669714a",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "https://airtable.com/appqZYgYFZfGfdGK8/tblAvUoDMF11LCCTU/viwk4RE0ijZz54u4z",
+          "mode": "url"
+        },
+        "table": {
+          "__rl": true,
+          "value": "https://airtable.com/appqZYgYFZfGfdGK8/tblAvUoDMF11LCCTU/viwk4RE0ijZz54u4z",
+          "mode": "url"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{ $json.Timestamp}}",
+            "Client Name": "={{ $json['Client Name'] }}",
+            "Channel": "={{ $json.Channel }}",
+            "Question": "={{ $json.Question }}",
+            "Status": "={{ $json.Status }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Client Name",
+              "displayName": "Client Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Channel",
+              "displayName": "Channel",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Question",
+              "displayName": "Question",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Follow-up Date",
+              "displayName": "Follow-up Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        688,
+        -16
+      ],
+      "id": "975829ff-14ea-4c9f-bb39-edcc34c8a79f",
+      "name": "Create a record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ZC9pKtyxF4dO44KJ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c1d580b2-74c2-47a6-92df-3d0793d99f50",
+              "name": "content",
+              "value": "={{ $json.body.content }}",
+              "type": "string"
+            },
+            {
+              "id": "b692377d-241b-4d5b-93e3-2f4338af3454",
+              "name": "username",
+              "value": "=ClientName {{ $json.body.username }}",
+              "type": "string"
+            },
+            {
+              "id": "7c5ab585-f5e1-4aa4-9126-516b2e48a11b",
+              "name": "channel_id",
+              "value": "=123456789 {{ $json.body.channel_id }}",
+              "type": "string"
+            },
+            {
+              "id": "67ac8d00-192b-4ed9-986b-4046bb68632b",
+              "name": "guild_id",
+              "value": "=987654321 {{ $json.body.guild_id }}",
+              "type": "string"
+            },
+            {
+              "id": "49501704-bcca-4a91-ba2a-1514b39a0902",
+              "name": "timestamp",
+              "value": "={{ $json.body.timestamp }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        256,
+        224
+      ],
+      "id": "ff7b776a-fc40-4f1a-a6b9-a1c99571a87f",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f904b526-34fc-4de4-b7c0-5000bb54e912",
+              "name": "Timestamp",
+              "value": "={{ $json.timestamp }}",
+              "type": "string"
+            },
+            {
+              "id": "a357621a-772c-43b7-9fa6-babf37cc2ca0",
+              "name": "Client Name",
+              "value": "={{ $json.username }}",
+              "type": "string"
+            },
+            {
+              "id": "b4516ce4-28d7-4cec-ae82-d761f1893054",
+              "name": "Channel",
+              "value": "={{ $json.channel_id }}",
+              "type": "string"
+            },
+            {
+              "id": "b07eb1f8-c036-440f-b885-721c3f4c3fd6",
+              "name": "Question",
+              "value": "={{ $json.content }}",
+              "type": "string"
+            },
+            {
+              "id": "f358d1f2-72b8-491c-a8bf-2c6b70fd91f1",
+              "name": "Status",
+              "value": "New",
+              "type": "string"
+            },
+            {
+              "id": "a789bc56-ebc3-4351-a406-cee257f1f00f",
+              "name": "Follow-up Date",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        464,
+        224
+      ],
+      "id": "eb68c2e9-2dd8-48dd-a871-b893d397c54e",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "https://airtable.com/appqZYgYFZfGfdGK8/tblAvUoDMF11LCCTU/viwk4RE0ijZz54u4z",
+          "mode": "url"
+        },
+        "table": {
+          "__rl": true,
+          "value": "https://airtable.com/appqZYgYFZfGfdGK8/tblAvUoDMF11LCCTU/viwk4RE0ijZz54u4z",
+          "mode": "url"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{ $json.Timestamp}}",
+            "Client Name": "={{ $json['Client Name'] }}",
+            "Channel": "={{ $json.Channel }}",
+            "Question": "={{ $json.Question }}",
+            "Status": "={{ $json.Status }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Client Name",
+              "displayName": "Client Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Channel",
+              "displayName": "Channel",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Question",
+              "displayName": "Question",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Follow-up Date",
+              "displayName": "Follow-up Date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        672,
+        224
+      ],
+      "id": "c1d01e75-3c4a-498d-9606-63789ff35502",
+      "name": "Create a record1",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ZC9pKtyxF4dO44KJ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Create a record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record": {
+      "main": [
+        []
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Create a record1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "14181cf2-ef29-484a-9842-f7f65046d7c2",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "498b44b759fe6fd6aa7173bde51a49898f3619b4e4601d5d80d88251496769b8"
+  },
+  "id": "HCQUV1Mbnw0E5m2L",
+  "tags": []
+}
