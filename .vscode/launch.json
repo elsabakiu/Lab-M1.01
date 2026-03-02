@@ -1,0 +1,40 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Week 5 Agent: Single (AAPL)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/WEEK 5/investment-agent/src/investment_agent/runner.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/WEEK 5/investment-agent",
+      "envFile": "${workspaceFolder}/WEEK 5/.env",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/WEEK 5/investment-agent/src"
+      },
+      "args": [
+        "--ticker",
+        "AAPL"
+      ],
+      "justMyCode": true
+    },
+    {
+      "name": "Week 5 Agent: Batch (Top 5)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/WEEK 5/investment-agent/src/investment_agent/runner.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/WEEK 5/investment-agent",
+      "envFile": "${workspaceFolder}/WEEK 5/.env",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/WEEK 5/investment-agent/src"
+      },
+      "args": [
+        "--batch",
+        "--max-symbols",
+        "5"
+      ],
+      "justMyCode": true
+    }
+  ]
+}
