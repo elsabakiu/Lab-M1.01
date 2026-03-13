@@ -1,0 +1,542 @@
+{
+  "name": "SIL-15 Automated Project Setup v4",
+  "nodes": [
+    {
+      "parameters": {
+        "events": [
+          "jira:issue_created"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.jiraTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -16,
+        64
+      ],
+      "id": "96a95d32-5aee-44df-8ae5-457d1ad41766",
+      "name": "Jira Trigger",
+      "webhookId": "d5322946-fca6-4467-9623-abc6e4a965e6",
+      "credentials": {
+        "jiraSoftwareCloudApi": {
+          "id": "dDawTjrp8sYwFXBj",
+          "name": "Jira SW Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.jira",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        -160
+      ],
+      "id": "8ebf0f43-c9ca-441e-a349-ebefa6a3cbe3",
+      "name": "Get many issues",
+      "credentials": {
+        "jiraSoftwareCloudApi": {
+          "id": "dDawTjrp8sYwFXBj",
+          "name": "Jira SW Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "7166ad29-025f-4965-bb9a-bee10772f9a5",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -16,
+        288
+      ],
+      "id": "b04b5792-2309-4d91-b547-f2f3f5a755d6",
+      "name": "Webhook",
+      "webhookId": "7166ad29-025f-4965-bb9a-bee10772f9a5"
+    },
+    {
+      "parameters": {
+        "project": {
+          "__rl": true,
+          "value": "10000",
+          "mode": "list",
+          "cachedResultName": "AI Consulting"
+        },
+        "issueType": {
+          "__rl": true,
+          "value": "10037",
+          "mode": "list",
+          "cachedResultName": "Story"
+        },
+        "summary": "={{$json.title}}",
+        "additionalFields": {
+          "description": "={{$json.description}}"
+        }
+      },
+      "type": "n8n-nodes-base.jira",
+      "typeVersion": 1,
+      "position": [
+        208,
+        288
+      ],
+      "id": "07f86fd1-600f-4aac-9db1-89d3aaa82b51",
+      "name": "Create an issue",
+      "credentials": {
+        "jiraSoftwareCloudApi": {
+          "id": "dDawTjrp8sYwFXBj",
+          "name": "Jira SW Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.item.json.body;\nconst issue = body.issue;\nconst fields = issue.fields;\nconst user = body.user;\n\nconst consultants = fields.customfield_assigned_consultants || [];\n\nif (!Array.isArray(consultants) || consultants.length === 0) {\n  throw new Error('No consultants found in customfield_assigned_consultants');\n}\n\n// Build a comma-separated attendee email string for the calendar invite\nconst attendeeEmails = consultants.map(c => c.emailAddress).join(',');\n\n// Add the approving PM too\nconst allAttendeeEmails = attendeeEmails + ',' + user.emailAddress;\n\nconst issueKey = issue.key;\nconst projectName = fields.customfield_project_name || fields.summary;\nconst projectKey = fields.project.key;\nconst startDate = fields.customfield_start_date;\nconst endDate = fields.customfield_end_date;\nconst approvedBy = user.displayName;\nconst approvedByEmail = user.emailAddress;\nconst allocationNotes = fields.customfield_allocation_notes || '';\nconst jiraBaseUrl = 'https://ai-consulting-eb.atlassian.net';\nconst runTimestamp = new Date().toISOString();\n\nconst teamSummary = consultants\n  .map(c => c.displayName + ' (' + c.role + ')')\n  .join(', ');\n\n// Output a single item for the calendar node\nreturn [{\n  json: {\n    issueKey,\n    projectName,\n    projectKey,\n    startDate,\n    endDate,\n    approvedBy,\n    approvedByEmail,\n    allocationNotes,\n    jiraBaseUrl,\n    runTimestamp,\n    teamSummary,\n    attendeeEmails: allAttendeeEmails,\n    consultants\n  }\n}];"
+      },
+      "id": "c89fe211-ba7b-4f09-a87a-719a3e45e002",
+      "name": "Prepare Calendar Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        384,
+        544
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.item.json.body;\nconst issue = body.issue;\nconst fields = issue.fields;\nconst user = body.user;\n\nconst consultants = fields.customfield_assigned_consultants || [];\n\nif (!Array.isArray(consultants) || consultants.length === 0) {\n  throw new Error('No consultants found in customfield_assigned_consultants');\n}\n\nconst issueKey = issue.key;\nconst projectName = fields.customfield_project_name || fields.summary;\nconst projectKey = fields.project.key;\nconst startDate = fields.customfield_start_date;\nconst endDate = fields.customfield_end_date;\nconst approvedBy = user.displayName;\nconst approvedByEmail = user.emailAddress;\nconst jiraBaseUrl = 'https://ai-consulting-eb.atlassian.net';\nconst runTimestamp = new Date().toISOString();\n\n// Output one item per consultant for individual Slack DMs\nreturn consultants.map(consultant => ({\n  json: {\n    accountId: consultant.accountId,\n    displayName: consultant.displayName,\n    emailAddress: consultant.emailAddress,\n    slackUserId: consultant.slackUserId || null,\n    role: consultant.role,\n    skillMatchScore: consultant.skillMatchScore,\n    currentUtilization: consultant.currentUtilization,\n    issueKey,\n    projectName,\n    projectKey,\n    startDate,\n    endDate,\n    approvedBy,\n    approvedByEmail,\n    jiraBaseUrl,\n    runTimestamp\n  }\n}));"
+      },
+      "id": "b91bebd8-d521-4da4-9438-c2847a31494b",
+      "name": "Split for Slack",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        384,
+        736
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "jira-allocation-approved",
+        "options": {}
+      },
+      "id": "44dc9d1c-7f09-457f-8b8f-d12499c1a847",
+      "name": "Jira Webhook Trigger1",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -64,
+        736
+      ],
+      "webhookId": "80dd1bef-a031-41a7-a8c5-8e89878edd9d"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.changelog.items[0].toString }}",
+              "value2": "Approved"
+            }
+          ]
+        }
+      },
+      "id": "30beab16-809a-4b21-aa1a-eabee21a2a40",
+      "name": "IF Allocation Approved1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        160,
+        736
+      ]
+    },
+    {
+      "parameters": {
+        "select": "user",
+        "user": {
+          "__rl": true,
+          "value": "=U0ALQ10K1G9",
+          "mode": "id"
+        },
+        "text": "={{ ':rocket: *New Project Assignment — ' + $json.projectName + '*\\n\\nHi ' + $json.displayName + ',\\n\\nYou have been assigned to *' + $json.projectName + '* (' + $json.projectKey + ').\\n\\n• *Role:* ' + $json.role + '\\n• *Start:* ' + $json.startDate + '\\n• *End:* ' + $json.endDate + '\\n• *Skill match:* ' + $json.skillMatchScore + '%\\n• *Approved by:* ' + $json.approvedBy + '\\n• *Jira issue:* ' + $json.jiraBaseUrl + '/browse/' + $json.issueKey + '\\n\\nA calendar invite has been sent to your email. Please accept to confirm.' }}",
+        "otherOptions": {}
+      },
+      "id": "4cc94f57-bdd1-4805-8b07-3346764eda2d",
+      "name": "Send Slack Notification1",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [
+        608,
+        736
+      ],
+      "webhookId": "9ea3adde-f35a-4abc-b4bf-c765e6776892",
+      "credentials": {
+        "slackApi": {
+          "id": "3j6374pjC4G3I6qQ",
+          "name": "Slack account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "79bc4dd5-dc6d-4c3c-a6c4-2c78b5c98120",
+      "name": "Merge1",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [
+        832,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Pull original data directly from Prepare Calendar Data node\n// regardless of what Calendar/Slack nodes did to the items\nconst ref = $('Prepare Calendar Data').first().json;\nconst consultants = ref.consultants || [];\n\nconst teamLines = consultants\n  .map(c => '  • ' + c.displayName + ' (' + c.role + ') — Skill match: ' + c.skillMatchScore + '%')\n  .join('\\n');\n\nconst commentBody = '✅ *Automated Project Setup Complete*\\n\\n'\n  + '*Triggered:* ' + ref.runTimestamp + '\\n'\n  + '*Issue:* ' + ref.issueKey + '\\n'\n  + '*Project:* ' + ref.projectName + ' (' + ref.projectKey + ')\\n'\n  + '*Period:* ' + ref.startDate + ' → ' + ref.endDate + '\\n'\n  + '*Approved by:* ' + ref.approvedBy + '\\n\\n'\n  + '*Assigned Team:*\\n' + teamLines + '\\n\\n'\n  + '*Actions completed:*\\n'\n  + '  • 1 Google Calendar invite sent to full team\\n'\n  + '  • ' + consultants.length + ' individual Slack notifications sent\\n'\n  + '  • This comment posted as audit record\\n\\n'\n  + '_Automated by n8n SIL-15 workflow_';\n\nreturn [{\n  json: {\n    issueKey: ref.issueKey,\n    jiraBaseUrl: ref.jiraBaseUrl,\n    commentBody,\n    consultantCount: consultants.length\n  }\n}];"
+      },
+      "id": "621614ff-136a-4fca-9ffc-c0c1e510426d",
+      "name": "Build Audit Summary1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1056,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "issueComment",
+        "issueKey": "={{ $json.issueKey }}",
+        "comment": "={{ $json.commentBody }}",
+        "options": {}
+      },
+      "id": "8302a7dc-a520-4aae-88a5-4c13f190a670",
+      "name": "Post Confirmation Comment1",
+      "type": "n8n-nodes-base.jira",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        640
+      ],
+      "credentials": {
+        "jiraSoftwareCloudApi": {
+          "id": "dDawTjrp8sYwFXBj",
+          "name": "Jira SW Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "3cf31626-84d6-4ebb-8c23-300c3c606b77",
+      "name": "Not Approved — No Action1",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        384,
+        928
+      ]
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "elsabakiu@gmail.com",
+          "mode": "list",
+          "cachedResultName": "elsabakiu@gmail.com"
+        },
+        "start": "={{ $json.startDate }}",
+        "end": "={{ $json.endDate }}",
+        "additionalFields": {
+          "attendees": [
+            "={{ $json.attendeeEmails }}"
+          ],
+          "description": "={{ 'Project team assignment for ' + $json.projectName + ' (' + $json.projectKey + ').\\n\\nTeam: ' + $json.teamSummary + '\\nApproved by: ' + $json.approvedBy + '\\n\\nNotes: ' + $json.allocationNotes + '\\n\\nJira: ' + $json.jiraBaseUrl + '/browse/' + $json.issueKey }}",
+          "summary": "={{ '[' + $json.projectKey + '] ' + $json.projectName + ' — Team Assignment' }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        576,
+        544
+      ],
+      "id": "911896c1-623d-4c52-acd4-9004ca553a55",
+      "name": "Send Invite in Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "CXa2ZaAzxZ1SmVoI",
+          "name": "Google Calendar account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "title": "AI matching for junior consultant growth",
+          "description": "As David Park (Junior Consultant), I want the AI to match me to projects that include a deliberate development component, so that I build skills progressively rather than being assigned reactively whenever a senior consultant is unavailable."
+        }
+      }
+    ],
+    "Jira Webhook Trigger1": [
+      {
+        "json": {
+          "body": {
+            "timestamp": 1741948800000,
+            "webhookEvent": "jira:issue_updated",
+            "issue_event_type_name": "issue_generic",
+            "user": {
+              "accountId": "712020:manager-001",
+              "emailAddress": "michelle.zhang@acme.com",
+              "displayName": "Michelle Zhang",
+              "active": true,
+              "timeZone": "Europe/London"
+            },
+            "issue": {
+              "id": "10200",
+              "key": "PROJ-42",
+              "fields": {
+                "summary": "Cloud Infrastructure Modernisation — Phase 2",
+                "issuetype": {
+                  "id": "10115",
+                  "name": "Story",
+                  "subtask": false
+                },
+                "project": {
+                  "id": "10100",
+                  "key": "PROJ",
+                  "name": "Acme Consulting",
+                  "projectTypeKey": "software"
+                },
+                "status": {
+                  "id": "10106",
+                  "name": "In Progress"
+                },
+                "priority": {
+                  "id": "1",
+                  "name": "Highest"
+                },
+                "customfield_project_name": "Cloud Infrastructure Modernisation — Phase 2",
+                "customfield_start_date": "2026-04-14",
+                "customfield_end_date": "2026-08-31",
+                "customfield_allocation_notes": "Team approved by Michelle Zhang. Lena Horvat included as growth pairing with Sarah Mitchell.",
+                "customfield_assigned_consultants": [
+                  {
+                    "accountId": "712020:consultant-001",
+                    "displayName": "Sarah Mitchell",
+                    "emailAddress": "sarah.mitchell@acme.com",
+                    "slackUserId": "U01SMITCH01",
+                    "role": "Senior Consultant",
+                    "skillMatchScore": 96,
+                    "currentUtilization": 55,
+                    "active": true
+                  },
+                  {
+                    "accountId": "712020:consultant-002",
+                    "displayName": "James Okafor",
+                    "emailAddress": "james.okafor@acme.com",
+                    "slackUserId": "U01JOKAF02",
+                    "role": "Consultant",
+                    "skillMatchScore": 89,
+                    "currentUtilization": 40,
+                    "active": true
+                  },
+                  {
+                    "accountId": "712020:consultant-003",
+                    "displayName": "Lena Horvat",
+                    "emailAddress": "lena.horvat@acme.com",
+                    "slackUserId": "U01LHORV03",
+                    "role": "Junior Consultant",
+                    "skillMatchScore": 74,
+                    "currentUtilization": 25,
+                    "active": true
+                  }
+                ]
+              }
+            },
+            "changelog": {
+              "id": "30001",
+              "items": [
+                {
+                  "field": "allocation_status",
+                  "fieldtype": "custom",
+                  "fieldId": "customfield_allocation_status",
+                  "fromString": "Pending Review",
+                  "toString": "Approved"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Create an issue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Calendar Data": {
+      "main": [
+        [
+          {
+            "node": "Send Invite in Google Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split for Slack": {
+      "main": [
+        [
+          {
+            "node": "Send Slack Notification1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Jira Webhook Trigger1": {
+      "main": [
+        [
+          {
+            "node": "IF Allocation Approved1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Allocation Approved1": {
+      "main": [
+        [
+          {
+            "node": "Prepare Calendar Data",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Split for Slack",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Not Approved — No Action1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Slack Notification1": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Build Audit Summary1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Audit Summary1": {
+      "main": [
+        [
+          {
+            "node": "Post Confirmation Comment1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Invite in Google Calendar": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "5a3f0ee0-dd15-4805-8a63-e4b84074ab4f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "498b44b759fe6fd6aa7173bde51a49898f3619b4e4601d5d80d88251496769b8"
+  },
+  "id": "wZDBKCZ4zDZqdddl",
+  "tags": [
+    {
+      "updatedAt": "2026-03-12T23:22:36.228Z",
+      "createdAt": "2026-03-12T23:22:36.228Z",
+      "id": "3A58rYncGSMnJvTL",
+      "name": "n8n-automation"
+    },
+    {
+      "updatedAt": "2026-03-12T23:22:36.104Z",
+      "createdAt": "2026-03-12T23:22:36.104Z",
+      "id": "ApnXlUucKtXuw6qm",
+      "name": "Silver Trust"
+    },
+    {
+      "updatedAt": "2026-03-12T23:22:36.140Z",
+      "createdAt": "2026-03-12T23:22:36.140Z",
+      "id": "CFLcLBmjuZKbwK2U",
+      "name": "SIL-15"
+    },
+    {
+      "updatedAt": "2026-03-12T23:22:36.179Z",
+      "createdAt": "2026-03-12T23:22:36.179Z",
+      "id": "iWgnTFbHMZ6viVY4",
+      "name": "Category-1"
+    },
+    {
+      "name": "SIL",
+      "id": "FBUUND87WjKJnzdb",
+      "updatedAt": "2026-03-13T09:43:03.637Z",
+      "createdAt": "2026-03-13T09:43:03.637Z"
+    },
+    {
+      "name": "automation",
+      "id": "BaGNHLkNqKVmXIJn",
+      "updatedAt": "2026-03-13T09:43:03.666Z",
+      "createdAt": "2026-03-13T09:43:03.666Z"
+    }
+  ]
+}
