@@ -3,50 +3,6 @@
   "nodes": [
     {
       "parameters": {
-        "events": [
-          "jira:issue_created"
-        ],
-        "additionalFields": {}
-      },
-      "type": "n8n-nodes-base.jiraTrigger",
-      "typeVersion": 1.1,
-      "position": [
-        -16,
-        64
-      ],
-      "id": "96a95d32-5aee-44df-8ae5-457d1ad41766",
-      "name": "Jira Trigger",
-      "webhookId": "d5322946-fca6-4467-9623-abc6e4a965e6",
-      "credentials": {
-        "jiraSoftwareCloudApi": {
-          "id": "dDawTjrp8sYwFXBj",
-          "name": "Jira SW Cloud account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "getAll",
-        "returnAll": true,
-        "options": {}
-      },
-      "type": "n8n-nodes-base.jira",
-      "typeVersion": 1,
-      "position": [
-        -16,
-        -160
-      ],
-      "id": "8ebf0f43-c9ca-441e-a349-ebefa6a3cbe3",
-      "name": "Get many issues",
-      "credentials": {
-        "jiraSoftwareCloudApi": {
-          "id": "dDawTjrp8sYwFXBj",
-          "name": "Jira SW Cloud account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "path": "7166ad29-025f-4965-bb9a-bee10772f9a5",
         "options": {}
       },
@@ -161,7 +117,7 @@
         "select": "user",
         "user": {
           "__rl": true,
-          "value": "=U0ALQ10K1G9",
+          "value": "={{ $json.slackUserId }}",
           "mode": "id"
         },
         "text": "={{ ':rocket: *New Project Assignment — ' + $json.projectName + '*\\n\\nHi ' + $json.displayName + ',\\n\\nYou have been assigned to *' + $json.projectName + '* (' + $json.projectKey + ').\\n\\n• *Role:* ' + $json.role + '\\n• *Start:* ' + $json.startDate + '\\n• *End:* ' + $json.endDate + '\\n• *Skill match:* ' + $json.skillMatchScore + '%\\n• *Approved by:* ' + $json.approvedBy + '\\n• *Jira issue:* ' + $json.jiraBaseUrl + '/browse/' + $json.issueKey + '\\n\\nA calendar invite has been sent to your email. Please accept to confirm.' }}",
@@ -261,7 +217,7 @@
       "type": "n8n-nodes-base.googleCalendar",
       "typeVersion": 1.3,
       "position": [
-        576,
+        592,
         544
       ],
       "id": "911896c1-623d-4c52-acd4-9004ca553a55",
@@ -495,7 +451,7 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "5a3f0ee0-dd15-4805-8a63-e4b84074ab4f",
+  "versionId": "af8738d8-803a-4c04-9cbe-d36f639bf49d",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "498b44b759fe6fd6aa7173bde51a49898f3619b4e4601d5d80d88251496769b8"
