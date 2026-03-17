@@ -1,0 +1,282 @@
+[
+  {
+    "inputs": {
+      "question": "When did Virgin Australia start operating?",
+      "context": "Virgin Australia, the trading name of Virgin Australia Airlines Pty Ltd, is an Australian-based airline. It is the largest airline by fleet size to use the Virgin brand. It commenced services on 31 August 2000 as Virgin Blue, with two aircraft on a single route. It suddenly found itself as a major airline in Australia's domestic market after the collapse of Ansett Australia in September 2001. The airline has since grown to directly serve 32 cities in Australia, from hubs in Brisbane, Melbourne and Sydney."
+    },
+    "outputs": {
+      "answer": "Virgin Australia commenced services on 31 August 2000 as Virgin Blue, with two aircraft on a single route."
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "When was Tomoaki Komorida born?",
+      "context": "Komorida was born in Kumamoto Prefecture on July 10, 1981. After graduating from high school, he joined the J1 League club Avispa Fukuoka in 2000. Although he debuted as a midfielder in 2001, he did not play much and the club was relegated to the J2 League at the end of the 2001 season. In 2002, he moved to the J2 club Oita Trinita. He became a regular player as a defensive midfielder and the club won the championship in 2002 and was promoted in 2003. He played many matches until 2005. In September 2005, he moved to the J2 club Montedio Yamagata. In 2006, he moved to the J2 club Vissel Kobe. Although he became a regular player as a defensive midfielder, his gradually was played less during the summer. In 2007, he moved to the Japan Football League club Rosso Kumamoto (later Roasso Kumamoto) based in his local region. He played as a regular player and the club was promoted to J2 in 2008. Although he did not play as much, he still played in many matches. In 2010, he moved to Indonesia and joined Persela Lamongan. In July 2010, he returned to Japan and joined the J2 club Giravanz Kitakyushu. He played often as a defensive midfielder and center back until 2012 when he retired."
+    },
+    "outputs": {
+      "answer": "Tomoaki Komorida was born on July 10,1981."
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "Given a reference text about Lollapalooza, where does it take place, who started it and what is it?",
+      "context": "Lollapalooza /ˌlɒləpəˈluːzə/ (Lolla) is an annual American four-day music festival held in Grant Park in Chicago. It originally started as a touring event in 1991, but several years later, Chicago became its permanent location. Music genres include but are not limited to alternative rock, heavy metal, punk rock, hip hop, and electronic dance music. Lollapalooza has also featured visual arts, nonprofit organizations, and political organizations. The festival, held in Grant Park, hosts an estimated 400,000 people each July and sells out annually. Lollapalooza is one of the largest and most iconic music festivals in the world and one of the longest-running in the United States.\n\nLollapalooza was conceived and created in 1991 as a farewell tour by Perry Farrell, singer of the group Jane's Addiction."
+    },
+    "outputs": {
+      "answer": "Lollapalooze is an annual musical festival held in Grant Park in Chicago, Illinois. It was started in 1991 as a farewell tour by Perry Farrell, singe of the group Jane's Addiction. The festival includes an array of musical genres including alternative rock, heavy metal, punk rock, hip hop, and electronic dance music. The festivals welcomes an estimated 400,000 people each year and sells out annually. Some notable headliners include: the Red Hot Chili Peppers, Chance the Rapper, Metallica, and Lady Gage. Lollapalooza is one of the largest and most iconic festivals in the world and a staple of Chicago."
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "Who was Kyle Van Zyl playing against when he scored 36 of hisa teams 61 points?",
+      "context": "Van Zyl joined the Eastern Province Kings Academy, where he played for the Eastern Province U19 side in the 2010 Under-19 Provincial Championship. He was a key player for the Eastern Province U21 side in the 2012 Under-21 Provincial Championship, scoring 71 points in eight appearances. Van Zyl was under the Top SARU Performers, scoring the most tries at 6 in the 2012 Provincial Under 21 in the Rugby Junior Provincials.\n\nThis included a record and a remarkable personal haul in their opening match, when he scored 36 of his team's points in a 61–3 victory over Boland U21, consisting of four tries and eight conversions and was awarded Man of the Match."
+    },
+    "outputs": {
+      "answer": "Kyle Van Zyl was playing against Boland U21 when he scored 36 points, leading his team to victory in a 61-3 win."
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "Who was the first to record the Needles and Pins song?",
+      "context": "\"Needles and Pins\" is a rock song credited to American writers Jack Nitzsche and Sonny Bono. Jackie DeShannon recorded it in 1963 and other versions followed. The most successful ones were by the Searchers, whose version reached No. 1 on the UK singles chart in 1964, and Smokie, who had a worldwide hit in 1977. Others who recorded the song include the Ramones, Gene Clark, and Tom Petty and the Heartbreakers with Stevie Nicks.\n\nJackie DeShannon version (1963)\nIn his autobiography, Bono states that he sang along with Nitzsche's guitar-playing, thus creating both the tune and the lyrics, being guided by the chord progressions. However, Jackie DeShannon claims that the song was written at the piano, and that she was a full participant in the song's creation, along with Nitzsche and Bono, although she did not get formal credit.\n\nDeShannon was the first to record the song; in the US it peaked at number 84 on the Billboard Hot 100 singles chart in May 1963. Though it was only a minor US hit, DeShannon's recording of the song topped the charts in Canada, hitting number one on the CHUM Chart in July 1963"
+    },
+    "outputs": {
+      "answer": "The first artist to record Needles and Pins song was DeShannon."
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "Given this paragraph, what is the top speed of a Kia Stinger?",
+      "context": "Kia claims that the Stinger accelerates from zero to 100 km/h (62 mph) in 7.7, 6 and 4.9 seconds for the 2.2-liter diesel, 2.0-liter petrol and 3.3-liter petrol respectively. Schreyer reportedly drove a pre-production Stinger GT at a top speed of 269 km/h (167 mph) on the Autobahn.\n\nDuring a test by Car and Driver, an all-wheel-drive U.S. spec GT 3.3T with Michelin Pilot Sport 4 tires achieved 0–60 mph (0–97 km/h) in 4.6 seconds on the track, reached 0.91 g on the skidpad and was able to stop from 70 mph (113 km/h) in 164 feet (50 m). According to this publication, the U.S. model's top speed is governed at 167 mph (269 km/h) per Kia specs. In tests conducted by Motor Trend, the four-cylinder U.S. spec Stinger 2.0 RWD on Bridgestone Potenza tires reached 60 mph (97 km/h) in 6.6 seconds, completed the 1⁄4-mile (0.4 km) run in 15 seconds and stopped from 60 mph (97 km/h) in 126 feet (38 m). The average lateral acceleration recorded in track testing was 0.85 g."
+    },
+    "outputs": {
+      "answer": "The top speed of a Kia Stinger is 269km/h (167mph) according to this text."
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "Where are the British Virgin Islands (BVI) and which islands are a part of the BVI?",
+      "context": "The British Virgin Islands (BVI), officially the Virgin Islands, are a British Overseas Territory in the Caribbean, to the east of Puerto Rico and the US Virgin Islands and north-west of Anguilla. The islands are geographically part of the Virgin Islands archipelago and are located in the Leeward Islands of the Lesser Antilles and part of the West Indies.\n\nThe British Virgin Islands consist of the main islands of Tortola, Virgin Gorda, Anegada and Jost Van Dyke, along with more than 50 other smaller islands and cays. About 16 of the islands are inhabited. The capital, Road Town, is on Tortola, the largest island, which is about 20 km (12 mi) long and 5 km (3 mi) wide. The islands had a population of 28,054 at the 2010 Census, of whom 23,491 lived on Tortola; current estimates put the population at 35,802 (July 2018)."
+    },
+    "outputs": {
+      "answer": "The British Virgin Islands (BVI), officially the Virgin Islands, are a British Overseas Territory in the Caribbean, to the east of Puerto Rico and the US Virgin Islands and north-west of Anguilla. The islands are geographically part of the Virgin Islands archipelago and are located in the Leeward Islands of the Lesser Antilles and part of the West Indies.\n\nThe British Virgin Islands consist of the main islands of Tortola, Virgin Gorda, Anegada and Jost Van Dyke, along with more than 50 other smaller islands and cays."
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "Does \"outbreeding\" or \"inbreeding\" benefit the offspring more?",
+      "context": "Exogamy often results in two individuals that are not closely genetically related marrying each other; that is, outbreeding as opposed to inbreeding. In moderation, this benefits the offspring as it reduces the risk of the offspring inheriting two copies of a defective gene. Increasing the genetic diversity of the offspring improves the chances of offspring reproducing, up until the fourth-cousin level of relatedness; however, reproduction between individuals on the fourth-cousin level of relatedness decreases evolutionarily fitness."
+    },
+    "outputs": {
+      "answer": "\"Outbreeding\" is more beneficial to the offspring as it reduces the risk of inheriting defective genes, increasing the offspring's ability to reproduce."
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "When was the first Reading railway station opened?",
+      "context": "Reading railway station is a major transport hub in Reading, Berkshire, England. It is on the northern edge of the town centre, near the main retail and commercial areas and the River Thames, 36 miles (58 km) from London Paddington. The first Reading station was opened on 30 March 1840 as the temporary western terminus of the original line of the Great Western Railway (GWR). Reading is the ninth-busiest station in the UK outside London and the second busiest interchange station outside London with over 3.8 million passengers changing trains at the station annually."
+    },
+    "outputs": {
+      "answer": "The first Reading railway station was opened on the 30th of March, 1840."
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "Given this paragraph about Billie Eilish, tell me who produced her debut single, also tell me what is her chart-topping single?",
+      "context": "Billie Eilish Pirate Baird O'Connell (/ˈaɪlɪʃ/ EYE-lish; born December 18, 2001) is an American singer and songwriter. She first gained public attention in 2015 with her debut single \"Ocean Eyes\", written and produced by her brother Finneas O'Connell, with whom she collaborates on music and live shows. In 2017, she released her debut extended play (EP), titled Don't Smile at Me. Commercially successful, it reached the top 15 of record charts in numerous countries, including the US, UK, Canada, and Australia.\n\nEilish's first studio album, When We All Fall Asleep, Where Do We Go? (2019), debuted atop the US Billboard 200 and UK Albums Chart. It was one of the best-selling albums of the year, buoyed by the success of its fifth single \"Bad Guy\", Eilish's first number-one on the US Billboard Hot 100. This made her the first artist born in the 21st century to release a chart-topping single. The following year, Eilish performed the theme song \"No Time to Die\" for the James Bond film of the same name, which topped the UK Singles Chart and won the Academy Award for Best Original Song in 2022. Her subsequent singles \"Everything I Wanted\", \"My Future\", \"Therefore I Am\", and \"Your Power\" peaked in the top 10 in the US and UK. Her second studio album, Happier Than Ever (2021), topped charts in 25 countries."
+    },
+    "outputs": {
+      "answer": "Her brother Finneas O'Connell produced her debut single \"Ocean Eyes\", and her chart topping single is \"Bad Guy\""
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "How many managers have Arsenal had?",
+      "context": "There have been twenty permanent and eight caretaker managers of Arsenal since 1897; Stewart Houston has managed the club in two separate spells as caretaker. The most successful person to manage Arsenal is Arsène Wenger, who won three Premier League titles, seven FA Cups and seven Community Shields between 1996 and 2018. Wenger is the club's longest-serving manager; he surpassed George Allison's record of 13 years in October 2009. Two Arsenal managers have died in the job – Herbert Chapman and Tom Whittaker."
+    },
+    "outputs": {
+      "answer": "Arsenal have had twenty permanent and eight caretake managers."
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "What is SVM?",
+      "context": "In machine learning, support vector machines (SVMs, also support vector networks) are supervised learning models with associated learning algorithms that analyze data for classification and regression analysis. Developed at AT&T Bell Laboratories by Vladimir Vapnik with colleagues (Boser et al., 1992, Guyon et al., 1993, Cortes and Vapnik, 1995, Vapnik et al., 1997[citation needed]) SVMs are one of the most robust prediction methods, being based on statistical learning frameworks or VC theory proposed by Vapnik (1982, 1995) and Chervonenkis (1974). Given a set of training examples, each marked as belonging to one of two categories, an SVM training algorithm builds a model that assigns new examples to one category or the other, making it a non-probabilistic binary linear classifier (although methods such as Platt scaling exist to use SVM in a probabilistic classification setting). SVM maps training examples to points in space so as to maximise the width of the gap between the two categories. New examples are then mapped into that same space and predicted to belong to a category based on which side of the gap they fall.\n\nIn addition to performing linear classification, SVMs can efficiently perform a non-linear classification using what is called the kernel trick, implicitly mapping their inputs into high-dimensional feature spaces.\n\nThe support vector clustering algorithm, created by Hava Siegelmann and Vladimir Vapnik, applies the statistics of support vectors, developed in the support vector machines algorithm, to categorize unlabeled data.[citation needed] These data sets require unsupervised learning approaches, which attempt to find natural clustering of the data to groups and, then, to map new data according to these clusters."
+    },
+    "outputs": {
+      "answer": "SVM stands for \"\"support vector machine\". It is a machine learning model for supervised learning tasks. It was popular in the 1990s and early 2000s, before deep learning take off. The classic use case is binary classification, but its extension can also do multi-label classification as we as regression. Kernel methods greatly enhanced SVM's capability to perform non-linear machine learning tasks."
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "Who scored first in Austin FC's first victory in a home game in the 2021 MLS season?",
+      "context": "Austin FC played their first MLS match against LAFC at Banc of California Stadium on April 17, 2021, losing 0–2. The club secured its first victory the following week against the Colorado Rapids, winning 3–1. Diego Fagúndez scored the club's first goal and the following two were scored by the club's first Designated Player, Cecilio Dominguez. Their home opener was held on June 19, 2021, against the San Jose Earthquakes, a match which ended in a scoreless draw. The team secured its first ever home victory on July 1, 2021, defeating the Portland Timbers 4–1. Jon Gallagher scored the team's first home goal and the first MLS goal at Q2 Stadium."
+    },
+    "outputs": {
+      "answer": "Jon Gallagher scored the first goal in Austin FC's first win at home, over the Portland Timbers."
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "How long does it take for a mustard seed to germinate?",
+      "context": "Mustard seeds are the small round seeds of various mustard plants. The seeds are usually about 1 to 2 millimetres (0.039 to 0.079 in) in diameter and may be colored from yellowish white to black. They are an important spice in many regional foods and may come from one of three different plants: black mustard (Brassica nigra), brown mustard (B. juncea), or white mustard (Sinapis alba).\n\nGrinding and mixing the seeds with water, vinegar or other liquids creates the yellow condiment known as prepared mustard.\n\nMustard seeds generally take eight to ten days to germinate if placed under the proper conditions, which include a cold atmosphere and relatively moist soil."
+    },
+    "outputs": {
+      "answer": "Mustard seeds generally take eight to ten days to germinate if placed under the proper conditions, which include a cold atmosphere and relatively moist soil."
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "What is the origin of the name of the herb Rosemary?",
+      "context": "alvia rosmarinus (/ˈsælviə ˌrɒsməˈraɪnəs/), commonly known as rosemary, is a shrub with fragrant, evergreen, needle-like leaves and white, pink, purple, or blue flowers, native to the Mediterranean region. Until 2017, it was known by the scientific name Rosmarinus officinalis (/ˌrɒsməˈraɪnəs əˌfɪsɪˈneɪlɪs/), now a synonym.\n\nIt is a member of the sage family Lamiaceae, which includes many other medicinal and culinary herbs. The name \"\"rosemary\"\" derives from Latin ros marinus (lit. 'dew of the sea'). Rosemary has a fibrous root system"
+    },
+    "outputs": {
+      "answer": "The name \"rosemary\" derives from Latin ros marinus."
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "Who coined the phrase \"Bike-shedding\" and when?",
+      "context": "The law of triviality is C. Northcote Parkinson's 1957 argument that people within an organization commonly or typically give disproportionate weight to trivial issues. Parkinson provides the example of a fictional committee whose job was to approve the plans for a nuclear power plant spending the majority of its time on discussions about relatively minor but easy-to-grasp issues, such as what materials to use for the staff bicycle shed, while neglecting the proposed design of the plant itself, which is far more important and a far more difficult and complex task.\n\nThe law has been applied to software development and other activities. The terms bicycle-shed effect, bike-shed effect, and bike-shedding were coined based on Parkinson's example; it was popularised in the Berkeley Software Distribution community by the Danish software developer Poul-Henning Kamp in 1999 and, due to that, has since become popular within the field of software development generally.\n\nArgument\n\nA bicycle shed\nThe concept was first presented as a corollary of his broader \"Parkinson's law\" spoof of management. He dramatizes this \"law of triviality\" with the example of a committee's deliberations on an atomic reactor, contrasting it to deliberations on a bicycle shed. As he put it: \"The time spent on any item of the agenda will be in inverse proportion to the sum [of money] involved.\" A reactor is so vastly expensive and complicated that an average person cannot understand it (see ambiguity aversion), so one assumes that those who work on it understand it. However, everyone can visualize a cheap, simple bicycle shed, so planning one can result in endless discussions because everyone involved wants to implement their own proposal and demonstrate personal contribution.\n\nAfter a suggestion of building something new for the community, like a bike shed, problems arise when everyone involved argues about the details. This is a metaphor indicating that it is not necessary to argue about every little feature based simply on having the knowledge to do so. Some people have commented that the amount of noise generated by a change is inversely proportional to the complexity of the change.\n\nThe law of triviality is supported by behavioural research. People tend to spend more time on small decisions than they should, and less time on big decisions than they should. A simple explanation is that during the process of making a decision, one has to assess whether enough information has been collected to make the decision. If people make mistakes about whether they have enough information, they will tend to stop too early for big decisions. The reason is that big decisions require collecting information for a long time. It leaves more time to make a mistake (and stop) before getting enough information. Conversely, for small decisions, where people should stop early, they may continue to ponder for too long by mistake.\n\nRelated principles and formulations \nThere are several other principles, well-known in specific problem domains, which express a similar sentiment.\n\nWadler's law, named for computer scientist Philip Wadler, is a principle which asserts that the bulk of discussion on programming-language design centers on syntax (which, for purposes of the argument, is considered a solved problem), as opposed to semantics.\n\nSayre's law is a more general principle, which holds (among other formulations) that \"In any dispute, the intensity of feeling is inversely proportional to the value of the issues at stake\"; many formulations of the principle focus on academia."
+    },
+    "outputs": {
+      "answer": "The phrase \"bike-shedding\" was introduced in 1957 by C. Northcote Parkinson."
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "Given a reference text about Run Towards the Danger, tell me how many essays are part of the collection.",
+      "context": "Run Towards the Danger is a 2022 Canadian essay collection by Sarah Polley, a former child star, director, and screenwriter.\n\nThe six essays in the collection examine aspects of Polley's career on stage, screen, and on film detailing her roles in a Stratford Festival production of Alice Through the Looking Glass, as well as her breakout roles in The Adventures of Baron Munchausen and the TV series Road to Avonlea. The book also revealed for the first time that Polley had been a victim of Jian Ghomeshi who sexually and physically assaulted her when she was 16 and he was 28."
+    },
+    "outputs": {
+      "answer": "Six essays are part of the Run Towards the Danger essay collection."
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "Who tends to participates in hackathons?",
+      "context": "A hackathon (also known as a hack day, hackfest, datathon or codefest; a portmanteau of hacking and marathon) is an event where people engage in rapid and collaborative engineering over a relatively short period of time such as 24 or 48 hours. They are often run using agile software development practices, such as sprint-like design wherein computer programmers and others involved in software development, including graphic designers, interface designers, product managers, project managers, domain experts, and others collaborate intensively on engineering projects, such as software engineering.\n\nThe goal of a hackathon is to create functioning software or hardware by the end of the event. Hackathons tend to have a specific focus, which can include the programming language used, the operating system, an application, an API, or the subject and the demographic group of the programmers. In other cases, there is no restriction on the type of software being created or the design of the new system."
+    },
+    "outputs": {
+      "answer": "Computer programmers and others involved in software development, including graphic designers, interface designers, product managers, project managers, domain experts, and others tend to participate in hackathons.\n\nThey collaborate intensively on engineering projects, such as software engineering with the goal of creating functioning software or hardware by the end of the event."
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "What is Marketing Automation?",
+      "context": "Marketing Automation is a subset of customer relationship management (CRM) or customer experience management (CXM) that focuses on the definition, segmentation, scheduling and tracking of marketing campaigns. The use of marketing automation makes processes that would otherwise have been performed manually much more efficient and makes new processes possible. Marketing Automation can be defined as a process where technology is used to automate several repetitive tasks that are undertaken on a regular basis in a marketing campaign.\n\nMarketing Automation platforms allow marketers to automate and simplify client communication by managing complex omnichannel marketing strategies from a single tool. Marketing Automation assists greatly in areas like Lead Generation, Segmentation, Lead nurturing and lead scoring, Relationship marketing, Cross-sell and upsell, Retention, Marketing ROI measurement. Effective marketing automation tools leverage data from a separate or integrated CRM to understand customer impact and preferences."
+    },
+    "outputs": {
+      "answer": "Marketing Automation is software that helps marketers to do create efficient online and offline campaigns. It's part of CRM suite and people usually integrate it with their salesforce application and marketing website. The Marketing Automation platform allows marketers to automate and simplify customer communication by managing multi communication channels. This includes personalized email, dynamic web pages, digital banners, social media and more. People use it for lead generation, segmentation and nurturing and lead scoring. Post-sales marketers also use Marketing Automation for cross-sell, upsell and retention marketing. In"
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  },
+  {
+    "inputs": {
+      "question": "Which American president spoke Dutch as their first language?",
+      "context": "Van Buren received a basic education at the village schoolhouse, and briefly studied Latin at the Kinderhook Academy and at Washington Seminary in Claverack. Van Buren was raised speaking primarily Dutch and learned English while attending school; he is the only president of the United States whose first language was not English. Also during his childhood, Van Buren learned at his father's inn how to interact with people from varied ethnic, income, and societal groups, which he used to his advantage as a political organizer. His formal education ended in 1796, when he began reading law at the office of Peter Silvester and his son Francis."
+    },
+    "outputs": {
+      "answer": "President Van Buren spoke Dutch as his first language. He is the only president of the United States of America who spoke English as a second language."
+    },
+    "metadata": {
+      "category": "closed_qa",
+      "source": "databricks/databricks-dolly-15k",
+      "has_context": true
+    }
+  }
+]
