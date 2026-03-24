@@ -1,0 +1,376 @@
+weekday,hour,specialty,total_appointments,no_show_count,attended_count,avg_lead_time_days,reminder_coverage_rate,no_show_rate
+Friday,7,Behavioral Health,55,11,44,4.07,0.13,0.2
+Friday,7,Chronic Care,240,54,186,9.96,0.22,0.225
+Friday,7,Family Medicine,430,73,357,9.12,0.17,0.1698
+Friday,7,Geriatrics,237,40,197,12.5,0.22,0.1688
+Friday,7,Pediatrics,452,107,345,10.18,0.21,0.2367
+Friday,7,Rehabilitation,35,3,32,8.71,0.09,0.0857
+Friday,7,Women's Health,427,106,321,12.26,0.24,0.2482
+Friday,8,Behavioral Health,55,10,45,8.18,0.13,0.1818
+Friday,8,Chronic Care,185,42,143,10.33,0.26,0.227
+Friday,8,Family Medicine,446,80,366,9.98,0.2,0.1794
+Friday,8,Geriatrics,229,32,197,9.4,0.17,0.1397
+Friday,8,Pediatrics,434,107,327,9.41,0.21,0.2465
+Friday,8,Rehabilitation,33,2,31,10.64,0.15,0.0606
+Friday,8,Women's Health,462,107,355,10.56,0.26,0.2316
+Friday,9,Behavioral Health,45,6,39,5.24,0.16,0.1333
+Friday,9,Chronic Care,227,45,182,9.85,0.21,0.1982
+Friday,9,Family Medicine,481,97,384,10.35,0.2,0.2017
+Friday,9,Geriatrics,230,37,193,12.35,0.22,0.1609
+Friday,9,Pediatrics,455,121,334,9.65,0.23,0.2659
+Friday,9,Rehabilitation,48,8,40,11.38,0.17,0.1667
+Friday,9,Women's Health,434,124,310,11.35,0.28,0.2857
+Friday,10,Behavioral Health,57,10,47,7.65,0.21,0.1754
+Friday,10,Chronic Care,231,39,192,9.39,0.23,0.1688
+Friday,10,Family Medicine,439,84,355,10.39,0.19,0.1913
+Friday,10,Geriatrics,239,53,186,15.62,0.24,0.2218
+Friday,10,Pediatrics,481,108,373,10.8,0.22,0.2245
+Friday,10,Rehabilitation,49,10,39,10.02,0.18,0.2041
+Friday,10,Women's Health,471,127,344,10.08,0.25,0.2696
+Friday,11,Behavioral Health,54,11,43,7.04,0.19,0.2037
+Friday,11,Chronic Care,210,46,164,10.23,0.17,0.219
+Friday,11,Family Medicine,459,79,380,11.64,0.21,0.1721
+Friday,11,Geriatrics,237,47,190,11.82,0.19,0.1983
+Friday,11,Pediatrics,487,106,381,9.51,0.23,0.2177
+Friday,11,Rehabilitation,42,5,37,3.95,0.1,0.119
+Friday,11,Women's Health,476,126,350,10.5,0.23,0.2647
+Friday,12,Behavioral Health,50,6,44,5.94,0.12,0.12
+Friday,12,Chronic Care,237,39,198,10.13,0.24,0.1646
+Friday,12,Family Medicine,438,93,345,9.84,0.21,0.2123
+Friday,12,Geriatrics,261,28,233,14.38,0.21,0.1073
+Friday,12,Pediatrics,449,103,346,9.92,0.24,0.2294
+Friday,12,Rehabilitation,45,7,38,9.76,0.13,0.1556
+Friday,12,Women's Health,421,100,321,11.2,0.3,0.2375
+Friday,13,Behavioral Health,54,12,42,4.61,0.15,0.2222
+Friday,13,Chronic Care,208,46,162,10.15,0.24,0.2212
+Friday,13,Family Medicine,458,88,370,10.55,0.22,0.1921
+Friday,13,Geriatrics,236,43,193,15.93,0.19,0.1822
+Friday,13,Pediatrics,466,108,358,10.35,0.2,0.2318
+Friday,13,Rehabilitation,43,10,33,6.88,0.07,0.2326
+Friday,13,Women's Health,418,101,317,10.76,0.25,0.2416
+Friday,14,Behavioral Health,54,10,44,5.56,0.13,0.1852
+Friday,14,Chronic Care,214,40,174,10.01,0.2,0.1869
+Friday,14,Family Medicine,417,68,349,10.28,0.2,0.1631
+Friday,14,Geriatrics,260,39,221,12.11,0.2,0.15
+Friday,14,Pediatrics,489,107,382,8.4,0.18,0.2188
+Friday,14,Rehabilitation,40,4,36,6.38,0.15,0.1
+Friday,14,Women's Health,425,97,328,10.89,0.29,0.2282
+Friday,15,Behavioral Health,45,7,38,6.96,0.2,0.1556
+Friday,15,Chronic Care,226,45,181,7.88,0.23,0.1991
+Friday,15,Family Medicine,431,95,336,10.25,0.22,0.2204
+Friday,15,Geriatrics,223,33,190,14.74,0.25,0.148
+Friday,15,Pediatrics,489,108,381,9.36,0.22,0.2209
+Friday,15,Rehabilitation,30,5,25,8.0,0.17,0.1667
+Friday,15,Women's Health,452,130,322,10.53,0.23,0.2876
+Friday,16,Behavioral Health,47,9,38,7.7,0.19,0.1915
+Friday,16,Chronic Care,211,36,175,11.17,0.25,0.1706
+Friday,16,Family Medicine,435,98,337,9.53,0.23,0.2253
+Friday,16,Geriatrics,241,39,202,12.32,0.24,0.1618
+Friday,16,Pediatrics,465,110,355,9.21,0.23,0.2366
+Friday,16,Rehabilitation,40,7,33,11.02,0.12,0.175
+Friday,16,Women's Health,429,103,326,11.64,0.28,0.2401
+Monday,7,Behavioral Health,56,10,46,5.84,0.18,0.1786
+Monday,7,Chronic Care,272,62,210,8.55,0.36,0.2279
+Monday,7,Family Medicine,514,107,407,11.29,0.34,0.2082
+Monday,7,Geriatrics,304,36,268,9.91,0.3,0.1184
+Monday,7,Pediatrics,584,118,466,10.58,0.33,0.2021
+Monday,7,Rehabilitation,50,10,40,7.22,0.2,0.2
+Monday,7,Women's Health,494,101,393,11.17,0.3,0.2045
+Monday,8,Behavioral Health,66,16,50,4.44,0.17,0.2424
+Monday,8,Chronic Care,283,50,233,9.66,0.34,0.1767
+Monday,8,Family Medicine,546,121,425,11.66,0.32,0.2216
+Monday,8,Geriatrics,295,52,243,11.42,0.32,0.1763
+Monday,8,Pediatrics,594,132,462,11.12,0.31,0.2222
+Monday,8,Rehabilitation,44,12,32,14.09,0.25,0.2727
+Monday,8,Women's Health,491,118,373,11.3,0.33,0.2403
+Monday,9,Behavioral Health,66,14,52,7.35,0.33,0.2121
+Monday,9,Chronic Care,266,52,214,9.3,0.35,0.1955
+Monday,9,Family Medicine,546,127,419,12.87,0.37,0.2326
+Monday,9,Geriatrics,274,46,228,12.07,0.33,0.1679
+Monday,9,Pediatrics,603,137,466,10.67,0.31,0.2272
+Monday,9,Rehabilitation,31,3,28,8.77,0.16,0.0968
+Monday,9,Women's Health,497,116,381,11.2,0.33,0.2334
+Monday,10,Behavioral Health,63,12,51,6.16,0.27,0.1905
+Monday,10,Chronic Care,246,49,197,11.0,0.35,0.1992
+Monday,10,Family Medicine,564,111,453,10.57,0.31,0.1968
+Monday,10,Geriatrics,282,36,246,12.94,0.34,0.1277
+Monday,10,Pediatrics,577,127,450,10.04,0.26,0.2201
+Monday,10,Rehabilitation,48,13,35,9.0,0.35,0.2708
+Monday,10,Women's Health,528,114,414,10.63,0.34,0.2159
+Monday,11,Behavioral Health,60,22,38,6.1,0.2,0.3667
+Monday,11,Chronic Care,249,50,199,9.76,0.36,0.2008
+Monday,11,Family Medicine,515,94,421,11.23,0.33,0.1825
+Monday,11,Geriatrics,254,35,219,9.89,0.32,0.1378
+Monday,11,Pediatrics,570,109,461,9.78,0.29,0.1912
+Monday,11,Rehabilitation,50,13,37,11.52,0.32,0.26
+Monday,11,Women's Health,462,120,342,12.06,0.32,0.2597
+Monday,12,Behavioral Health,64,20,44,5.94,0.25,0.3125
+Monday,12,Chronic Care,242,57,185,9.4,0.33,0.2355
+Monday,12,Family Medicine,580,120,460,11.32,0.31,0.2069
+Monday,12,Geriatrics,280,48,232,12.01,0.35,0.1714
+Monday,12,Pediatrics,550,112,438,9.43,0.28,0.2036
+Monday,12,Rehabilitation,43,6,37,5.67,0.28,0.1395
+Monday,12,Women's Health,511,118,393,10.88,0.3,0.2309
+Monday,13,Behavioral Health,55,11,44,6.82,0.25,0.2
+Monday,13,Chronic Care,267,49,218,10.93,0.34,0.1835
+Monday,13,Family Medicine,536,104,432,11.43,0.3,0.194
+Monday,13,Geriatrics,268,37,231,9.63,0.32,0.1381
+Monday,13,Pediatrics,586,126,460,10.36,0.29,0.215
+Monday,13,Rehabilitation,38,3,35,7.89,0.29,0.0789
+Monday,13,Women's Health,531,126,405,10.92,0.32,0.2373
+Monday,14,Behavioral Health,72,16,56,7.89,0.26,0.2222
+Monday,14,Chronic Care,249,41,208,9.22,0.33,0.1647
+Monday,14,Family Medicine,532,99,433,13.91,0.36,0.1861
+Monday,14,Geriatrics,282,38,244,11.49,0.31,0.1348
+Monday,14,Pediatrics,554,121,433,11.62,0.32,0.2184
+Monday,14,Rehabilitation,44,7,37,6.77,0.2,0.1591
+Monday,14,Women's Health,570,141,429,10.83,0.29,0.2474
+Monday,15,Behavioral Health,59,9,50,4.86,0.17,0.1525
+Monday,15,Chronic Care,245,51,194,9.98,0.34,0.2082
+Monday,15,Family Medicine,546,111,435,12.03,0.33,0.2033
+Monday,15,Geriatrics,282,39,243,13.77,0.31,0.1383
+Monday,15,Pediatrics,582,119,463,10.38,0.28,0.2045
+Monday,15,Rehabilitation,50,11,39,8.9,0.4,0.22
+Monday,15,Women's Health,512,113,399,10.87,0.34,0.2207
+Monday,16,Behavioral Health,63,15,48,9.43,0.16,0.2381
+Monday,16,Chronic Care,232,39,193,9.98,0.37,0.1681
+Monday,16,Family Medicine,561,119,442,12.12,0.31,0.2121
+Monday,16,Geriatrics,270,54,216,13.84,0.35,0.2
+Monday,16,Pediatrics,538,129,409,9.56,0.25,0.2398
+Monday,16,Rehabilitation,43,8,35,8.23,0.35,0.186
+Monday,16,Women's Health,534,128,406,11.04,0.31,0.2397
+Saturday,8,Chronic Care,1,0,1,4.0,1.0,0.0
+Saturday,8,Family Medicine,3,3,0,5.0,0.33,1.0
+Saturday,8,Women's Health,1,0,1,3.0,0.0,0.0
+Saturday,9,Behavioral Health,1,0,1,4.0,0.0,0.0
+Saturday,9,Chronic Care,1,1,0,2.0,0.0,1.0
+Saturday,9,Family Medicine,1,0,1,0.0,0.0,0.0
+Saturday,10,Geriatrics,2,0,2,2.5,0.0,0.0
+Saturday,11,Chronic Care,2,0,2,2.5,0.0,0.0
+Saturday,11,Family Medicine,2,0,2,2.0,0.5,0.0
+Saturday,12,Behavioral Health,1,0,1,3.0,0.0,0.0
+Saturday,12,Chronic Care,1,0,1,0.0,0.0,0.0
+Saturday,12,Geriatrics,4,2,2,3.75,0.5,0.5
+Saturday,12,Rehabilitation,1,0,1,12.0,1.0,0.0
+Saturday,12,Women's Health,1,0,1,0.0,0.0,0.0
+Saturday,13,Geriatrics,2,0,2,5.0,0.5,0.0
+Saturday,13,Women's Health,1,0,1,8.0,1.0,0.0
+Saturday,14,Chronic Care,4,0,4,1.0,0.0,0.0
+Saturday,14,Geriatrics,1,0,1,2.0,0.0,0.0
+Saturday,14,Women's Health,2,2,0,11.0,1.0,1.0
+Saturday,15,Chronic Care,1,0,1,5.0,1.0,0.0
+Saturday,15,Family Medicine,2,0,2,12.0,0.5,0.0
+Saturday,15,Geriatrics,1,0,1,12.0,0.0,0.0
+Saturday,15,Women's Health,1,0,1,4.0,1.0,0.0
+Saturday,16,Chronic Care,1,1,0,2.0,0.0,1.0
+Saturday,16,Family Medicine,1,0,1,0.0,0.0,0.0
+Thursday,7,Behavioral Health,38,8,30,6.18,0.26,0.2105
+Thursday,7,Chronic Care,208,37,171,8.5,0.26,0.1779
+Thursday,7,Family Medicine,401,75,326,9.64,0.25,0.187
+Thursday,7,Geriatrics,189,28,161,11.1,0.27,0.1481
+Thursday,7,Pediatrics,418,77,341,9.87,0.27,0.1842
+Thursday,7,Rehabilitation,42,6,36,10.31,0.24,0.1429
+Thursday,7,Women's Health,398,83,315,10.33,0.34,0.2085
+Thursday,8,Behavioral Health,53,13,40,8.7,0.25,0.2453
+Thursday,8,Chronic Care,180,29,151,8.0,0.26,0.1611
+Thursday,8,Family Medicine,397,75,322,10.19,0.31,0.1889
+Thursday,8,Geriatrics,236,37,199,9.06,0.22,0.1568
+Thursday,8,Pediatrics,401,86,315,9.89,0.28,0.2145
+Thursday,8,Rehabilitation,35,8,27,7.71,0.17,0.2286
+Thursday,8,Women's Health,381,95,286,10.64,0.3,0.2493
+Thursday,9,Behavioral Health,48,9,39,5.94,0.19,0.1875
+Thursday,9,Chronic Care,188,37,151,8.47,0.24,0.1968
+Thursday,9,Family Medicine,436,89,347,10.51,0.3,0.2041
+Thursday,9,Geriatrics,217,28,189,9.47,0.24,0.129
+Thursday,9,Pediatrics,432,109,323,10.36,0.32,0.2523
+Thursday,9,Rehabilitation,40,11,29,5.38,0.1,0.275
+Thursday,9,Women's Health,390,82,308,11.72,0.39,0.2103
+Thursday,10,Behavioral Health,41,8,33,8.78,0.37,0.1951
+Thursday,10,Chronic Care,205,32,173,10.11,0.26,0.1561
+Thursday,10,Family Medicine,440,91,349,10.17,0.28,0.2068
+Thursday,10,Geriatrics,196,30,166,9.19,0.23,0.1531
+Thursday,10,Pediatrics,392,81,311,10.13,0.28,0.2066
+Thursday,10,Rehabilitation,35,7,28,5.8,0.14,0.2
+Thursday,10,Women's Health,415,94,321,9.61,0.33,0.2265
+Thursday,11,Behavioral Health,46,6,40,8.22,0.22,0.1304
+Thursday,11,Chronic Care,222,34,188,8.33,0.27,0.1532
+Thursday,11,Family Medicine,415,71,344,9.76,0.24,0.1711
+Thursday,11,Geriatrics,232,39,193,8.98,0.22,0.1681
+Thursday,11,Pediatrics,415,76,339,9.12,0.25,0.1831
+Thursday,11,Rehabilitation,38,10,28,4.97,0.18,0.2632
+Thursday,11,Women's Health,372,78,294,9.24,0.31,0.2097
+Thursday,12,Behavioral Health,43,7,36,5.28,0.21,0.1628
+Thursday,12,Chronic Care,203,33,170,9.12,0.25,0.1626
+Thursday,12,Family Medicine,412,85,327,9.27,0.27,0.2063
+Thursday,12,Geriatrics,191,28,163,8.11,0.23,0.1466
+Thursday,12,Pediatrics,417,82,335,10.52,0.28,0.1966
+Thursday,12,Rehabilitation,36,5,31,3.83,0.17,0.1389
+Thursday,12,Women's Health,389,82,307,9.23,0.33,0.2108
+Thursday,13,Behavioral Health,37,9,28,6.14,0.22,0.2432
+Thursday,13,Chronic Care,205,37,168,9.57,0.25,0.1805
+Thursday,13,Family Medicine,431,67,364,9.49,0.26,0.1555
+Thursday,13,Geriatrics,248,52,196,11.87,0.26,0.2097
+Thursday,13,Pediatrics,412,87,325,9.07,0.28,0.2112
+Thursday,13,Rehabilitation,44,4,40,6.7,0.25,0.0909
+Thursday,13,Women's Health,389,83,306,10.78,0.34,0.2134
+Thursday,14,Behavioral Health,44,7,37,5.64,0.3,0.1591
+Thursday,14,Chronic Care,215,39,176,9.53,0.33,0.1814
+Thursday,14,Family Medicine,407,72,335,10.32,0.29,0.1769
+Thursday,14,Geriatrics,218,27,191,9.66,0.25,0.1239
+Thursday,14,Pediatrics,431,85,346,9.54,0.28,0.1972
+Thursday,14,Rehabilitation,32,2,30,7.69,0.25,0.0625
+Thursday,14,Women's Health,396,73,323,8.24,0.3,0.1843
+Thursday,15,Behavioral Health,41,4,37,4.1,0.2,0.0976
+Thursday,15,Chronic Care,190,33,157,7.75,0.27,0.1737
+Thursday,15,Family Medicine,425,78,347,9.52,0.24,0.1835
+Thursday,15,Geriatrics,196,26,170,8.22,0.2,0.1327
+Thursday,15,Pediatrics,427,99,328,9.79,0.25,0.2319
+Thursday,15,Rehabilitation,35,7,28,3.74,0.09,0.2
+Thursday,15,Women's Health,398,98,300,10.11,0.38,0.2462
+Thursday,16,Behavioral Health,52,18,34,10.77,0.21,0.3462
+Thursday,16,Chronic Care,208,37,171,8.95,0.25,0.1779
+Thursday,16,Family Medicine,395,76,319,11.04,0.33,0.1924
+Thursday,16,Geriatrics,220,30,190,11.25,0.25,0.1364
+Thursday,16,Pediatrics,430,100,330,8.94,0.26,0.2326
+Thursday,16,Rehabilitation,39,6,33,4.54,0.15,0.1538
+Thursday,16,Women's Health,399,81,318,10.87,0.37,0.203
+Tuesday,7,Behavioral Health,74,17,57,10.07,0.46,0.2297
+Tuesday,7,Chronic Care,302,57,245,9.52,0.44,0.1887
+Tuesday,7,Family Medicine,639,112,527,10.55,0.43,0.1753
+Tuesday,7,Geriatrics,294,38,256,11.64,0.37,0.1293
+Tuesday,7,Pediatrics,627,127,500,9.07,0.33,0.2026
+Tuesday,7,Rehabilitation,58,14,44,8.28,0.29,0.2414
+Tuesday,7,Women's Health,629,145,484,10.64,0.45,0.2305
+Tuesday,8,Behavioral Health,65,14,51,7.83,0.43,0.2154
+Tuesday,8,Chronic Care,286,54,232,9.48,0.44,0.1888
+Tuesday,8,Family Medicine,576,104,472,9.34,0.39,0.1806
+Tuesday,8,Geriatrics,329,48,281,10.4,0.4,0.1459
+Tuesday,8,Pediatrics,642,152,490,9.49,0.34,0.2368
+Tuesday,8,Rehabilitation,64,11,53,7.19,0.36,0.1719
+Tuesday,8,Women's Health,628,142,486,10.27,0.43,0.2261
+Tuesday,9,Behavioral Health,58,15,43,7.69,0.26,0.2586
+Tuesday,9,Chronic Care,323,58,265,10.11,0.46,0.1796
+Tuesday,9,Family Medicine,574,116,458,10.48,0.44,0.2021
+Tuesday,9,Geriatrics,359,57,302,11.71,0.42,0.1588
+Tuesday,9,Pediatrics,629,128,501,8.89,0.34,0.2035
+Tuesday,9,Rehabilitation,37,4,33,5.51,0.27,0.1081
+Tuesday,9,Women's Health,605,122,483,9.37,0.43,0.2017
+Tuesday,10,Behavioral Health,60,17,43,7.22,0.28,0.2833
+Tuesday,10,Chronic Care,306,50,256,8.08,0.41,0.1634
+Tuesday,10,Family Medicine,530,101,429,11.39,0.43,0.1906
+Tuesday,10,Geriatrics,320,38,282,10.48,0.37,0.1188
+Tuesday,10,Pediatrics,616,143,473,9.42,0.36,0.2321
+Tuesday,10,Rehabilitation,45,12,33,7.93,0.38,0.2667
+Tuesday,10,Women's Health,597,129,468,11.34,0.49,0.2161
+Tuesday,11,Behavioral Health,56,14,42,7.41,0.32,0.25
+Tuesday,11,Chronic Care,268,56,212,9.36,0.44,0.209
+Tuesday,11,Family Medicine,610,113,497,10.67,0.42,0.1852
+Tuesday,11,Geriatrics,307,48,259,11.85,0.39,0.1564
+Tuesday,11,Pediatrics,615,134,481,9.12,0.33,0.2179
+Tuesday,11,Rehabilitation,46,10,36,8.15,0.39,0.2174
+Tuesday,11,Women's Health,639,144,495,9.14,0.44,0.2254
+Tuesday,12,Behavioral Health,63,14,49,6.21,0.24,0.2222
+Tuesday,12,Chronic Care,311,48,263,8.96,0.41,0.1543
+Tuesday,12,Family Medicine,588,128,460,10.82,0.42,0.2177
+Tuesday,12,Geriatrics,315,56,259,10.7,0.41,0.1778
+Tuesday,12,Pediatrics,607,114,493,9.79,0.38,0.1878
+Tuesday,12,Rehabilitation,66,8,58,6.7,0.36,0.1212
+Tuesday,12,Women's Health,593,136,457,10.0,0.47,0.2293
+Tuesday,13,Behavioral Health,62,12,50,5.42,0.23,0.1935
+Tuesday,13,Chronic Care,315,49,266,7.9,0.45,0.1556
+Tuesday,13,Family Medicine,580,112,468,10.56,0.38,0.1931
+Tuesday,13,Geriatrics,328,52,276,10.58,0.41,0.1585
+Tuesday,13,Pediatrics,613,104,509,8.89,0.34,0.1697
+Tuesday,13,Rehabilitation,43,11,32,7.77,0.4,0.2558
+Tuesday,13,Women's Health,665,165,500,9.81,0.47,0.2481
+Tuesday,14,Behavioral Health,63,17,46,9.56,0.37,0.2698
+Tuesday,14,Chronic Care,289,45,244,8.92,0.44,0.1557
+Tuesday,14,Family Medicine,585,129,456,12.45,0.45,0.2205
+Tuesday,14,Geriatrics,362,63,299,12.36,0.45,0.174
+Tuesday,14,Pediatrics,596,123,473,8.9,0.34,0.2064
+Tuesday,14,Rehabilitation,61,10,51,6.41,0.23,0.1639
+Tuesday,14,Women's Health,602,137,465,11.25,0.46,0.2276
+Tuesday,15,Behavioral Health,75,18,57,6.76,0.36,0.24
+Tuesday,15,Chronic Care,321,47,274,9.3,0.44,0.1464
+Tuesday,15,Family Medicine,589,113,476,11.5,0.43,0.1919
+Tuesday,15,Geriatrics,313,53,260,11.97,0.45,0.1693
+Tuesday,15,Pediatrics,637,148,489,10.15,0.35,0.2323
+Tuesday,15,Rehabilitation,66,14,52,8.52,0.32,0.2121
+Tuesday,15,Women's Health,600,151,449,10.89,0.43,0.2517
+Tuesday,16,Behavioral Health,64,16,48,8.58,0.44,0.25
+Tuesday,16,Chronic Care,291,59,232,8.18,0.43,0.2027
+Tuesday,16,Family Medicine,628,131,497,10.71,0.4,0.2086
+Tuesday,16,Geriatrics,309,52,257,9.96,0.41,0.1683
+Tuesday,16,Pediatrics,609,128,481,8.97,0.34,0.2102
+Tuesday,16,Rehabilitation,41,6,35,7.46,0.37,0.1463
+Tuesday,16,Women's Health,577,139,438,10.96,0.43,0.2409
+Wednesday,7,Behavioral Health,54,10,44,6.43,0.33,0.1852
+Wednesday,7,Chronic Care,286,69,217,9.09,0.32,0.2413
+Wednesday,7,Family Medicine,615,112,503,11.58,0.36,0.1821
+Wednesday,7,Geriatrics,303,40,263,12.05,0.34,0.132
+Wednesday,7,Pediatrics,638,142,496,8.82,0.33,0.2226
+Wednesday,7,Rehabilitation,43,8,35,6.35,0.23,0.186
+Wednesday,7,Women's Health,571,122,449,10.58,0.39,0.2137
+Wednesday,8,Behavioral Health,84,18,66,6.1,0.3,0.2143
+Wednesday,8,Chronic Care,311,51,260,10.02,0.33,0.164
+Wednesday,8,Family Medicine,660,128,532,10.72,0.35,0.1939
+Wednesday,8,Geriatrics,309,59,250,10.99,0.28,0.1909
+Wednesday,8,Pediatrics,621,143,478,9.7,0.31,0.2303
+Wednesday,8,Rehabilitation,41,11,30,10.17,0.39,0.2683
+Wednesday,8,Women's Health,638,149,489,11.29,0.42,0.2335
+Wednesday,9,Behavioral Health,72,12,60,6.9,0.31,0.1667
+Wednesday,9,Chronic Care,315,60,255,9.31,0.36,0.1905
+Wednesday,9,Family Medicine,593,88,505,10.49,0.35,0.1484
+Wednesday,9,Geriatrics,292,42,250,10.93,0.34,0.1438
+Wednesday,9,Pediatrics,631,143,488,9.12,0.3,0.2266
+Wednesday,9,Rehabilitation,43,10,33,6.02,0.23,0.2326
+Wednesday,9,Women's Health,625,143,482,9.78,0.4,0.2288
+Wednesday,10,Behavioral Health,76,11,65,6.61,0.24,0.1447
+Wednesday,10,Chronic Care,312,58,254,9.82,0.33,0.1859
+Wednesday,10,Family Medicine,602,123,479,11.09,0.37,0.2043
+Wednesday,10,Geriatrics,306,42,264,10.55,0.24,0.1373
+Wednesday,10,Pediatrics,644,141,503,9.57,0.32,0.2189
+Wednesday,10,Rehabilitation,50,7,43,6.88,0.2,0.14
+Wednesday,10,Women's Health,598,129,469,10.3,0.42,0.2157
+Wednesday,11,Behavioral Health,64,11,53,5.53,0.28,0.1719
+Wednesday,11,Chronic Care,308,53,255,8.65,0.36,0.1721
+Wednesday,11,Family Medicine,588,84,504,9.53,0.36,0.1429
+Wednesday,11,Geriatrics,366,50,316,11.42,0.3,0.1366
+Wednesday,11,Pediatrics,626,138,488,9.85,0.32,0.2204
+Wednesday,11,Rehabilitation,44,9,35,14.48,0.25,0.2045
+Wednesday,11,Women's Health,586,122,464,10.49,0.4,0.2082
+Wednesday,12,Behavioral Health,87,13,74,7.46,0.34,0.1494
+Wednesday,12,Chronic Care,274,50,224,10.59,0.39,0.1825
+Wednesday,12,Family Medicine,618,111,507,10.35,0.35,0.1796
+Wednesday,12,Geriatrics,305,49,256,9.7,0.28,0.1607
+Wednesday,12,Pediatrics,615,145,470,9.28,0.31,0.2358
+Wednesday,12,Rehabilitation,56,10,46,7.48,0.18,0.1786
+Wednesday,12,Women's Health,604,146,458,10.78,0.41,0.2417
+Wednesday,13,Behavioral Health,68,11,57,8.87,0.29,0.1618
+Wednesday,13,Chronic Care,332,50,282,10.37,0.36,0.1506
+Wednesday,13,Family Medicine,605,119,486,9.83,0.33,0.1967
+Wednesday,13,Geriatrics,331,52,279,12.72,0.34,0.1571
+Wednesday,13,Pediatrics,649,139,510,9.76,0.32,0.2142
+Wednesday,13,Rehabilitation,46,11,35,10.7,0.26,0.2391
+Wednesday,13,Women's Health,606,140,466,9.78,0.4,0.231
+Wednesday,14,Behavioral Health,64,11,53,7.77,0.2,0.1719
+Wednesday,14,Chronic Care,256,35,221,11.76,0.38,0.1367
+Wednesday,14,Family Medicine,619,102,517,9.72,0.31,0.1648
+Wednesday,14,Geriatrics,316,51,265,11.06,0.35,0.1614
+Wednesday,14,Pediatrics,666,152,514,8.69,0.3,0.2282
+Wednesday,14,Rehabilitation,56,11,45,11.18,0.23,0.1964
+Wednesday,14,Women's Health,584,124,460,9.59,0.35,0.2123
+Wednesday,15,Behavioral Health,57,8,49,4.84,0.21,0.1404
+Wednesday,15,Chronic Care,286,49,237,9.55,0.37,0.1713
+Wednesday,15,Family Medicine,635,119,516,9.42,0.32,0.1874
+Wednesday,15,Geriatrics,304,49,255,10.01,0.32,0.1612
+Wednesday,15,Pediatrics,633,139,494,10.36,0.34,0.2196
+Wednesday,15,Rehabilitation,45,8,37,8.31,0.22,0.1778
+Wednesday,15,Women's Health,596,134,462,10.31,0.4,0.2248
+Wednesday,16,Behavioral Health,70,13,57,6.3,0.27,0.1857
+Wednesday,16,Chronic Care,315,51,264,7.27,0.36,0.1619
+Wednesday,16,Family Medicine,586,109,477,10.84,0.34,0.186
+Wednesday,16,Geriatrics,342,41,301,12.07,0.34,0.1199
+Wednesday,16,Pediatrics,651,144,507,8.0,0.29,0.2212
+Wednesday,16,Rehabilitation,67,9,58,5.21,0.16,0.1343
+Wednesday,16,Women's Health,608,150,458,10.05,0.4,0.2467

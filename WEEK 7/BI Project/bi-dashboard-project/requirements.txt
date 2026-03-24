@@ -1,0 +1,16 @@
+pandas
+numpy
+python-dotenv
+pydantic
+openai
+streamlit
+plotly
+xgboost
+scikit-learn
+shap
+requests
+langchain
+langgraph
+langsmith
+fastapi
+uvicorn

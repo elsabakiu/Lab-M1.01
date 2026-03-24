@@ -1,0 +1,3825 @@
+{
+  "name": "Production - Appointment Reminders and Follow-ups (Airtable + Gmail + Telegram)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "f82e880e-6566-4a79-b7b5-8ad8c3d4c6cf",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1760,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "id": "44bda22f-39f2-494e-a32a-28c0d95b3a9d",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1760,
+        592
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "7fca5b61-4f1a-4e00-a1f2-a56096d89c2c",
+      "name": "Merge Triggers",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -1536,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "https://airtable.com/appqZYgYFZfGfdGK8/",
+          "mode": "url"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblBkoJHIdBxGsGZU",
+          "mode": "list",
+          "cachedResultName": "Appointments",
+          "cachedResultUrl": "https://airtable.com/appqZYgYFZfGfdGK8/tblBkoJHIdBxGsGZU"
+        },
+        "filterByFormula": "=AND(\n  {consent} = TRUE(),\n  OR(\n    {status} = \"scheduled\",\n    {status} = \"completed\",\n    {status} = \"no_show\"\n  )\n)",
+        "options": {}
+      },
+      "id": "3a61e050-4b83-4541-bd43-012f3b16d4fa",
+      "name": "Airtable - List Appointments",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        -1312,
+        400
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ZC9pKtyxF4dO44KJ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const fields = $json.fields || $json;\nconst recordId = $json.id || fields.record_id || '';\n\nfunction safeLower(v) {\n  return (v ?? '').toString().trim().toLowerCase();\n}\n\nfunction parseBool(v) {\n  if (v === true || v === false) return v;\n  const s = safeLower(v);\n  return s === 'true' || s === '1' || s === 'yes';\n}\n\nfunction parseDateTime(dateStr, timeStr) {\n  if (!dateStr) return null;\n  const dt = new Date(`${dateStr}T${timeStr || '09:00'}:00`);\n  return isNaN(dt.getTime()) ? null : dt;\n}\n\nfunction formatPhone(phone) {\n  const phoneStr = (phone || '').toString().replace(/[^0-9]/g, '');\n  return phoneStr ? '+' + phoneStr : '';\n}\n\nconst now = new Date();\n\nconst apptDate = fields.appointment_date || fields.AppointmentDate || fields.date || '';\nconst apptTime = fields.appointment_time || fields.AppointmentTime || fields.time || '';\nconst appointmentAt = parseDateTime(apptDate, apptTime);\nconst diffHours = appointmentAt ? (appointmentAt.getTime() - now.getTime()) / 3600000 : null;\n\nconst status = safeLower(fields.status || fields.Status);\nconst preferredChannel = safeLower(fields.preferred_channel || fields.PreferredChannel || 'sms');\n\nconst reminder24Sent = parseBool(fields.reminder_24h_sent ?? fields.Reminder24hSent);\nconst followupSent = parseBool(fields.followup_sent ?? fields.FollowupSent);\nconst consent = parseBool(fields.consent ?? fields.Consent);\n\nlet workflowType = 'ignore';\n\nif (\n  status === 'scheduled' &&\n  diffHours !== null &&\n  diffHours > 0 &&\n  diffHours <= 24 &&\n  !reminder24Sent\n) {\n  workflowType = 'reminder';\n} else if (status === 'completed' && !followupSent) {\n  workflowType = 'completed_followup';\n} else if ((status === 'no_show' || status === 'noshow') && !followupSent) {\n  workflowType = 'no_show_followup';\n}\n\nconst patientName = fields.patient_name || fields.PatientName || '';\nconst firstName =\n  fields.first_name ||\n  fields.FirstName ||\n  (patientName ? patientName.split(' ')[0] : '') ||\n  'there';\n\nreturn {\n  json: {\n    recordId,\n    patientId: fields.patient_id || fields.PatientID || '',\n    appointmentId: fields.appointment_id || fields.AppointmentID || '',\n    patientName,\n    firstName,\n    phone: formatPhone(fields.phone || fields.Phone),\n     telegram_chat_id: fields.telegram_chat_id || fields.Telegram_Chat_Id || '',\n    email: fields.email || fields.Email || '',\n    consent,\n    preferredChannel,\n    appointmentDate: apptDate,\n    appointmentTime: apptTime,\n    appointmentAt: appointmentAt ? appointmentAt.toISOString() : '',\n    diffHours,\n    providerName: fields.provider_name || fields.ProviderName || '',\n    specialty: fields.specialty || fields.Specialty || '',\n    clinicName: fields.clinic_name || fields.ClinicName || '',\n    clinicAddress: fields.clinic_address || fields.ClinicAddress || '',\n    status,\n    reminder24Sent,\n    followupSent,\n    workflowType\n  }\n};"
+      },
+      "id": "17e97c9d-0cdd-4550-ba3e-c6cc32f04c10",
+      "name": "Normalize + Decide Flow",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1088,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.workflowType }}",
+                    "rightValue": "reminder",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "1bedffb7-3b23-40ee-84e3-1d0561486e02"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.workflowType }}",
+                    "rightValue": "completed_followup",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "64edd816-ef39-4d8c-bc10-0aefd3bbae09"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.workflowType }}",
+                    "rightValue": "no_show_followup",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "7f6e6a59-a898-49f0-8553-2e6df2966d05"
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "bca84250-1cc2-4cc9-ba6e-02b0236545d1",
+      "name": "Switch by Workflow Type",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -864,
+        384
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "messageType",
+              "type": "string",
+              "value": "appointment_reminder_24h",
+              "id": "998b23c4-aa6c-4c59-a126-3daa370c0285"
+            },
+            {
+              "name": "messageSubject",
+              "type": "string",
+              "value": "=Appointment reminder: {{ $json.appointmentDate }} at {{ $json.appointmentTime }}",
+              "id": "50b08016-6b50-4122-a1ab-89488721955d"
+            },
+            {
+              "name": "=messageText",
+              "type": "string",
+              "value": "=Hi {{ $json.firstName }}, this is a reminder for your appointment at {{ $json.clinicName }} on {{ $json.appointmentDate }} at {{ $json.appointmentTime }} with {{ $json.providerName }} ({{ $json.specialty }}). Address: {{ $json.clinicAddress }}. Please contact us if you need to reschedule.",
+              "id": "b3ac18bc-7142-4bc4-951e-9b7f925ca3dc"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "e3487cfd-413b-4303-a390-421b5de54e6d",
+      "name": "Set Reminder Message",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -640,
+        16
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.preferredChannel }}",
+              "rightValue": "email",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "7419fd1f-39f3-413b-9c8c-0a56f529ec8b",
+      "name": "Reminder via Email?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -416,
+        16
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "={{ $json.messageSubject }}",
+        "emailType": "text",
+        "message": "={{ $json.messageText }}",
+        "options": {}
+      },
+      "id": "63abb9a7-8a03-4db7-8e0a-79f673c400ce",
+      "name": "Gmail - Send Reminder",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -192,
+        -80
+      ],
+      "webhookId": "0058d39c-ae56-4c7b-a6ac-60126580c09c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Awo2cfDMqFQEGtJy",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "deliveryChannel",
+              "type": "string",
+              "value": "={{ $json.preferredChannel === 'email' ? 'email' : 'telegram' }}"
+            },
+            {
+              "name": "deliveryStatus",
+              "type": "string",
+              "value": "sent"
+            },
+            {
+              "name": "sentAt",
+              "type": "string",
+              "value": "={{ $now }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "978e9aa0-884c-4937-a0d1-7947c7a1a6a9",
+      "name": "Set Reminder Delivery Status",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        32,
+        16
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appqZYgYFZfGfdGK8",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblBkoJHIdBxGsGZU",
+          "mode": "list",
+          "cachedResultName": "Appointments",
+          "cachedResultUrl": "https://airtable.com/appqZYgYFZfGfdGK8/tblBkoJHIdBxGsGZU"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "consent": false,
+            "reminder_24h_sent": true,
+            "appointment_id": "={{ $('Reminder via Email?').item.json.appointmentId }}",
+            "patient_id": 0,
+            "phone": 0,
+            "wait_time_min": 0,
+            "visit_duration_min": 0,
+            "lead_time_days": 0,
+            "hour": 0,
+            "age": 0,
+            "telegram_chat_id": 0,
+            "last_message_sent_at": "={{$now.toISO()}}"
+          },
+          "matchingColumns": [
+            "appointment_id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "appointment_id",
+              "displayName": "appointment_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "patient_id",
+              "displayName": "patient_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "first_name",
+              "displayName": "first_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Matthew",
+                  "value": "Matthew"
+                },
+                {
+                  "name": "William",
+                  "value": "William"
+                },
+                {
+                  "name": "Kimberly",
+                  "value": "Kimberly"
+                },
+                {
+                  "name": "Paul",
+                  "value": "Paul"
+                },
+                {
+                  "name": "Andrew",
+                  "value": "Andrew"
+                },
+                {
+                  "name": "John",
+                  "value": "John"
+                },
+                {
+                  "name": "Sarah",
+                  "value": "Sarah"
+                },
+                {
+                  "name": "Lisa",
+                  "value": "Lisa"
+                },
+                {
+                  "name": "Daniel",
+                  "value": "Daniel"
+                },
+                {
+                  "name": "Ashley",
+                  "value": "Ashley"
+                },
+                {
+                  "name": "Mark",
+                  "value": "Mark"
+                },
+                {
+                  "name": "Donna",
+                  "value": "Donna"
+                },
+                {
+                  "name": "Patricia",
+                  "value": "Patricia"
+                },
+                {
+                  "name": "Thomas",
+                  "value": "Thomas"
+                },
+                {
+                  "name": "Richard",
+                  "value": "Richard"
+                },
+                {
+                  "name": "Steven",
+                  "value": "Steven"
+                },
+                {
+                  "name": "Anthony",
+                  "value": "Anthony"
+                },
+                {
+                  "name": "Donald",
+                  "value": "Donald"
+                },
+                {
+                  "name": "Margaret",
+                  "value": "Margaret"
+                },
+                {
+                  "name": "Michael",
+                  "value": "Michael"
+                },
+                {
+                  "name": "Michelle",
+                  "value": "Michelle"
+                },
+                {
+                  "name": "James",
+                  "value": "James"
+                },
+                {
+                  "name": "Robert",
+                  "value": "Robert"
+                },
+                {
+                  "name": "Kenneth",
+                  "value": "Kenneth"
+                },
+                {
+                  "name": "Jessica",
+                  "value": "Jessica"
+                },
+                {
+                  "name": "Betty",
+                  "value": "Betty"
+                },
+                {
+                  "name": "Joshua",
+                  "value": "Joshua"
+                },
+                {
+                  "name": "Charles",
+                  "value": "Charles"
+                },
+                {
+                  "name": "David",
+                  "value": "David"
+                },
+                {
+                  "name": "Nancy",
+                  "value": "Nancy"
+                },
+                {
+                  "name": "Barbara",
+                  "value": "Barbara"
+                },
+                {
+                  "name": "Karen",
+                  "value": "Karen"
+                },
+                {
+                  "name": "Sandra",
+                  "value": "Sandra"
+                },
+                {
+                  "name": "Mary",
+                  "value": "Mary"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "patient_name",
+              "displayName": "patient_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "consent",
+              "displayName": "consent",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "preferred_channel",
+              "displayName": "preferred_channel",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "options": [
+                {
+                  "name": "telegram",
+                  "value": "telegram"
+                },
+                {
+                  "name": "email",
+                  "value": "email"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "appointment_date",
+              "displayName": "appointment_date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "appointment_time",
+              "displayName": "appointment_time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "provider_name",
+              "displayName": "provider_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "BH-01",
+                  "value": "BH-01"
+                },
+                {
+                  "name": "BH-02",
+                  "value": "BH-02"
+                },
+                {
+                  "name": "BH-03",
+                  "value": "BH-03"
+                },
+                {
+                  "name": "BH-04",
+                  "value": "BH-04"
+                },
+                {
+                  "name": "BH-05",
+                  "value": "BH-05"
+                },
+                {
+                  "name": "BH-06",
+                  "value": "BH-06"
+                },
+                {
+                  "name": "BH-07",
+                  "value": "BH-07"
+                },
+                {
+                  "name": "BH-08",
+                  "value": "BH-08"
+                },
+                {
+                  "name": "BH-09",
+                  "value": "BH-09"
+                },
+                {
+                  "name": "BH-10",
+                  "value": "BH-10"
+                },
+                {
+                  "name": "BH-11",
+                  "value": "BH-11"
+                },
+                {
+                  "name": "BH-12",
+                  "value": "BH-12"
+                },
+                {
+                  "name": "BH-13",
+                  "value": "BH-13"
+                },
+                {
+                  "name": "BH-14",
+                  "value": "BH-14"
+                },
+                {
+                  "name": "BH-15",
+                  "value": "BH-15"
+                },
+                {
+                  "name": "BH-16",
+                  "value": "BH-16"
+                },
+                {
+                  "name": "BH-17",
+                  "value": "BH-17"
+                },
+                {
+                  "name": "BH-18",
+                  "value": "BH-18"
+                },
+                {
+                  "name": "BH-20",
+                  "value": "BH-20"
+                },
+                {
+                  "name": "BH-21",
+                  "value": "BH-21"
+                },
+                {
+                  "name": "BH-22",
+                  "value": "BH-22"
+                },
+                {
+                  "name": "BH-24",
+                  "value": "BH-24"
+                },
+                {
+                  "name": "CHR-01",
+                  "value": "CHR-01"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "specialty",
+              "displayName": "specialty",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Behavioral Health",
+                  "value": "Behavioral Health"
+                },
+                {
+                  "name": "Chronic Care",
+                  "value": "Chronic Care"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "clinic_name",
+              "displayName": "clinic_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "City Clinic",
+                  "value": "City Clinic"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "clinic_address",
+              "displayName": "clinic_address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "12 Main Street",
+                  "value": "12 Main Street"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "completed",
+                  "value": "completed"
+                },
+                {
+                  "name": "no_show",
+                  "value": "no_show"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "reminder_24h_sent",
+              "displayName": "reminder_24h_sent",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "followup_sent",
+              "displayName": "followup_sent",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "last_message_sent_at",
+              "displayName": "last_message_sent_at",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "wait_time_min",
+              "displayName": "wait_time_min",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "visit_duration_min",
+              "displayName": "visit_duration_min",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "lead_time_days",
+              "displayName": "lead_time_days",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "weekday",
+              "displayName": "weekday",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Friday",
+                  "value": "Friday"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "hour",
+              "displayName": "hour",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "neighborhood",
+              "displayName": "neighborhood",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "INHANGUETÁ",
+                  "value": "INHANGUETÁ"
+                },
+                {
+                  "name": "BONFIM",
+                  "value": "BONFIM"
+                },
+                {
+                  "name": "JOANA D´ARC",
+                  "value": "JOANA D´ARC"
+                },
+                {
+                  "name": "COMDUSA",
+                  "value": "COMDUSA"
+                },
+                {
+                  "name": "SÃO BENEDITO",
+                  "value": "SÃO BENEDITO"
+                },
+                {
+                  "name": "SANTA MARTHA",
+                  "value": "SANTA MARTHA"
+                },
+                {
+                  "name": "CENTRO",
+                  "value": "CENTRO"
+                },
+                {
+                  "name": "TABUAZEIRO",
+                  "value": "TABUAZEIRO"
+                },
+                {
+                  "name": "REDENÇÃO",
+                  "value": "REDENÇÃO"
+                },
+                {
+                  "name": "DO QUADRO",
+                  "value": "DO QUADRO"
+                },
+                {
+                  "name": "PRAIA DO SUÁ",
+                  "value": "PRAIA DO SUÁ"
+                },
+                {
+                  "name": "DA PENHA",
+                  "value": "DA PENHA"
+                },
+                {
+                  "name": "PARQUE MOSCOSO",
+                  "value": "PARQUE MOSCOSO"
+                },
+                {
+                  "name": "JESUS DE NAZARETH",
+                  "value": "JESUS DE NAZARETH"
+                },
+                {
+                  "name": "SÃO CRISTÓVÃO",
+                  "value": "SÃO CRISTÓVÃO"
+                },
+                {
+                  "name": "ILHA DE SANTA MARIA",
+                  "value": "ILHA DE SANTA MARIA"
+                },
+                {
+                  "name": "GURIGICA",
+                  "value": "GURIGICA"
+                },
+                {
+                  "name": "NOVA PALESTINA",
+                  "value": "NOVA PALESTINA"
+                },
+                {
+                  "name": "RESISTÊNCIA",
+                  "value": "RESISTÊNCIA"
+                },
+                {
+                  "name": "SÃO PEDRO",
+                  "value": "SÃO PEDRO"
+                },
+                {
+                  "name": "FORTE SÃO JOÃO",
+                  "value": "FORTE SÃO JOÃO"
+                },
+                {
+                  "name": "ITARARÉ",
+                  "value": "ITARARÉ"
+                },
+                {
+                  "name": "CONSOLAÇÃO",
+                  "value": "CONSOLAÇÃO"
+                },
+                {
+                  "name": "ANDORINHAS",
+                  "value": "ANDORINHAS"
+                },
+                {
+                  "name": "MARUÍPE",
+                  "value": "MARUÍPE"
+                },
+                {
+                  "name": "ESTRELINHA",
+                  "value": "ESTRELINHA"
+                },
+                {
+                  "name": "ILHA DAS CAIEIRAS",
+                  "value": "ILHA DAS CAIEIRAS"
+                },
+                {
+                  "name": "ROMÃO",
+                  "value": "ROMÃO"
+                },
+                {
+                  "name": "DO MOSCOSO",
+                  "value": "DO MOSCOSO"
+                },
+                {
+                  "name": "BELA VISTA",
+                  "value": "BELA VISTA"
+                },
+                {
+                  "name": "CRUZAMENTO",
+                  "value": "CRUZAMENTO"
+                },
+                {
+                  "name": "SANTO ANTÔNIO",
+                  "value": "SANTO ANTÔNIO"
+                },
+                {
+                  "name": "CARATOÍRA",
+                  "value": "CARATOÍRA"
+                },
+                {
+                  "name": "DE LOURDES",
+                  "value": "DE LOURDES"
+                },
+                {
+                  "name": "SANTO ANDRÉ",
+                  "value": "SANTO ANDRÉ"
+                },
+                {
+                  "name": "VILA RUBIM",
+                  "value": "VILA RUBIM"
+                },
+                {
+                  "name": "BENTO FERREIRA",
+                  "value": "BENTO FERREIRA"
+                },
+                {
+                  "name": "FONTE GRANDE",
+                  "value": "FONTE GRANDE"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "gender",
+              "displayName": "gender",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "M",
+                  "value": "M"
+                },
+                {
+                  "name": "F",
+                  "value": "F"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "age",
+              "displayName": "age",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "telegram_chat_id",
+              "displayName": "telegram_chat_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "673ff064-3e44-4f12-a93e-a7b76b21f7fa",
+      "name": "Airtable - Update Reminder Status",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        256,
+        16
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ZC9pKtyxF4dO44KJ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appqZYgYFZfGfdGK8",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblwXZ3zGBmONz89k",
+          "mode": "list",
+          "cachedResultName": "Communications Log",
+          "cachedResultUrl": "https://airtable.com/appqZYgYFZfGfdGK8/tblwXZ3zGBmONz89k"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "appointment_record_id": "={{ $json.fields.appointment_id }}",
+            "patient_name": "={{ $json.fields.patient_name }}",
+            "message_type": "reminder",
+            "channel": "={{ $json.fields.preferred_channel }}",
+            "status": "failed",
+            "sent_at": "={{$now.toISO()}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "appointment_record_id",
+              "displayName": "appointment_record_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "patient_name",
+              "displayName": "patient_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "message_type",
+              "displayName": "message_type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "no_show_followup",
+                  "value": "no_show_followup"
+                },
+                {
+                  "name": "completed_followup",
+                  "value": "completed_followup"
+                },
+                {
+                  "name": "reminder",
+                  "value": "reminder"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "channel",
+              "displayName": "channel",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "options": [
+                {
+                  "name": "telegram",
+                  "value": "telegram"
+                },
+                {
+                  "name": "email",
+                  "value": "email"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "sent",
+                  "value": "sent"
+                },
+                {
+                  "name": "failed",
+                  "value": "failed"
+                },
+                {
+                  "name": "delivered",
+                  "value": "delivered"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "sent_at",
+              "displayName": "sent_at",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "04ab1c01-6877-44e4-a3ea-cd6290213364",
+      "name": "Airtable - Log Reminder",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        480,
+        16
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ZC9pKtyxF4dO44KJ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "messageType",
+              "type": "string",
+              "value": "completed_followup",
+              "id": "58db56a9-f10a-496c-a423-c02dc723c5cc"
+            },
+            {
+              "name": "messageSubject",
+              "type": "string",
+              "value": "=Thanks for visiting {{ $json.clinicName }}",
+              "id": "ef27631f-c550-4b25-8492-74f52ee9e9fb"
+            },
+            {
+              "name": "=messageText",
+              "type": "string",
+              "value": "=Hi {{ $json.firstName }}, thank you for visiting {{ $json.clinicName }} today. We hope your appointment with {{ $json.providerName }} went well. We would love your feedback and are here if you need any follow-up support.",
+              "id": "646030dd-7407-4039-9e97-7528302682d4"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "b71ebafc-0169-4e2a-8e59-0482a0d92a19",
+      "name": "Set Completed Follow-up",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -640,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.preferredChannel }}",
+              "rightValue": "email",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              },
+              "id": "79e222dc-e781-461c-92e2-b38b04c47ff1"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "0e7a6040-420b-49e5-9802-a19eaa080c35",
+      "name": "Completed via Email?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -416,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "={{ $json.messageSubject }}",
+        "emailType": "text",
+        "message": "={{ $json.messageText }}",
+        "options": {}
+      },
+      "id": "25285ee4-ff24-4aa0-b351-a24ec4f34936",
+      "name": "Gmail - Send Completed Follow-up",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -192,
+        304
+      ],
+      "webhookId": "7b63ee02-7cb7-446d-a83f-5f9b17702171",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Awo2cfDMqFQEGtJy",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "deliveryChannel",
+              "type": "string",
+              "value": "={{ $json.preferredChannel === 'email' ? 'email' : 'telegram' }}"
+            },
+            {
+              "name": "deliveryStatus",
+              "type": "string",
+              "value": "sent"
+            },
+            {
+              "name": "sentAt",
+              "type": "string",
+              "value": "={{ $now }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4ff89bfd-3b10-4331-a7db-1cabae6e4ae6",
+      "name": "Set Completed Delivery Status",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        32,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appqZYgYFZfGfdGK8",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblBkoJHIdBxGsGZU",
+          "mode": "list",
+          "cachedResultName": "Appointments",
+          "cachedResultUrl": "https://airtable.com/appqZYgYFZfGfdGK8/tblBkoJHIdBxGsGZU"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "consent": false,
+            "reminder_24h_sent": false,
+            "last_message_sent_at": "={{$now.toISO()}}",
+            "status": "completed",
+            "appointment_id": "={{ $('Set Completed Follow-up').item.json.appointmentId }}",
+            "patient_id": 0,
+            "phone": 0,
+            "wait_time_min": 0,
+            "visit_duration_min": 0,
+            "lead_time_days": 0,
+            "hour": 0,
+            "age": 0,
+            "telegram_chat_id": 0
+          },
+          "matchingColumns": [
+            "appointment_id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "appointment_id",
+              "displayName": "appointment_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "patient_id",
+              "displayName": "patient_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "first_name",
+              "displayName": "first_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Matthew",
+                  "value": "Matthew"
+                },
+                {
+                  "name": "William",
+                  "value": "William"
+                },
+                {
+                  "name": "Kimberly",
+                  "value": "Kimberly"
+                },
+                {
+                  "name": "Paul",
+                  "value": "Paul"
+                },
+                {
+                  "name": "Andrew",
+                  "value": "Andrew"
+                },
+                {
+                  "name": "John",
+                  "value": "John"
+                },
+                {
+                  "name": "Sarah",
+                  "value": "Sarah"
+                },
+                {
+                  "name": "Lisa",
+                  "value": "Lisa"
+                },
+                {
+                  "name": "Daniel",
+                  "value": "Daniel"
+                },
+                {
+                  "name": "Ashley",
+                  "value": "Ashley"
+                },
+                {
+                  "name": "Mark",
+                  "value": "Mark"
+                },
+                {
+                  "name": "Donna",
+                  "value": "Donna"
+                },
+                {
+                  "name": "Patricia",
+                  "value": "Patricia"
+                },
+                {
+                  "name": "Thomas",
+                  "value": "Thomas"
+                },
+                {
+                  "name": "Richard",
+                  "value": "Richard"
+                },
+                {
+                  "name": "Steven",
+                  "value": "Steven"
+                },
+                {
+                  "name": "Anthony",
+                  "value": "Anthony"
+                },
+                {
+                  "name": "Donald",
+                  "value": "Donald"
+                },
+                {
+                  "name": "Margaret",
+                  "value": "Margaret"
+                },
+                {
+                  "name": "Michael",
+                  "value": "Michael"
+                },
+                {
+                  "name": "Michelle",
+                  "value": "Michelle"
+                },
+                {
+                  "name": "James",
+                  "value": "James"
+                },
+                {
+                  "name": "Robert",
+                  "value": "Robert"
+                },
+                {
+                  "name": "Kenneth",
+                  "value": "Kenneth"
+                },
+                {
+                  "name": "Jessica",
+                  "value": "Jessica"
+                },
+                {
+                  "name": "Betty",
+                  "value": "Betty"
+                },
+                {
+                  "name": "Joshua",
+                  "value": "Joshua"
+                },
+                {
+                  "name": "Charles",
+                  "value": "Charles"
+                },
+                {
+                  "name": "David",
+                  "value": "David"
+                },
+                {
+                  "name": "Nancy",
+                  "value": "Nancy"
+                },
+                {
+                  "name": "Barbara",
+                  "value": "Barbara"
+                },
+                {
+                  "name": "Karen",
+                  "value": "Karen"
+                },
+                {
+                  "name": "Sandra",
+                  "value": "Sandra"
+                },
+                {
+                  "name": "Mary",
+                  "value": "Mary"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "patient_name",
+              "displayName": "patient_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "consent",
+              "displayName": "consent",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "preferred_channel",
+              "displayName": "preferred_channel",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "options": [
+                {
+                  "name": "telegram",
+                  "value": "telegram"
+                },
+                {
+                  "name": "email",
+                  "value": "email"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "appointment_date",
+              "displayName": "appointment_date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "appointment_time",
+              "displayName": "appointment_time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "provider_name",
+              "displayName": "provider_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "BH-01",
+                  "value": "BH-01"
+                },
+                {
+                  "name": "BH-02",
+                  "value": "BH-02"
+                },
+                {
+                  "name": "BH-03",
+                  "value": "BH-03"
+                },
+                {
+                  "name": "BH-04",
+                  "value": "BH-04"
+                },
+                {
+                  "name": "BH-05",
+                  "value": "BH-05"
+                },
+                {
+                  "name": "BH-06",
+                  "value": "BH-06"
+                },
+                {
+                  "name": "BH-07",
+                  "value": "BH-07"
+                },
+                {
+                  "name": "BH-08",
+                  "value": "BH-08"
+                },
+                {
+                  "name": "BH-09",
+                  "value": "BH-09"
+                },
+                {
+                  "name": "BH-10",
+                  "value": "BH-10"
+                },
+                {
+                  "name": "BH-11",
+                  "value": "BH-11"
+                },
+                {
+                  "name": "BH-12",
+                  "value": "BH-12"
+                },
+                {
+                  "name": "BH-13",
+                  "value": "BH-13"
+                },
+                {
+                  "name": "BH-14",
+                  "value": "BH-14"
+                },
+                {
+                  "name": "BH-15",
+                  "value": "BH-15"
+                },
+                {
+                  "name": "BH-16",
+                  "value": "BH-16"
+                },
+                {
+                  "name": "BH-17",
+                  "value": "BH-17"
+                },
+                {
+                  "name": "BH-18",
+                  "value": "BH-18"
+                },
+                {
+                  "name": "BH-20",
+                  "value": "BH-20"
+                },
+                {
+                  "name": "BH-21",
+                  "value": "BH-21"
+                },
+                {
+                  "name": "BH-22",
+                  "value": "BH-22"
+                },
+                {
+                  "name": "BH-24",
+                  "value": "BH-24"
+                },
+                {
+                  "name": "CHR-01",
+                  "value": "CHR-01"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "specialty",
+              "displayName": "specialty",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Behavioral Health",
+                  "value": "Behavioral Health"
+                },
+                {
+                  "name": "Chronic Care",
+                  "value": "Chronic Care"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "clinic_name",
+              "displayName": "clinic_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "City Clinic",
+                  "value": "City Clinic"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "clinic_address",
+              "displayName": "clinic_address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "12 Main Street",
+                  "value": "12 Main Street"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "completed",
+                  "value": "completed"
+                },
+                {
+                  "name": "no_show",
+                  "value": "no_show"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "reminder_24h_sent",
+              "displayName": "reminder_24h_sent",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "followup_sent",
+              "displayName": "followup_sent",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "last_message_sent_at",
+              "displayName": "last_message_sent_at",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "wait_time_min",
+              "displayName": "wait_time_min",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "visit_duration_min",
+              "displayName": "visit_duration_min",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "lead_time_days",
+              "displayName": "lead_time_days",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "weekday",
+              "displayName": "weekday",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Friday",
+                  "value": "Friday"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "hour",
+              "displayName": "hour",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "neighborhood",
+              "displayName": "neighborhood",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "INHANGUETÁ",
+                  "value": "INHANGUETÁ"
+                },
+                {
+                  "name": "BONFIM",
+                  "value": "BONFIM"
+                },
+                {
+                  "name": "JOANA D´ARC",
+                  "value": "JOANA D´ARC"
+                },
+                {
+                  "name": "COMDUSA",
+                  "value": "COMDUSA"
+                },
+                {
+                  "name": "SÃO BENEDITO",
+                  "value": "SÃO BENEDITO"
+                },
+                {
+                  "name": "SANTA MARTHA",
+                  "value": "SANTA MARTHA"
+                },
+                {
+                  "name": "CENTRO",
+                  "value": "CENTRO"
+                },
+                {
+                  "name": "TABUAZEIRO",
+                  "value": "TABUAZEIRO"
+                },
+                {
+                  "name": "REDENÇÃO",
+                  "value": "REDENÇÃO"
+                },
+                {
+                  "name": "DO QUADRO",
+                  "value": "DO QUADRO"
+                },
+                {
+                  "name": "PRAIA DO SUÁ",
+                  "value": "PRAIA DO SUÁ"
+                },
+                {
+                  "name": "DA PENHA",
+                  "value": "DA PENHA"
+                },
+                {
+                  "name": "PARQUE MOSCOSO",
+                  "value": "PARQUE MOSCOSO"
+                },
+                {
+                  "name": "JESUS DE NAZARETH",
+                  "value": "JESUS DE NAZARETH"
+                },
+                {
+                  "name": "SÃO CRISTÓVÃO",
+                  "value": "SÃO CRISTÓVÃO"
+                },
+                {
+                  "name": "ILHA DE SANTA MARIA",
+                  "value": "ILHA DE SANTA MARIA"
+                },
+                {
+                  "name": "GURIGICA",
+                  "value": "GURIGICA"
+                },
+                {
+                  "name": "NOVA PALESTINA",
+                  "value": "NOVA PALESTINA"
+                },
+                {
+                  "name": "RESISTÊNCIA",
+                  "value": "RESISTÊNCIA"
+                },
+                {
+                  "name": "SÃO PEDRO",
+                  "value": "SÃO PEDRO"
+                },
+                {
+                  "name": "FORTE SÃO JOÃO",
+                  "value": "FORTE SÃO JOÃO"
+                },
+                {
+                  "name": "ITARARÉ",
+                  "value": "ITARARÉ"
+                },
+                {
+                  "name": "CONSOLAÇÃO",
+                  "value": "CONSOLAÇÃO"
+                },
+                {
+                  "name": "ANDORINHAS",
+                  "value": "ANDORINHAS"
+                },
+                {
+                  "name": "MARUÍPE",
+                  "value": "MARUÍPE"
+                },
+                {
+                  "name": "ESTRELINHA",
+                  "value": "ESTRELINHA"
+                },
+                {
+                  "name": "ILHA DAS CAIEIRAS",
+                  "value": "ILHA DAS CAIEIRAS"
+                },
+                {
+                  "name": "ROMÃO",
+                  "value": "ROMÃO"
+                },
+                {
+                  "name": "DO MOSCOSO",
+                  "value": "DO MOSCOSO"
+                },
+                {
+                  "name": "BELA VISTA",
+                  "value": "BELA VISTA"
+                },
+                {
+                  "name": "CRUZAMENTO",
+                  "value": "CRUZAMENTO"
+                },
+                {
+                  "name": "SANTO ANTÔNIO",
+                  "value": "SANTO ANTÔNIO"
+                },
+                {
+                  "name": "CARATOÍRA",
+                  "value": "CARATOÍRA"
+                },
+                {
+                  "name": "DE LOURDES",
+                  "value": "DE LOURDES"
+                },
+                {
+                  "name": "SANTO ANDRÉ",
+                  "value": "SANTO ANDRÉ"
+                },
+                {
+                  "name": "VILA RUBIM",
+                  "value": "VILA RUBIM"
+                },
+                {
+                  "name": "BENTO FERREIRA",
+                  "value": "BENTO FERREIRA"
+                },
+                {
+                  "name": "FONTE GRANDE",
+                  "value": "FONTE GRANDE"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "gender",
+              "displayName": "gender",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "M",
+                  "value": "M"
+                },
+                {
+                  "name": "F",
+                  "value": "F"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "age",
+              "displayName": "age",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "telegram_chat_id",
+              "displayName": "telegram_chat_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "370ba49d-11e2-4026-b204-b09ce953ac03",
+      "name": "Airtable - Update Completed Status",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        256,
+        400
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ZC9pKtyxF4dO44KJ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appqZYgYFZfGfdGK8",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblwXZ3zGBmONz89k",
+          "mode": "list",
+          "cachedResultName": "Communications Log",
+          "cachedResultUrl": "https://airtable.com/appqZYgYFZfGfdGK8/tblwXZ3zGBmONz89k"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "appointment_record_id": "={{ $json.fields.appointment_id }}",
+            "patient_name": "={{ $json.fields.patient_name }}",
+            "channel": "={{ [$(\"Set Completed Delivery Status\").item.json.deliveryChannel] }}",
+            "status": "sent",
+            "sent_at": "={{ $json.createdTime }}",
+            "message_type": "completed_followup"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "appointment_record_id",
+              "displayName": "appointment_record_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "patient_name",
+              "displayName": "patient_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "message_type",
+              "displayName": "message_type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "no_show_followup",
+                  "value": "no_show_followup"
+                },
+                {
+                  "name": "completed_followup",
+                  "value": "completed_followup"
+                },
+                {
+                  "name": "reminder",
+                  "value": "reminder"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "channel",
+              "displayName": "channel",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "options": [
+                {
+                  "name": "telegram",
+                  "value": "telegram"
+                },
+                {
+                  "name": "email",
+                  "value": "email"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "sent",
+                  "value": "sent"
+                },
+                {
+                  "name": "failed",
+                  "value": "failed"
+                },
+                {
+                  "name": "delivered",
+                  "value": "delivered"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "sent_at",
+              "displayName": "sent_at",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "b74786b9-894f-4c98-b9a2-6450253e60c1",
+      "name": "Airtable - Log Completed",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        480,
+        400
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ZC9pKtyxF4dO44KJ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "messageType",
+              "type": "string",
+              "value": "no_show_followup",
+              "id": "e8b99f7b-1d43-4dc3-aea8-3287a487333a"
+            },
+            {
+              "name": "messageSubject",
+              "type": "string",
+              "value": "Missed appointment at {{ $json.clinicName }}",
+              "id": "749cd537-d422-4e42-83c7-fe7ba3d907c4"
+            },
+            {
+              "name": "=messageText",
+              "type": "string",
+              "value": "=Hi {{ $json.firstName }}, we noticed you missed your appointment at {{ $json.clinicName }} on {{ $json.appointmentDate }} at {{ $json.appointmentTime }}. Please contact us to reschedule at your convenience.",
+              "id": "5636871a-2fa8-476b-b619-3abc02f0f88f"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "8eec7ada-f5b8-4d2e-adfa-76758ab69baf",
+      "name": "Set No-show Follow-up",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -640,
+        784
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.preferredChannel }}",
+              "rightValue": "email",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "7cef9f44-9534-41f5-b917-a23e3bf1de8d",
+      "name": "No-show via Email?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -416,
+        784
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "={{ $json.messageSubject }}",
+        "emailType": "text",
+        "message": "={{ $json.messageText }}",
+        "options": {}
+      },
+      "id": "88cbf6ae-dafb-447e-85d4-e521a38ffdd6",
+      "name": "Gmail - Send No-show Follow-up",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -192,
+        688
+      ],
+      "webhookId": "f8c63e07-ab8c-4185-aaf2-d036cd9824cd",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Awo2cfDMqFQEGtJy",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "deliveryChannel",
+              "type": "string",
+              "value": "={{ $json.preferredChannel === 'email' ? 'email' : 'telegram' }}"
+            },
+            {
+              "name": "deliveryStatus",
+              "type": "string",
+              "value": "sent"
+            },
+            {
+              "name": "sentAt",
+              "type": "string",
+              "value": "={{ $now }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "efd10dc1-c3d4-489a-8558-112d1a95070a",
+      "name": "Set No-show Delivery Status",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        32,
+        784
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appqZYgYFZfGfdGK8",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblBkoJHIdBxGsGZU",
+          "mode": "list",
+          "cachedResultName": "Appointments",
+          "cachedResultUrl": "https://airtable.com/appqZYgYFZfGfdGK8/tblBkoJHIdBxGsGZU"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "consent": false,
+            "reminder_24h_sent": false,
+            "appointment_id": "={{ $('Set No-show Follow-up').item.json.appointmentId }}",
+            "status": "no_show",
+            "last_message_sent_at": "={{$now.toISO()}}"
+          },
+          "matchingColumns": [
+            "appointment_id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "appointment_id",
+              "displayName": "appointment_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "patient_id",
+              "displayName": "patient_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "first_name",
+              "displayName": "first_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Matthew",
+                  "value": "Matthew"
+                },
+                {
+                  "name": "William",
+                  "value": "William"
+                },
+                {
+                  "name": "Kimberly",
+                  "value": "Kimberly"
+                },
+                {
+                  "name": "Paul",
+                  "value": "Paul"
+                },
+                {
+                  "name": "Andrew",
+                  "value": "Andrew"
+                },
+                {
+                  "name": "John",
+                  "value": "John"
+                },
+                {
+                  "name": "Sarah",
+                  "value": "Sarah"
+                },
+                {
+                  "name": "Lisa",
+                  "value": "Lisa"
+                },
+                {
+                  "name": "Daniel",
+                  "value": "Daniel"
+                },
+                {
+                  "name": "Ashley",
+                  "value": "Ashley"
+                },
+                {
+                  "name": "Mark",
+                  "value": "Mark"
+                },
+                {
+                  "name": "Donna",
+                  "value": "Donna"
+                },
+                {
+                  "name": "Patricia",
+                  "value": "Patricia"
+                },
+                {
+                  "name": "Thomas",
+                  "value": "Thomas"
+                },
+                {
+                  "name": "Richard",
+                  "value": "Richard"
+                },
+                {
+                  "name": "Steven",
+                  "value": "Steven"
+                },
+                {
+                  "name": "Anthony",
+                  "value": "Anthony"
+                },
+                {
+                  "name": "Donald",
+                  "value": "Donald"
+                },
+                {
+                  "name": "Margaret",
+                  "value": "Margaret"
+                },
+                {
+                  "name": "Michael",
+                  "value": "Michael"
+                },
+                {
+                  "name": "Michelle",
+                  "value": "Michelle"
+                },
+                {
+                  "name": "James",
+                  "value": "James"
+                },
+                {
+                  "name": "Robert",
+                  "value": "Robert"
+                },
+                {
+                  "name": "Kenneth",
+                  "value": "Kenneth"
+                },
+                {
+                  "name": "Jessica",
+                  "value": "Jessica"
+                },
+                {
+                  "name": "Betty",
+                  "value": "Betty"
+                },
+                {
+                  "name": "Joshua",
+                  "value": "Joshua"
+                },
+                {
+                  "name": "Charles",
+                  "value": "Charles"
+                },
+                {
+                  "name": "David",
+                  "value": "David"
+                },
+                {
+                  "name": "Nancy",
+                  "value": "Nancy"
+                },
+                {
+                  "name": "Barbara",
+                  "value": "Barbara"
+                },
+                {
+                  "name": "Karen",
+                  "value": "Karen"
+                },
+                {
+                  "name": "Sandra",
+                  "value": "Sandra"
+                },
+                {
+                  "name": "Mary",
+                  "value": "Mary"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "patient_name",
+              "displayName": "patient_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "consent",
+              "displayName": "consent",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "preferred_channel",
+              "displayName": "preferred_channel",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "options": [
+                {
+                  "name": "telegram",
+                  "value": "telegram"
+                },
+                {
+                  "name": "email",
+                  "value": "email"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "appointment_date",
+              "displayName": "appointment_date",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "appointment_time",
+              "displayName": "appointment_time",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "provider_name",
+              "displayName": "provider_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "BH-01",
+                  "value": "BH-01"
+                },
+                {
+                  "name": "BH-02",
+                  "value": "BH-02"
+                },
+                {
+                  "name": "BH-03",
+                  "value": "BH-03"
+                },
+                {
+                  "name": "BH-04",
+                  "value": "BH-04"
+                },
+                {
+                  "name": "BH-05",
+                  "value": "BH-05"
+                },
+                {
+                  "name": "BH-06",
+                  "value": "BH-06"
+                },
+                {
+                  "name": "BH-07",
+                  "value": "BH-07"
+                },
+                {
+                  "name": "BH-08",
+                  "value": "BH-08"
+                },
+                {
+                  "name": "BH-09",
+                  "value": "BH-09"
+                },
+                {
+                  "name": "BH-10",
+                  "value": "BH-10"
+                },
+                {
+                  "name": "BH-11",
+                  "value": "BH-11"
+                },
+                {
+                  "name": "BH-12",
+                  "value": "BH-12"
+                },
+                {
+                  "name": "BH-13",
+                  "value": "BH-13"
+                },
+                {
+                  "name": "BH-14",
+                  "value": "BH-14"
+                },
+                {
+                  "name": "BH-15",
+                  "value": "BH-15"
+                },
+                {
+                  "name": "BH-16",
+                  "value": "BH-16"
+                },
+                {
+                  "name": "BH-17",
+                  "value": "BH-17"
+                },
+                {
+                  "name": "BH-18",
+                  "value": "BH-18"
+                },
+                {
+                  "name": "BH-20",
+                  "value": "BH-20"
+                },
+                {
+                  "name": "BH-21",
+                  "value": "BH-21"
+                },
+                {
+                  "name": "BH-22",
+                  "value": "BH-22"
+                },
+                {
+                  "name": "BH-24",
+                  "value": "BH-24"
+                },
+                {
+                  "name": "CHR-01",
+                  "value": "CHR-01"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "specialty",
+              "displayName": "specialty",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Behavioral Health",
+                  "value": "Behavioral Health"
+                },
+                {
+                  "name": "Chronic Care",
+                  "value": "Chronic Care"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "clinic_name",
+              "displayName": "clinic_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "City Clinic",
+                  "value": "City Clinic"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "clinic_address",
+              "displayName": "clinic_address",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "12 Main Street",
+                  "value": "12 Main Street"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "completed",
+                  "value": "completed"
+                },
+                {
+                  "name": "no_show",
+                  "value": "no_show"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "reminder_24h_sent",
+              "displayName": "reminder_24h_sent",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "followup_sent",
+              "displayName": "followup_sent",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "last_message_sent_at",
+              "displayName": "last_message_sent_at",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "wait_time_min",
+              "displayName": "wait_time_min",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "visit_duration_min",
+              "displayName": "visit_duration_min",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "lead_time_days",
+              "displayName": "lead_time_days",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "weekday",
+              "displayName": "weekday",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Friday",
+                  "value": "Friday"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "hour",
+              "displayName": "hour",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "neighborhood",
+              "displayName": "neighborhood",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "INHANGUETÁ",
+                  "value": "INHANGUETÁ"
+                },
+                {
+                  "name": "BONFIM",
+                  "value": "BONFIM"
+                },
+                {
+                  "name": "JOANA D´ARC",
+                  "value": "JOANA D´ARC"
+                },
+                {
+                  "name": "COMDUSA",
+                  "value": "COMDUSA"
+                },
+                {
+                  "name": "SÃO BENEDITO",
+                  "value": "SÃO BENEDITO"
+                },
+                {
+                  "name": "SANTA MARTHA",
+                  "value": "SANTA MARTHA"
+                },
+                {
+                  "name": "CENTRO",
+                  "value": "CENTRO"
+                },
+                {
+                  "name": "TABUAZEIRO",
+                  "value": "TABUAZEIRO"
+                },
+                {
+                  "name": "REDENÇÃO",
+                  "value": "REDENÇÃO"
+                },
+                {
+                  "name": "DO QUADRO",
+                  "value": "DO QUADRO"
+                },
+                {
+                  "name": "PRAIA DO SUÁ",
+                  "value": "PRAIA DO SUÁ"
+                },
+                {
+                  "name": "DA PENHA",
+                  "value": "DA PENHA"
+                },
+                {
+                  "name": "PARQUE MOSCOSO",
+                  "value": "PARQUE MOSCOSO"
+                },
+                {
+                  "name": "JESUS DE NAZARETH",
+                  "value": "JESUS DE NAZARETH"
+                },
+                {
+                  "name": "SÃO CRISTÓVÃO",
+                  "value": "SÃO CRISTÓVÃO"
+                },
+                {
+                  "name": "ILHA DE SANTA MARIA",
+                  "value": "ILHA DE SANTA MARIA"
+                },
+                {
+                  "name": "GURIGICA",
+                  "value": "GURIGICA"
+                },
+                {
+                  "name": "NOVA PALESTINA",
+                  "value": "NOVA PALESTINA"
+                },
+                {
+                  "name": "RESISTÊNCIA",
+                  "value": "RESISTÊNCIA"
+                },
+                {
+                  "name": "SÃO PEDRO",
+                  "value": "SÃO PEDRO"
+                },
+                {
+                  "name": "FORTE SÃO JOÃO",
+                  "value": "FORTE SÃO JOÃO"
+                },
+                {
+                  "name": "ITARARÉ",
+                  "value": "ITARARÉ"
+                },
+                {
+                  "name": "CONSOLAÇÃO",
+                  "value": "CONSOLAÇÃO"
+                },
+                {
+                  "name": "ANDORINHAS",
+                  "value": "ANDORINHAS"
+                },
+                {
+                  "name": "MARUÍPE",
+                  "value": "MARUÍPE"
+                },
+                {
+                  "name": "ESTRELINHA",
+                  "value": "ESTRELINHA"
+                },
+                {
+                  "name": "ILHA DAS CAIEIRAS",
+                  "value": "ILHA DAS CAIEIRAS"
+                },
+                {
+                  "name": "ROMÃO",
+                  "value": "ROMÃO"
+                },
+                {
+                  "name": "DO MOSCOSO",
+                  "value": "DO MOSCOSO"
+                },
+                {
+                  "name": "BELA VISTA",
+                  "value": "BELA VISTA"
+                },
+                {
+                  "name": "CRUZAMENTO",
+                  "value": "CRUZAMENTO"
+                },
+                {
+                  "name": "SANTO ANTÔNIO",
+                  "value": "SANTO ANTÔNIO"
+                },
+                {
+                  "name": "CARATOÍRA",
+                  "value": "CARATOÍRA"
+                },
+                {
+                  "name": "DE LOURDES",
+                  "value": "DE LOURDES"
+                },
+                {
+                  "name": "SANTO ANDRÉ",
+                  "value": "SANTO ANDRÉ"
+                },
+                {
+                  "name": "VILA RUBIM",
+                  "value": "VILA RUBIM"
+                },
+                {
+                  "name": "BENTO FERREIRA",
+                  "value": "BENTO FERREIRA"
+                },
+                {
+                  "name": "FONTE GRANDE",
+                  "value": "FONTE GRANDE"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "gender",
+              "displayName": "gender",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "M",
+                  "value": "M"
+                },
+                {
+                  "name": "F",
+                  "value": "F"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "age",
+              "displayName": "age",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "telegram_chat_id",
+              "displayName": "telegram_chat_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "e6b9fcb1-d07a-43ed-9ac5-9dfa28baf280",
+      "name": "Airtable - Update No-show Status",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        256,
+        784
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ZC9pKtyxF4dO44KJ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appqZYgYFZfGfdGK8",
+          "mode": "id"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblwXZ3zGBmONz89k",
+          "mode": "list",
+          "cachedResultName": "Communications Log",
+          "cachedResultUrl": "https://airtable.com/appqZYgYFZfGfdGK8/tblwXZ3zGBmONz89k"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "appointment_record_id": "={{ $json.fields.appointment_id }}",
+            "patient_name": "={{ $json.fields.patient_name }}",
+            "message_type": "no_show_followup",
+            "channel": "={{ $json.fields.preferred_channel }}",
+            "status": "sent",
+            "sent_at": "={{$now.toISO()}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "appointment_record_id",
+              "displayName": "appointment_record_id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "patient_name",
+              "displayName": "patient_name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "message_type",
+              "displayName": "message_type",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "no_show_followup",
+                  "value": "no_show_followup"
+                },
+                {
+                  "name": "completed_followup",
+                  "value": "completed_followup"
+                },
+                {
+                  "name": "reminder",
+                  "value": "reminder"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "channel",
+              "displayName": "channel",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "options": [
+                {
+                  "name": "telegram",
+                  "value": "telegram"
+                },
+                {
+                  "name": "email",
+                  "value": "email"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "sent",
+                  "value": "sent"
+                },
+                {
+                  "name": "failed",
+                  "value": "failed"
+                },
+                {
+                  "name": "delivered",
+                  "value": "delivered"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "sent_at",
+              "displayName": "sent_at",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "9fa5cc39-45ac-4137-98b6-511cb9dc2099",
+      "name": "Airtable - Log No-show",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2,
+      "position": [
+        480,
+        784
+      ],
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ZC9pKtyxF4dO44KJ",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "=8697341676",
+        "text": "={{ $json.messageText }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -192,
+        112
+      ],
+      "id": "9bf4f065-f322-4337-a68d-319b15c97d10",
+      "name": "Telegram - Send Reminder",
+      "webhookId": "ac92cf07-3bc4-40fa-80c0-e466bb34ad14",
+      "credentials": {
+        "telegramApi": {
+          "id": "GNQHB4737Tl7NS2z",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "=8697341676",
+        "text": "={{ $json.messageText }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -192,
+        496
+      ],
+      "id": "c8d03a68-0ab0-427c-a29a-b75657bd4798",
+      "name": "Telegram - Send Completed",
+      "webhookId": "ac92cf07-3bc4-40fa-80c0-e466bb34ad14",
+      "credentials": {
+        "telegramApi": {
+          "id": "GNQHB4737Tl7NS2z",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "=8697341676",
+        "text": "={{ $json.messageText }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -192,
+        880
+      ],
+      "id": "dab257cc-74a8-4866-bf0c-a1585f3cc235",
+      "name": "Telegram - Send No-Show",
+      "webhookId": "ac92cf07-3bc4-40fa-80c0-e466bb34ad14",
+      "credentials": {
+        "telegramApi": {
+          "id": "GNQHB4737Tl7NS2z",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "087b4a0f-3057-42bb-a250-b7f4cd13b6c6",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1760,
+        208
+      ],
+      "id": "cd5c3275-c0cb-4d8f-b554-4f2a83b7545c",
+      "name": "Webhook",
+      "webhookId": "087b4a0f-3057-42bb-a250-b7f4cd13b6c6"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Merge Triggers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Merge Triggers",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge Triggers": {
+      "main": [
+        [
+          {
+            "node": "Airtable - List Appointments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable - List Appointments": {
+      "main": [
+        [
+          {
+            "node": "Normalize + Decide Flow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize + Decide Flow": {
+      "main": [
+        [
+          {
+            "node": "Switch by Workflow Type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch by Workflow Type": {
+      "main": [
+        [
+          {
+            "node": "Set Reminder Message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set Completed Follow-up",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set No-show Follow-up",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Reminder Message": {
+      "main": [
+        [
+          {
+            "node": "Reminder via Email?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reminder via Email?": {
+      "main": [
+        [
+          {
+            "node": "Gmail - Send Reminder",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram - Send Reminder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail - Send Reminder": {
+      "main": [
+        [
+          {
+            "node": "Set Reminder Delivery Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Reminder Delivery Status": {
+      "main": [
+        [
+          {
+            "node": "Airtable - Update Reminder Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable - Update Reminder Status": {
+      "main": [
+        [
+          {
+            "node": "Airtable - Log Reminder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Completed Follow-up": {
+      "main": [
+        [
+          {
+            "node": "Completed via Email?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Completed via Email?": {
+      "main": [
+        [
+          {
+            "node": "Gmail - Send Completed Follow-up",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram - Send Completed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail - Send Completed Follow-up": {
+      "main": [
+        [
+          {
+            "node": "Set Completed Delivery Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Completed Delivery Status": {
+      "main": [
+        [
+          {
+            "node": "Airtable - Update Completed Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable - Update Completed Status": {
+      "main": [
+        [
+          {
+            "node": "Airtable - Log Completed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set No-show Follow-up": {
+      "main": [
+        [
+          {
+            "node": "No-show via Email?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "No-show via Email?": {
+      "main": [
+        [
+          {
+            "node": "Gmail - Send No-show Follow-up",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram - Send No-Show",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail - Send No-show Follow-up": {
+      "main": [
+        [
+          {
+            "node": "Set No-show Delivery Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set No-show Delivery Status": {
+      "main": [
+        [
+          {
+            "node": "Airtable - Update No-show Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable - Update No-show Status": {
+      "main": [
+        [
+          {
+            "node": "Airtable - Log No-show",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram - Send Reminder": {
+      "main": [
+        [
+          {
+            "node": "Set Reminder Delivery Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram - Send Completed": {
+      "main": [
+        [
+          {
+            "node": "Set Completed Delivery Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram - Send No-Show": {
+      "main": [
+        [
+          {
+            "node": "Set No-show Delivery Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Merge Triggers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "a94d7baf-3cb3-4adb-9d43-81a6d5571c18",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "498b44b759fe6fd6aa7173bde51a49898f3619b4e4601d5d80d88251496769b8"
+  },
+  "id": "4ufpA1YSoDxIC1ir",
+  "tags": []
+}

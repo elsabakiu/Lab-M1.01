@@ -1,0 +1,61 @@
+Date,Time,Patient ID,Specialty,Provider,Age,Reminder Sent,Lead Time (days),No-Show Risk,Risk Tier,Key Risk Factors
+2026-03-20,15:00,6525433225623.0,Pediatrics,PED-13,15,No,34,0.771,High,booked 34d in advance | patient age 15 | slot at 15:00
+2026-03-21,11:00,2327247812.0,Family Medicine,FM-19,21,Yes,22,0.746,High,booked 22d in advance | patient age 21 | slot at 11:00
+2026-03-20,10:00,92282526182277.0,Pediatrics,PED-18,4,No,29,0.73,High,booked 29d in advance | patient age 4 | slot at 10:00
+2026-03-20,11:00,3877537868536.0,Pediatrics,PED-09,17,No,14,0.728,High,booked 14d in advance | patient age 17 | slot at 11:00
+2026-03-20,08:00,92166456359558.0,Pediatrics,PED-04,9,No,28,0.718,High,booked 28d in advance | patient age 9 | slot at 08:00
+2026-03-20,16:00,47339233567365.0,Women's Health,WH-18,21,No,20,0.714,High,booked 20d in advance | patient age 21 | slot at 16:00
+2026-03-21,13:00,2127441349828.0,Women's Health,WH-15,33,No,32,0.712,High,booked 32d in advance | patient age 33 | slot at 13:00
+2026-03-21,14:00,81694891471585.0,Family Medicine,FM-16,37,No,15,0.701,High,booked 15d in advance | patient age 37 | slot at 14:00
+2026-03-20,16:00,5764286386575.0,Pediatrics,PED-14,11,No,14,0.701,High,booked 14d in advance | patient age 11 | slot at 16:00
+2026-03-20,14:00,9539715438865.0,Family Medicine,FM-04,39,Yes,46,0.693,High,booked 46d in advance | patient age 39 | slot at 14:00
+2026-03-21,16:00,73516653324721.0,Pediatrics,PED-16,8,No,13,0.689,High,booked 13d in advance | patient age 8 | slot at 16:00
+2026-03-20,15:00,4964882785358.0,Chronic Care,CHR-21,32,Yes,26,0.681,High,booked 26d in advance | patient age 32 | slot at 15:00
+2026-03-21,10:00,39455613783865.0,Women's Health,WH-16,32,Yes,26,0.68,High,booked 26d in advance | patient age 32 | slot at 10:00
+2026-03-21,13:00,7516895178741.0,Women's Health,WH-23,28,Yes,5,0.68,High,booked 5d in advance | patient age 28 | slot at 13:00
+2026-03-20,09:00,857627728675.0,Pediatrics,PED-07,17,No,4,0.66,High,booked 4d in advance | patient age 17 | slot at 09:00
+2026-03-20,14:00,4452167182239.0,Women's Health,WH-24,20,No,5,0.66,High,booked 5d in advance | patient age 20 | slot at 14:00
+2026-03-21,07:00,6387253373.0,Women's Health,WH-21,33,Yes,15,0.656,High,booked 15d in advance | patient age 33 | slot at 07:00
+2026-03-21,10:00,46314925168115.0,Women's Health,WH-06,33,Yes,11,0.655,High,booked 11d in advance | patient age 33 | slot at 10:00
+2026-03-20,15:00,96736344677585.0,Pediatrics,PED-13,4,No,7,0.638,High,booked 7d in advance | slot at 15:00 | patient age 4
+2026-03-21,13:00,494233897582.0,Pediatrics,PED-13,9,Yes,28,0.632,High,booked 28d in advance | patient age 9 | slot at 13:00
+2026-03-20,12:00,83863659354828.0,Chronic Care,CHR-18,50,Yes,65,0.619,High,booked 65d in advance | patient age 50 | slot at 12:00
+2026-03-21,08:00,826482348319264.0,Women's Health,WH-10,31,Yes,9,0.613,High,booked 9d in advance | patient age 31 | slot at 08:00
+2026-03-21,08:00,53988837127889.0,Pediatrics,PED-06,2,Yes,9,0.592,Medium,booked 9d in advance | slot at 08:00 | patient age 2
+2026-03-21,08:00,1888525298966.0,Family Medicine,FM-08,58,Yes,24,0.587,Medium,booked 24d in advance | patient age 58 | specialty
+2026-03-21,11:00,68391722277355.0,Chronic Care,CHR-15,37,Yes,5,0.574,Medium,booked 5d in advance | patient age 37 | slot at 11:00
+2026-03-21,10:00,54476123932427.0,Women's Health,WH-06,27,No,1,0.573,Medium,patient age 27 | booked 1d in advance | slot at 10:00
+2026-03-20,08:00,6385826849297.0,Geriatrics,GER-08,69,No,31,0.572,Medium,booked 31d in advance | patient age 69 | slot at 08:00
+2026-03-21,15:00,484735466247837.0,Family Medicine,FM-23,46,Yes,10,0.57,Medium,booked 10d in advance | patient age 46 | slot at 15:00
+2026-03-20,12:00,479957782241159.0,Family Medicine,FM-22,49,No,7,0.566,Medium,booked 7d in advance | patient age 49 | slot at 12:00
+2026-03-21,13:00,253866318547859.0,Family Medicine,FM-05,52,Yes,28,0.562,Medium,booked 28d in advance | patient age 52 | slot at 13:00
+2026-03-20,13:00,477633995915398.0,Chronic Care,CHR-01,46,No,4,0.542,Medium,patient age 46 | booked 4d in advance | slot at 13:00
+2026-03-20,12:00,48699989773.0,Pediatrics,PED-14,1,No,1,0.54,Medium,booked 1d in advance | slot at 12:00 | Friday
+2026-03-20,15:00,6444542462495.0,Chronic Care,CHR-13,64,Yes,21,0.538,Medium,booked 21d in advance | patient age 64 | slot at 15:00
+2026-03-21,16:00,9715329692783.0,Family Medicine,FM-02,48,Yes,8,0.524,Medium,booked 8d in advance | patient age 48 | slot at 16:00
+2026-03-21,16:00,58497566134716.0,Chronic Care,CHR-24,48,No,2,0.523,Medium,patient age 48 | booked 2d in advance | slot at 16:00
+2026-03-21,08:00,459797442394.0,Pediatrics,PED-12,3,No,2,0.521,Medium,booked 2d in advance | patient age 3 | slot at 08:00
+2026-03-20,07:00,7638399967769.0,Chronic Care,CHR-03,55,No,6,0.52,Medium,patient age 55 | booked 6d in advance | slot at 07:00
+2026-03-20,07:00,9362452265247.0,Chronic Care,CHR-13,55,No,4,0.517,Medium,patient age 55 | booked 4d in advance | slot at 07:00
+2026-03-20,13:00,383467425944.0,Women's Health,WH-01,45,Yes,4,0.5,Medium,patient age 45 | booked 4d in advance | slot at 13:00
+2026-03-21,15:00,97588962565491.0,Geriatrics,GER-03,67,Yes,23,0.488,Medium,booked 23d in advance | patient age 67 | slot at 15:00
+2026-03-21,09:00,777588461299598.0,Pediatrics,PED-19,16,No,0,0.483,Medium,patient age 16 | slot at 09:00 | Friday
+2026-03-21,08:00,57868619918831.0,Chronic Care,CHR-22,63,Yes,3,0.428,Medium,patient age 63 | booked 3d in advance | slot at 08:00
+2026-03-21,15:00,34692983734684.0,Pediatrics,PED-19,16,No,0,0.28,Low,patient age 16 | slot at 15:00 | welfare recipient
+2026-03-20,10:00,86671252961.0,Pediatrics,PED-04,16,No,0,0.262,Low,patient age 16 | slot at 10:00 | Friday
+2026-03-21,07:00,768948135435873.0,Pediatrics,PED-23,16,No,0,0.24,Low,patient age 16 | slot at 07:00 | Tuesday
+2026-03-21,10:00,789859433766744.0,Pediatrics,PED-04,7,No,0,0.214,Low,patient age 7 | slot at 10:00 | Thursday
+2026-03-20,11:00,755284679685192.0,Pediatrics,PED-03,15,No,0,0.202,Low,patient age 15 | slot at 11:00 | Tuesday
+2026-03-20,08:00,84454942957349.0,Family Medicine,FM-14,24,No,0,0.175,Low,patient age 24 | specialty | slot at 08:00
+2026-03-20,10:00,5718267873647.0,Pediatrics,PED-16,17,No,0,0.162,Low,patient age 17 | slot at 10:00 | Monday
+2026-03-21,10:00,774232347643899.0,Pediatrics,PED-16,2,No,0,0.156,Low,slot at 10:00 | patient age 2 | Thursday
+2026-03-20,11:00,46399775873898.0,Pediatrics,PED-11,3,No,0,0.154,Low,slot at 11:00 | patient age 3 | Friday
+2026-03-21,15:00,58645364481686.0,Chronic Care,CHR-19,47,No,0,0.139,Low,patient age 47 | slot at 15:00 | gender
+2026-03-21,16:00,6139432753432.0,Family Medicine,FM-08,48,No,0,0.125,Low,patient age 48 | slot at 16:00 | specialty
+2026-03-20,11:00,11679543349351.0,Pediatrics,PED-17,0,No,0,0.109,Low,slot at 11:00 | Tuesday | gender
+2026-03-21,08:00,231189342929116.0,Pediatrics,PED-14,5,No,0,0.109,Low,patient age 5 | slot at 08:00 | gender
+2026-03-21,14:00,726995427418975.0,Family Medicine,FM-12,56,No,0,0.108,Low,patient age 56 | slot at 14:00 | specialty
+2026-03-20,07:00,632152239327128.0,Behavioral Health,BH-01,61,No,0,0.097,Low,patient age 61 | specialty | slot at 07:00
+2026-03-20,07:00,24431587355768.0,Chronic Care,CHR-23,50,No,0,0.095,Low,patient age 50 | slot at 07:00 | Thursday
+2026-03-20,08:00,466233124625819.0,Chronic Care,CHR-16,53,No,0,0.092,Low,patient age 53 | slot at 08:00 | Wednesday
+2026-03-20,14:00,158381771422232.0,Pediatrics,PED-06,5,No,0,0.083,Low,patient age 5 | slot at 14:00 | Monday

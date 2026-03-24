@@ -1,0 +1,14 @@
+{
+  "ran_at": "2026-03-23T00:31:02.930186+00:00",
+  "mode": "langsmith",
+  "dataset_name": "BI Dashboard Project - Ops Insights Eval",
+  "experiment_name": "bi-dashboard-monitoring-89f591e6",
+  "results": "<ExperimentResults bi-dashboard-monitoring-89f591e6>",
+  "dataset_manifest": {
+    "dataset_name": "BI Dashboard Project - Ops Insights Eval",
+    "example_count": 15,
+    "status": "uploaded",
+    "dataset_id": "9ab049f8-6a10-4c2a-a0e2-477596bf71de",
+    "note": "Dataset uploaded to LangSmith successfully."
+  }
+}
